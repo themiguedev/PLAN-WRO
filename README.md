@@ -129,7 +129,7 @@ Ene: Estrategia  ──► Feb: Diseño  ──► Mar: Base y Chasis  ──►
 * **Objetivo:** Entrenar el rendimiento psicológico y operativo del equipo bajo las condiciones formales de la competencia.
 * **Proceso de equipo:**
   1. Cronometraje oficial de 2 minutos por intento, registrando puntajes y penalizaciones en hojas de evaluación estándar.
-  2. Protocolo de mantenimiento en boxes (*Pit Stop*): limpieza de neumáticos con alcohol isopropílico, ajuste de ejes y rotación de baterías.
+  2. Protocolo de mantenimiento en boxes (*Pit Stop*): limpieza de neumáticos, ajuste de ejes y rotación de baterías.
   3. Ensayos del tiempo de ensamblaje (si la categoría exige montaje en zona de cuarentena).
 * **Adaptación por niveles:**
   * **Elementary:** Asignación clara de roles de salida: un estudiante alinea el robot, otro selecciona el programa y el tercero confirma al juez el inicio. Manejo de la frustración ante fallos en tapete.
