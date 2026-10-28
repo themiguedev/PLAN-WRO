@@ -38,6 +38,36 @@
       border-radius: 9999px;
     }
 
+    /* 3D Wireframe Cube effect */
+    .cube-container {
+      perspective: 900px;
+    }
+    .cube-box {
+      width: 140px;
+      height: 140px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateFigmaCube 18s linear infinite;
+    }
+    @keyframes rotateFigmaCube {
+      0% { transform: rotateX(18deg) rotateY(0deg); }
+      100% { transform: rotateX(18deg) rotateY(360deg); }
+    }
+    .cube-face {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 1.5px solid #000000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    .cube-front  { transform: rotateY(0deg) translateZ(70px); }
+    .cube-back   { transform: rotateY(180deg) translateZ(70px); }
+    .cube-right  { transform: rotateY(90deg) translateZ(70px); }
+    .cube-left   { transform: rotateY(-90deg) translateZ(70px); }
+    .cube-top    { transform: rotateX(90deg) translateZ(70px); }
+    .cube-bottom { transform: rotateX(-90deg) translateZ(70px); }
 
     /* Custom light scrollbar */
     ::-webkit-scrollbar {
@@ -104,53 +134,202 @@
 
     <!-- ================= 2. HERO SECTION ================= -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
-      <div class="max-w-4xl space-y-6">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 pill-btn bg-slate-100 border border-slate-200/90 text-xs font-mono-figma text-slate-800 uppercase">
-          <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-          <span>WRO RoboMission &middot; Temporada Oficial 2027</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Text Column -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 pill-btn bg-slate-100 border border-slate-200/90 text-xs font-mono-figma text-slate-800 uppercase">
+            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+            <span>WRO RoboMission &middot; Temporada Oficial 2027</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#000000] leading-[1.05]">
+            Plan de Desarrollo <br>
+            <span class="bg-gradient-to-r from-[#000000] via-slate-800 to-slate-600 bg-clip-text text-transparent">
+              Técnico & Competitivo
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl font-normal">
+            Metodología de alto rendimiento para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras, pruebas de luz/batería y preparación para la Regla Sorpresa.
+          </p>
+
+          <!-- Key Metrics Tiles -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">8</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Sesiones Noviembre</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">3</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Categorías Oficiales</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">120s</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Límite de Ronda</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">25cm³</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Gálibo Máximo</div>
+            </div>
+          </div>
+
+          <!-- Hero CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-3">
+            <a href="#nivelacion" class="px-7 py-3.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+              Explorar Plan de Noviembre
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <a href="#macrociclo" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
+              Macro-Ciclo Anual
+            </a>
+          </div>
         </div>
 
-        <h1 class="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#000000] leading-[1.05]">
-          Plan de Desarrollo <br>
-          <span class="bg-gradient-to-r from-[#000000] via-slate-800 to-slate-600 bg-clip-text text-transparent">
-            Técnico & Competitivo
-          </span>
-        </h1>
+        <!-- Interactive Hub & Cube Multi-Tab Showcase -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center">
+          <div class="relative w-full max-w-md p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-5">
+            
+            <!-- Switcher Tabs inside Showcase Box -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div class="inline-flex p-1 pill-btn bg-slate-100 text-xs">
+                <button onclick="toggleHeroView('motor')" id="tab-motor" class="px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all flex items-center gap-1.5">
+                  <span>⚙️</span> Motor SPIKE
+                </button>
+                <button onclick="toggleHeroView('hub')" id="tab-hub" class="px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all flex items-center gap-1.5">
+                  <span>📟</span> Hub SPIKE 5×5
+                </button>
+                <button onclick="toggleHeroView('cube')" id="tab-cube" class="px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all flex items-center gap-1.5">
+                  <span>🧊</span> Cubo 25 cm
+                </button>
+              </div>
+              <span class="text-[11px] font-mono-figma text-slate-500 uppercase font-semibold">Hardware WRO</span>
+            </div>
 
-        <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
-          Metodología de alto rendimiento para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras, pruebas de luz/batería y preparación para la Regla Sorpresa.
-        </p>
+            <!-- View 1: 3D LEGO SPIKE Prime Motor (Realistic & Faithful) -->
+            <div id="view-motor" class="space-y-4">
+              <!-- 3D Canvas Showcase Box -->
+              <div class="relative w-full h-56 rounded-2xl bg-gradient-to-b from-slate-50/90 to-slate-100/70 border border-slate-200/90 overflow-hidden flex items-center justify-center select-none group shadow-inner">
+                <!-- Status Badge -->
+                <div class="absolute top-2.5 left-3 z-10 flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200/80 text-[10px] font-mono-figma font-bold text-slate-800 shadow-sm">
+                  <span class="relative flex h-2 w-2">
+                    <span id="motor-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span id="motor-dot" class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span id="motor-status-text">175 RPM • Giro Activo</span>
+                </div>
 
-        <!-- Key Metrics Tiles -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 max-w-3xl">
-          <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-            <div class="text-3xl font-black text-[#000000] font-mono-figma">8</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-0.5">Sesiones Noviembre</div>
-          </div>
-          <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-            <div class="text-3xl font-black text-[#000000] font-mono-figma">3</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-0.5">Categorías Oficiales</div>
-          </div>
-          <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-            <div class="text-3xl font-black text-[#000000] font-mono-figma">120s</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-0.5">Límite de Ronda</div>
-          </div>
-          <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-            <div class="text-3xl font-black text-[#000000] font-mono-figma">25cm³</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-0.5">Gálibo Máximo</div>
+                <!-- 3D Interaction Hint -->
+                <div class="absolute top-2.5 right-3 z-10 text-[9px] font-mono-figma text-slate-500 bg-white/80 backdrop-blur-sm px-2 py-0.5 rounded-full border border-slate-200/70 pointer-events-none flex items-center gap-1 shadow-sm">
+                  <span>🔄</span> Arrastra en 3D
+                </div>
+
+                <!-- Three.js Canvas Mount Point -->
+                <div id="spike-motor-3d" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+
+                <!-- Real-time Encoder Angle HUD Pill -->
+                <div class="absolute bottom-2.5 right-3 z-10 px-2.5 py-1 rounded-lg bg-black/85 backdrop-blur-sm text-white text-[11px] font-mono-figma font-bold flex items-center gap-1.5 shadow-md">
+                  <span class="text-cyan-400">θ</span>
+                  <span id="live-angle-display">0.0°</span>
+                </div>
+              </div>
+
+              <!-- Speed & Calibration Control Deck -->
+              <div class="flex items-center justify-between gap-1.5 pt-0.5">
+                <div class="flex items-center gap-1">
+                  <button onclick="setMotorSpeed(0)" id="spd-btn-0" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer">⏸ 0</button>
+                  <button onclick="setMotorSpeed(50)" id="spd-btn-50" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer">50%</button>
+                  <button onclick="setMotorSpeed(100)" id="spd-btn-100" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold bg-black text-white border border-black shadow-sm transition-all cursor-pointer">100%</button>
+                  <button onclick="setMotorSpeed(-100)" id="spd-btn-rev" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer">⟲ Rev</button>
+                </div>
+                <button onclick="calibrateMotorZero()" id="btn-auto-zero" class="px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold bg-cyan-600 hover:bg-cyan-700 text-white shadow-sm transition-all flex items-center gap-1 cursor-pointer" title="Alinear al cero absoluto (0°)">
+                  <span>🎯</span> Auto-Cero
+                </button>
+              </div>
+
+              <!-- Technical Specifications Data -->
+              <div class="space-y-1.5 text-xs pt-1.5 border-t border-slate-100">
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Motor Angular Mediano SPIKE:</span>
+                  <span class="font-mono-figma font-bold text-black">LEGO® 45603</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Sensor de Rotación / Encoder:</span>
+                  <span class="font-mono-figma font-bold text-cyan-600">±1° Absoluto (Cero Calibrado)</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Torque & Control de Carga:</span>
+                  <span class="font-mono-figma font-bold text-slate-800">18 N·cm • run_until_stalled()</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- View 3: 3D Wireframe Cube (Preserved) -->
+            <div id="view-cube" class="hidden space-y-5">
+              <div class="h-44 flex items-center justify-center cube-container">
+                <div class="cube-box">
+                  <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-figma text-slate-600 font-bold">TOP</div>
+                  <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-figma text-[#10b981] font-bold">BASE</div>
+                </div>
+              </div>
+              <div class="space-y-2 text-xs pt-1 border-t border-slate-100">
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Dimensiones de caja de arbitraje:</span>
+                  <span class="font-mono-figma font-bold text-black">250 × 250 × 250 mm</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Despliegue dinámico de brazos:</span>
+                  <span class="font-mono-figma font-bold text-[#10b981]">Válido tras el inicio</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- View 2: Interactive SPIKE Prime Hub 5x5 Matrix Simulator -->
+            <div id="view-hub" class="hidden space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="text-xs font-semibold text-slate-700">Matriz de 5×5 LEDs & Puertos</div>
+                <div class="flex gap-1 text-[10px] font-mono-figma">
+                  <button onclick="setMatrixPattern('smile')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">😊</button>
+                  <button onclick="setMatrixPattern('arrow')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">⬆ 90°</button>
+                  <button onclick="setMatrixPattern('check')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">✓ OK</button>
+                  <button onclick="setMatrixPattern('wro')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 font-bold">WRO</button>
+                </div>
+              </div>
+
+              <!-- Realistic SPIKE Prime Yellow Hub Frame -->
+              <div class="p-4 rounded-2xl bg-amber-400 border-2 border-amber-500 shadow-md flex items-center justify-between gap-4">
+                <!-- Ports Left (A, C, E) -->
+                <div class="flex flex-col gap-2 font-mono-figma text-[9px] font-bold text-amber-950">
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">A Tracción Izq</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">C Color Frontal 1</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">E Motor Garra</div>
+                </div>
+
+                <!-- 5x5 LED Grid Display -->
+                <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 shadow-inner grid grid-cols-5 gap-1.5" id="led-grid">
+                  <!-- Generated via JS -->
+                </div>
+
+                <!-- Ports Right (B, D, F) -->
+                <div class="flex flex-col gap-2 font-mono-figma text-[9px] font-bold text-amber-950 text-right">
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">B Tracción Der</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">D Color Frontal 2</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">F Motor Elevador</div>
+                </div>
+              </div>
+
+              <div class="text-[11px] text-slate-500 text-center font-mono-figma">
+                Configuración oficial de 6 puertos (2 Tracción + 2 Sensores Color + 2 Actuadores)
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Hero CTAs -->
-        <div class="flex flex-wrap items-center gap-4 pt-3">
-          <a href="#nivelacion" class="px-7 py-3.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
-            Explorar Plan de Noviembre
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
-          <a href="#macrociclo" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
-            Macro-Ciclo Anual
-          </a>
-        </div>
       </div>
     </section>
 
@@ -696,7 +875,512 @@
     }
     animateParticles();
 
-    // 2. Filter Level on November Schedule
+    // ==========================================
+    // 2. 3D LEGO SPIKE PRIME ANGULAR MOTOR (THREE.JS)
+    // ==========================================
+    let currentMotorRpm = 175;
+    let motorRotorAngle = 0;
+    let isCalibratingZero = false;
+    let handleMotorResize = null;
+
+    function initSpikeMotor3D() {
+      const mount = document.getElementById('spike-motor-3d');
+      if (!mount || typeof THREE === 'undefined') return;
+
+      const width = mount.clientWidth || 360;
+      const height = mount.clientHeight || 224;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
+      camera.position.set(4.6, 3.2, 5.8);
+      camera.lookAt(0, 0, 0.2);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      mount.innerHTML = '';
+      mount.appendChild(renderer.domElement);
+
+      // Studio Lighting for LEGO ABS Plastic
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.15);
+      keyLight.position.set(6, 8, 7);
+      keyLight.castShadow = true;
+      scene.add(keyLight);
+
+      const fillLight = new THREE.DirectionalLight(0xbae6fd, 0.5);
+      fillLight.position.set(-5, -3, 4);
+      scene.add(fillLight);
+
+      const rimLight = new THREE.DirectionalLight(0xffffff, 0.45);
+      rimLight.position.set(0, 6, -6);
+      scene.add(rimLight);
+
+      // Materials (Faithful LEGO Plastic Aesthetics)
+      const whitePlastic = new THREE.MeshStandardMaterial({
+        color: 0xf6f7f9,
+        roughness: 0.26,
+        metalness: 0.04
+      });
+
+      const tealPlastic = new THREE.MeshStandardMaterial({
+        color: 0x00a3a6,
+        roughness: 0.22,
+        metalness: 0.06
+      });
+
+      const darkInterior = new THREE.MeshStandardMaterial({
+        color: 0x0f172a,
+        roughness: 0.85
+      });
+
+      const holeRimMat = new THREE.MeshStandardMaterial({
+        color: 0xd1d5db,
+        roughness: 0.4
+      });
+
+      const redAxleMat = new THREE.MeshStandardMaterial({
+        color: 0xdc2626,
+        roughness: 0.32,
+        metalness: 0.05
+      });
+
+      const slateRubberMat = new THREE.MeshStandardMaterial({
+        color: 0x334155,
+        roughness: 0.6
+      });
+
+      // Motor Root Object
+      const motorGroup = new THREE.Group();
+      motorGroup.rotation.set(0.18, 0.45, 0);
+      scene.add(motorGroup);
+
+      // 1. White Motor Chassis
+      const frontHeadGeo = new THREE.BoxGeometry(2.8, 2.8, 1.8);
+      const frontHead = new THREE.Mesh(frontHeadGeo, whitePlastic);
+      frontHead.position.set(0, 0, 0.9);
+      frontHead.castShadow = true;
+      frontHead.receiveShadow = true;
+      motorGroup.add(frontHead);
+
+      const rearBodyGeo = new THREE.BoxGeometry(2.5, 3.4, 3.8);
+      const rearBody = new THREE.Mesh(rearBodyGeo, whitePlastic);
+      rearBody.position.set(0, -0.2, -1.5);
+      rearBody.castShadow = true;
+      rearBody.receiveShadow = true;
+      motorGroup.add(rearBody);
+
+      // Front Circular Collar (Housing boss)
+      const bossGeo = new THREE.CylinderGeometry(1.36, 1.36, 0.35, 48);
+      bossGeo.rotateX(Math.PI / 2);
+      const boss = new THREE.Mesh(bossGeo, whitePlastic);
+      boss.position.set(0, 0, 1.85);
+      boss.castShadow = true;
+      motorGroup.add(boss);
+
+      // Zero-Alignment Molded Tick on Chassis at 12 o'clock
+      const chassisZeroGeo = new THREE.ConeGeometry(0.1, 0.22, 4);
+      chassisZeroGeo.rotateZ(Math.PI);
+      const chassisZero = new THREE.Mesh(chassisZeroGeo, new THREE.MeshStandardMaterial({ color: 0x00a3a6, roughness: 0.3 }));
+      chassisZero.position.set(0, 1.42, 2.02);
+      motorGroup.add(chassisZero);
+
+      // 4 Front Face Corner Technic Pin Holes
+      const cornerOffsets = [
+        [-1.08, 1.08], [1.08, 1.08],
+        [-1.08, -1.08], [1.08, -1.08]
+      ];
+      cornerOffsets.forEach(([cx, cy]) => {
+        const holeGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.4, 24);
+        holeGeo.rotateX(Math.PI / 2);
+        const hole = new THREE.Mesh(holeGeo, darkInterior);
+        hole.position.set(cx, cy, 1.75);
+        motorGroup.add(hole);
+
+        const rimGeo = new THREE.RingGeometry(0.18, 0.26, 24);
+        const rim = new THREE.Mesh(rimGeo, holeRimMat);
+        rim.position.set(cx, cy, 1.81);
+        motorGroup.add(rim);
+      });
+
+      // Side Technic Pin Hole Grid (Left & Right Flanks)
+      [-1.26, 1.26].forEach((sx) => {
+        [-0.5, -1.5, -2.5].forEach((sz) => {
+          [0.6, -0.6].forEach((sy) => {
+            const sideHoleGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.3, 20);
+            sideHoleGeo.rotateZ(Math.PI / 2);
+            const sideHole = new THREE.Mesh(sideHoleGeo, darkInterior);
+            sideHole.position.set(sx, sy, sz);
+            motorGroup.add(sideHole);
+          });
+        });
+      });
+
+      // Rear Cable & Strain Relief
+      const strainGeo = new THREE.BoxGeometry(0.7, 0.45, 0.6);
+      const strain = new THREE.Mesh(strainGeo, slateRubberMat);
+      strain.position.set(0, -1.2, -3.4);
+      motorGroup.add(strain);
+
+      const cableGeo = new THREE.BoxGeometry(0.45, 0.14, 1.5);
+      const cable = new THREE.Mesh(cableGeo, darkInterior);
+      cable.position.set(0, -1.25, -4.3);
+      cable.rotation.x = -0.25;
+      motorGroup.add(cable);
+
+      // Side Turquoise SPIKE Accent Badge
+      const badgeGeo = new THREE.BoxGeometry(0.05, 0.4, 1.2);
+      const badge = new THREE.Mesh(badgeGeo, tealPlastic);
+      badge.position.set(1.27, 0.4, -0.8);
+      motorGroup.add(badge);
+
+      // 2. Rotating Turntable / Rotor Assembly
+      const rotorGroup = new THREE.Group();
+      rotorGroup.position.set(0, 0, 1.95);
+      motorGroup.add(rotorGroup);
+
+      // Main Vibrant Teal Rotor Disc
+      const discGeo = new THREE.CylinderGeometry(1.22, 1.22, 0.22, 64);
+      discGeo.rotateX(Math.PI / 2);
+      const disc = new THREE.Mesh(discGeo, tealPlastic);
+      disc.castShadow = true;
+      rotorGroup.add(disc);
+
+      // Raised Concentric Center Boss
+      const rotorBossGeo = new THREE.CylinderGeometry(1.06, 1.06, 0.26, 48);
+      rotorBossGeo.rotateX(Math.PI / 2);
+      const rotorBoss = new THREE.Mesh(rotorBossGeo, tealPlastic);
+      rotorBoss.position.set(0, 0, 0.03);
+      rotorGroup.add(rotorBoss);
+
+      // Rotor Zero Calibration Indicator Notch (White pointer at 12 o'clock)
+      const zeroMarkerGeo = new THREE.ConeGeometry(0.08, 0.18, 4);
+      const zeroMarker = new THREE.Mesh(zeroMarkerGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 }));
+      zeroMarker.position.set(0, 1.15, 0.14);
+      rotorGroup.add(zeroMarker);
+
+      // 4 Technic Pin Holes on the Turntable (90° pitch)
+      const rotorHoleRadius = 0.62;
+      [0, Math.PI / 2, Math.PI, Math.PI * 1.5].forEach((ang) => {
+        const hx = Math.cos(ang) * rotorHoleRadius;
+        const hy = Math.sin(ang) * rotorHoleRadius;
+        const rHoleGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.35, 24);
+        rHoleGeo.rotateX(Math.PI / 2);
+        const rHole = new THREE.Mesh(rHoleGeo, darkInterior);
+        rHole.position.set(hx, hy, 0.08);
+        rotorGroup.add(rHole);
+      });
+
+      // Center Cross Axle Socket ("+" Hole)
+      const crossBar1 = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.16, 0.35), darkInterior);
+      crossBar1.position.set(0, 0, 0.1);
+      rotorGroup.add(crossBar1);
+
+      const crossBar2 = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.5, 0.35), darkInterior);
+      crossBar2.position.set(0, 0, 0.1);
+      rotorGroup.add(crossBar2);
+
+      // Protruding Red LEGO Technic Cross Axle
+      const axleLength = 0.95;
+      const axleBeam1 = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.13, axleLength), redAxleMat);
+      axleBeam1.position.set(0, 0, 0.48);
+      axleBeam1.castShadow = true;
+      rotorGroup.add(axleBeam1);
+
+      const axleBeam2 = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.42, axleLength), redAxleMat);
+      axleBeam2.position.set(0, 0, 0.48);
+      axleBeam2.castShadow = true;
+      rotorGroup.add(axleBeam2);
+
+      // Soft Contact Shadow Plane Underneath
+      const shadowCanvas = document.createElement('canvas');
+      shadowCanvas.width = 128;
+      shadowCanvas.height = 128;
+      const sCtx = shadowCanvas.getContext('2d');
+      const grad = sCtx.createRadialGradient(64, 64, 10, 64, 64, 64);
+      grad.addColorStop(0, 'rgba(15, 23, 42, 0.35)');
+      grad.addColorStop(0.5, 'rgba(15, 23, 42, 0.12)');
+      grad.addColorStop(1, 'rgba(15, 23, 42, 0)');
+      sCtx.fillStyle = grad;
+      sCtx.fillRect(0, 0, 128, 128);
+
+      const shadowTex = new THREE.CanvasTexture(shadowCanvas);
+      const shadowPlaneGeo = new THREE.PlaneGeometry(6.5, 6.5);
+      const shadowPlaneMat = new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0.8 });
+      const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
+      shadowPlane.rotation.x = -Math.PI / 2;
+      shadowPlane.position.y = -2.1;
+      scene.add(shadowPlane);
+
+      // Interactive Drag-to-Rotate in 3D
+      let isDragging = false;
+      let prevPointerX = 0;
+      let prevPointerY = 0;
+      let targetRotY = 0.45;
+      let targetRotX = 0.18;
+      let lastDragTime = performance.now();
+
+      const onPointerDown = (e) => {
+        isDragging = true;
+        prevPointerX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+        prevPointerY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+        lastDragTime = performance.now();
+      };
+
+      const onPointerMove = (e) => {
+        if (!isDragging) return;
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+        const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+        const deltaX = clientX - prevPointerX;
+        const deltaY = clientY - prevPointerY;
+        prevPointerX = clientX;
+        prevPointerY = clientY;
+
+        targetRotY += deltaX * 0.009;
+        targetRotX += deltaY * 0.009;
+        targetRotX = Math.max(-0.4, Math.min(0.65, targetRotX));
+        lastDragTime = performance.now();
+      };
+
+      const onPointerUp = () => {
+        isDragging = false;
+      };
+
+      mount.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      mount.addEventListener('touchstart', onPointerDown, { passive: true });
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('touchend', onPointerUp);
+
+      // Handle Resize smoothly
+      handleMotorResize = () => {
+        if (!mount) return;
+        const w = mount.clientWidth;
+        const h = mount.clientHeight;
+        if (w > 0 && h > 0) {
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          renderer.setSize(w, h);
+        }
+      };
+      window.addEventListener('resize', handleMotorResize);
+
+      // DOM Elements for Telemetry HUD
+      const angleDisplay = document.getElementById('live-angle-display');
+      const statusText = document.getElementById('motor-status-text');
+
+      // Main Animation Loop
+      let lastTime = performance.now();
+
+      function animate(now) {
+        requestAnimationFrame(animate);
+        const dt = Math.min((now - lastTime) / 1000, 0.1);
+        lastTime = now;
+
+        // Auto-Cero Calibration or Continuous Rotation
+        if (isCalibratingZero) {
+          const currentModulo = ((motorRotorAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+          const diff = Math.PI * 2 - currentModulo;
+          if (diff < 0.03 || currentModulo < 0.03) {
+            motorRotorAngle = 0;
+            isCalibratingZero = false;
+            currentMotorRpm = 0;
+            updateSpeedButtonsUI(0);
+            if (statusText) statusText.textContent = "0.0° • Auto-Cero Calibrado";
+            const ping = document.getElementById('motor-ping');
+            if (ping) ping.classList.remove('animate-ping');
+          } else {
+            motorRotorAngle += Math.min(diff * 8 * dt, 4 * dt);
+          }
+        } else {
+          const deltaAngle = (currentMotorRpm * 2 * Math.PI / 60) * dt;
+          motorRotorAngle = (motorRotorAngle + deltaAngle) % (2 * Math.PI);
+        }
+
+        rotorGroup.rotation.z = -motorRotorAngle;
+
+        // Update Live Angle HUD
+        if (angleDisplay) {
+          let deg = ((-motorRotorAngle * 180 / Math.PI) % 360);
+          if (deg < 0) deg += 360;
+          angleDisplay.textContent = deg.toFixed(1) + '°';
+        }
+
+        // Return slowly to presentation view if not dragging
+        if (!isDragging && (now - lastDragTime > 2500)) {
+          targetRotY += (0.45 - targetRotY) * 0.02;
+          targetRotX += (0.18 - targetRotX) * 0.02;
+        }
+
+        // Smooth rotation damping
+        motorGroup.rotation.y += (targetRotY - motorGroup.rotation.y) * 0.1;
+        motorGroup.rotation.x += (targetRotX - motorGroup.rotation.x) * 0.1;
+
+        // Subtle floating bob
+        motorGroup.position.y = Math.sin(now * 0.0016) * 0.05;
+
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function updateSpeedButtonsUI(rpm) {
+      document.querySelectorAll('.motor-spd-btn').forEach(btn => {
+        btn.className = "motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer";
+      });
+      let activeBtn = null;
+      if (rpm === 0) activeBtn = document.getElementById('spd-btn-0');
+      else if (rpm === 50) activeBtn = document.getElementById('spd-btn-50');
+      else if (rpm === 100) activeBtn = document.getElementById('spd-btn-100');
+      else if (rpm === -100) activeBtn = document.getElementById('spd-btn-rev');
+
+      if (activeBtn) {
+        activeBtn.className = "motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold bg-black text-white border border-black shadow-sm transition-all cursor-pointer";
+      }
+    }
+
+    function setMotorSpeed(percent) {
+      isCalibratingZero = false;
+      const statusText = document.getElementById('motor-status-text');
+      const ping = document.getElementById('motor-ping');
+      const dot = document.getElementById('motor-dot');
+
+      if (percent === 0) {
+        currentMotorRpm = 0;
+        if (statusText) statusText.textContent = "0 RPM • En Pausa";
+        if (ping) ping.classList.remove('animate-ping');
+        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-amber-500";
+      } else if (percent === 50) {
+        currentMotorRpm = 88;
+        if (statusText) statusText.textContent = "88 RPM • 50% PWM";
+        if (ping) {
+          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
+        }
+        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
+      } else if (percent === 100) {
+        currentMotorRpm = 175;
+        if (statusText) statusText.textContent = "175 RPM • Giro Activo";
+        if (ping) {
+          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
+        }
+        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
+      } else if (percent === -100) {
+        currentMotorRpm = -175;
+        if (statusText) statusText.textContent = "-175 RPM • Inversión Pol";
+        if (ping) {
+          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75";
+        }
+        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-cyan-500";
+      }
+
+      updateSpeedButtonsUI(percent);
+    }
+
+    function calibrateMotorZero() {
+      isCalibratingZero = true;
+      const statusText = document.getElementById('motor-status-text');
+      if (statusText) statusText.textContent = "Calibrando al Cero (0°)...";
+      const ping = document.getElementById('motor-ping');
+      if (ping) ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75";
+    }
+
+    // 2. Hero Box Tab Switcher (Motor SPIKE vs Hub vs Cubo 25cm)
+    function toggleHeroView(view) {
+      const vMotor = document.getElementById('view-motor');
+      const vHub = document.getElementById('view-hub');
+      const vCube = document.getElementById('view-cube');
+      const tMotor = document.getElementById('tab-motor');
+      const tHub = document.getElementById('tab-hub');
+      const tCube = document.getElementById('tab-cube');
+
+      if (vMotor) vMotor.classList.add('hidden');
+      if (vHub) vHub.classList.add('hidden');
+      if (vCube) vCube.classList.add('hidden');
+
+      const inactiveStyle = "px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all flex items-center gap-1.5 cursor-pointer";
+      const activeStyle = "px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all flex items-center gap-1.5 cursor-pointer";
+
+      if (tMotor) tMotor.className = inactiveStyle;
+      if (tHub) tHub.className = inactiveStyle;
+      if (tCube) tCube.className = inactiveStyle;
+
+      if (view === 'motor') {
+        if (vMotor) vMotor.classList.remove('hidden');
+        if (tMotor) tMotor.className = activeStyle;
+        if (typeof handleMotorResize === 'function') {
+          setTimeout(handleMotorResize, 30);
+        }
+      } else if (view === 'hub') {
+        if (vHub) vHub.classList.remove('hidden');
+        if (tHub) tHub.className = activeStyle;
+      } else if (view === 'cube') {
+        if (vCube) vCube.classList.remove('hidden');
+        if (tCube) tCube.className = activeStyle;
+      }
+    }
+
+    // 3. Interactive 5x5 LED Matrix Grid Generator & Presets
+    const ledGrid = document.getElementById('led-grid');
+    const ledState = Array(25).fill(0);
+
+    const patterns = {
+      smile: [
+        0,1,0,1,0,
+        0,1,0,1,0,
+        0,0,0,0,0,
+        1,0,0,0,1,
+        0,1,1,1,0
+      ],
+      arrow: [
+        0,0,1,0,0,
+        0,1,1,1,0,
+        1,0,1,0,1,
+        0,0,1,0,0,
+        0,0,1,0,0
+      ],
+      check: [
+        0,0,0,0,1,
+        0,0,0,1,0,
+        1,0,1,0,0,
+        0,1,0,0,0,
+        0,0,0,0,0
+      ],
+      wro: [
+        1,0,1,0,1,
+        1,0,1,0,1,
+        1,1,1,1,1,
+        1,1,0,1,1,
+        1,0,0,0,1
+      ]
+    };
+
+    function renderMatrix(arr) {
+      ledGrid.innerHTML = '';
+      arr.forEach((val, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `w-3 h-3 rounded-full transition-all duration-200 cursor-pointer ${val ? 'bg-amber-400 shadow-[0_0_8px_#f59e0b]' : 'bg-slate-800 hover:bg-slate-700'}`;
+        dot.onclick = () => {
+          arr[idx] = arr[idx] ? 0 : 1;
+          renderMatrix(arr);
+        };
+        ledGrid.appendChild(dot);
+      });
+    }
+
+    function setMatrixPattern(name) {
+      if (patterns[name]) {
+        renderMatrix([...patterns[name]]);
+      }
+    }
+    setMatrixPattern('smile');
+
+    // 4. Filter Level on November Schedule
     function setFilter(lvl) {
       const boxes = document.querySelectorAll('.level-box');
       const buttons = document.querySelectorAll('.filter-btn');
@@ -878,6 +1562,11 @@
     // Initialize defaults
     selectMonth(1);
     setFilter('all');
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', initSpikeMotor3D);
+    } else {
+      initSpikeMotor3D();
+    }
   </script>
 </body>
 </html>
