@@ -1,744 +1,977 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full">
+<html lang="es" class="scroll-smooth h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plan de Desarrollo Técnico y Competitivo | LEGO SPIKE Prime & WRO</title>
+  <title>PLAN WRO | Plataforma Técnica y Competitiva SPIKE Prime</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-    
     body {
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
-    
     .font-mono-code {
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .slide-enter {
-      animation: fadeInSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Gradient animation */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animate-gradient {
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite;
     }
 
-    @keyframes fadeInSlide {
-      from {
-        opacity: 0;
-        transform: translateY(12px) scale(0.99);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    /* Glow utility */
+    .glow-amber {
+      box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.25);
     }
+    .glow-cyan {
+      box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.25);
+    }
+
+    /* Floating badge animation */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
+    /* 3D Wireframe Cube effect */
+    .cube-container {
+      perspective: 800px;
+    }
+    .cube-box {
+      width: 140px;
+      height: 140px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateCube 16s linear infinite;
+    }
+    @keyframes rotateCube {
+      0% { transform: rotateX(15deg) rotateY(0deg); }
+      100% { transform: rotateX(15deg) rotateY(360deg); }
+    }
+    .cube-face {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 1.5px solid rgba(245, 158, 11, 0.45);
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(4px);
+    }
+    .cube-front  { transform: rotateY(0deg) translateZ(70px); }
+    .cube-back   { transform: rotateY(180deg) translateZ(70px); }
+    .cube-right  { transform: rotateY(90deg) translateZ(70px); }
+    .cube-left   { transform: rotateY(-90deg) translateZ(70px); }
+    .cube-top    { transform: rotateX(90deg) translateZ(70px); }
+    .cube-bottom { transform: rotateX(-90deg) translateZ(70px); }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.6);
+      background: #020617;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(100, 116, 139, 0.5);
+      background: #1e293b;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(148, 163, 184, 0.8);
+      background: #334155;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 h-full flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 antialiased overflow-hidden">
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-slate-950 relative overflow-x-hidden min-h-screen">
 
-  <!-- Top Bar / Progress -->
-  <header class="px-6 py-4 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md flex items-center justify-between shrink-0 z-20">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-black text-slate-950 text-sm shadow-lg shadow-amber-500/20">
-        WRO
-      </div>
-      <div>
-        <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
-          SPIKE PRIME COMPETITIVO
-          <span class="text-[11px] font-mono-code px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-normal">RoboMission</span>
-        </h1>
-        <p class="text-xs text-slate-400 hidden sm:block">Plan de Nivelación y Macro-Ciclo Oficial</p>
-      </div>
-    </div>
+  <!-- Interactive Canvas Particle Background -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-    <!-- Slide Navigation Indicators -->
-    <div class="flex items-center gap-2">
-      <div class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 rounded-full px-3 py-1 text-xs text-slate-300 font-mono-code">
-        <span id="current-slide-num" class="text-amber-400 font-bold">1</span>
-        <span class="text-slate-600">/</span>
-        <span id="total-slides-num">6</span>
-      </div>
+  <!-- Ambient Light Blurs -->
+  <div class="fixed top-[-10rem] left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] bg-gradient-to-tr from-amber-500/15 via-cyan-500/10 to-transparent rounded-full blur-[120px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[-15rem] right-[-10rem] w-[35rem] h-[35rem] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
-      <button id="fullscreen-btn" onclick="toggleFullScreen()" title="Pantalla Completa (F)" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition-all border border-transparent hover:border-slate-700">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- Progress Bar Line -->
-  <div class="w-full bg-slate-900 h-1 relative">
-    <div id="progress-bar" class="h-full bg-gradient-to-r from-amber-500 via-cyan-400 to-emerald-400 transition-all duration-300 w-1/6"></div>
-  </div>
-
-  <!-- Slides Viewport Container -->
-  <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 max-w-7xl w-full mx-auto flex items-center justify-center relative">
-    
-    <!-- ================= SLIDE 1: PORTADA ================= -->
-    <div id="slide-1" class="slide-content w-full flex flex-col items-center justify-center text-center space-y-8 slide-enter">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs text-slate-300 shadow-inner">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Temporada Competitiva &middot; World Robot Olympiad
-      </div>
-
-      <div class="space-y-4 max-w-3xl">
-        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-          Plan de Desarrollo <br>
-          <span class="bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-400 bg-clip-text text-transparent">Técnico y Competitivo</span>
-        </h2>
-        <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          Estrategia integral para <strong class="text-slate-200">LEGO® SPIKE™ Prime</strong> orientada a la excelencia en diseño mecánico, algorítmica sensorial y ejecución táctica bajo presión.
-        </p>
-      </div>
-
-      <!-- Categories Pills -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl pt-2">
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-blue-500/20 text-left hover:border-blue-500/50 transition-all group">
-          <div class="text-xs font-mono-code text-blue-400 mb-1 font-semibold">CATEGORÍA 1</div>
-          <div class="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">Elementary</div>
-          <div class="text-xs text-slate-400 mt-1">8 a 12 años &bull; Intuición y bases sólidas</div>
+  <!-- STICKY NAVBAR -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/70 border-b border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-300 flex items-center justify-center font-black text-slate-950 text-base shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform">
+          WRO
         </div>
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-amber-500/20 text-left hover:border-amber-500/50 transition-all group">
-          <div class="text-xs font-mono-code text-amber-400 mb-1 font-semibold">CATEGORÍA 2</div>
-          <div class="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">Junior</div>
-          <div class="text-xs text-slate-400 mt-1">11 a 15 años &bull; Control y rigor sensorial</div>
-        </div>
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-emerald-500/20 text-left hover:border-emerald-500/50 transition-all group">
-          <div class="text-xs font-mono-code text-emerald-400 mb-1 font-semibold">CATEGORÍA 3</div>
-          <div class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Senior</div>
-          <div class="text-xs text-slate-400 mt-1">14 a 19 años &bull; Control PD y cinemática</div>
-        </div>
-      </div>
-
-      <div class="pt-2 flex items-center gap-3 text-xs text-slate-500 font-mono-code">
-        <span>Usa las flechas ◀ ▶ o la barra espaciadora para navegar</span>
-      </div>
-    </div>
-
-    <!-- ================= SLIDE 2: LAS 4 FASES DE EVOLUCIÓN ================= -->
-    <div id="slide-2" class="slide-content w-full hidden slide-enter space-y-6">
-      <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
-          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-wider">Marco Conceptual</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">4 Fases de Evolución del Estudiante</h2>
+          <span class="text-sm font-extrabold tracking-tight text-white flex items-center gap-2">
+            PLAN WRO
+            <span class="text-[10px] font-mono-code px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">SPIKE Prime</span>
+          </span>
+          <span class="text-[11px] text-slate-400 block -mt-0.5">Centro Técnico & Competitivo</span>
         </div>
-        <div class="text-xs text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
-          De la alfabetización motriz a la alta competencia
-        </div>
-      </div>
+      </a>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Fase 1 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-blue-500/40 transition-all shadow-md">
-          <div class="space-y-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-black text-sm">
-              01
-            </div>
-            <h3 class="text-base font-bold text-white">Alfabetización</h3>
-            <p class="text-xs text-blue-300/80 font-mono-code">Mecánica y Algoritmos</p>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Comprensión de vigas, ejes, simetría y engranajes elementales. Lógica de bloques lineales y avance calibrado por rotaciones.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 font-mono-code">
-            Objetivo: Ensambles rígidos sin holguras
-          </div>
-        </div>
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-300">
+        <a href="#fases" class="hover:text-amber-400 transition-colors">Fases</a>
+        <a href="#nivelacion" class="hover:text-amber-400 transition-colors">Plan Octubre</a>
+        <a href="#macrociclo" class="hover:text-amber-400 transition-colors">Macro-Ciclo</a>
+        <a href="#adn" class="hover:text-amber-400 transition-colors">ADN Competitivo</a>
+        <a href="#checklist" class="hover:text-amber-400 transition-colors">Checklist de Torneo</a>
+      </nav>
 
-        <!-- Fase 2 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition-all shadow-md">
-          <div class="space-y-3">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-black text-sm">
-              02
-            </div>
-            <h3 class="text-base font-bold text-white">Adaptabilidad</h3>
-            <p class="text-xs text-amber-300/80 font-mono-code">Sensores y Lógica Libre</p>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Integración de color, distancia y giroscopio. Construcción sin manual, bucles condicionales y resolución autónoma de obstáculos.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 font-mono-code">
-            Objetivo: Respuesta sensorial reactiva
-          </div>
-        </div>
-
-        <!-- Fase 3 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-cyan-500/40 transition-all shadow-md">
-          <div class="space-y-3">
-            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-black text-sm">
-              03
-            </div>
-            <h3 class="text-base font-bold text-white">Ingeniería WRO</h3>
-            <p class="text-xs text-cyan-300/80 font-mono-code">Cinemática y Robustez</p>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Ajuste estricto al cubo de 25×25×25 cm. Odometría, giros guiados por Yaw Angle y autoalineación en líneas perpendiculares.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 font-mono-code">
-            Objetivo: Cero error acumulado en marcha
-          </div>
-        </div>
-
-        <!-- Fase 4 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition-all shadow-md">
-          <div class="space-y-3">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-black text-sm">
-              04
-            </div>
-            <h3 class="text-base font-bold text-white">Optimización</h3>
-            <p class="text-xs text-emerald-300/80 font-mono-code">Estrategia y Torneo</p>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Manejo estricto de los 120 segundos. Protocolos contra fallos de batería o luz, y resolución ágil de la Regla Sorpresa en cuarentena.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 font-mono-code">
-            Objetivo: Consistencia del 100% en tapete
-          </div>
-        </div>
-      </div>
-
-      <!-- Key principle callout -->
-      <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center gap-3 text-xs text-slate-300">
-        <svg class="w-5 h-5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        <span><strong>Principio rector:</strong> Ningún estudiante salta a cinemática de torneo sin antes dominar la simetría estructural y el control cinemático básico.</span>
-      </div>
-    </div>
-
-    <!-- ================= SLIDE 3: NIVELACIÓN OCTUBRE ================= -->
-    <div id="slide-3" class="slide-content w-full hidden slide-enter space-y-5">
-      <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-wider">Plan Mensual Intensivo</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Nivelación de Octubre (8 Sesiones)</h2>
-        </div>
-        
-        <!-- Filter Tabs for Levels -->
-        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
-          <button onclick="filterLevel('all')" id="tab-all" class="level-tab px-3 py-1.5 rounded-lg font-medium bg-amber-500 text-slate-950 font-bold transition-all">Todos</button>
-          <button onclick="filterLevel('elem')" id="tab-elem" class="level-tab px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">Elementary</button>
-          <button onclick="filterLevel('jun')" id="tab-jun" class="level-tab px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">Junior</button>
-          <button onclick="filterLevel('sen')" id="tab-sen" class="level-tab px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">Senior</button>
-        </div>
-      </div>
-
-      <!-- Weekly Schedule Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto pr-1">
-        
-        <!-- Semana 1 -->
-        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-xs font-bold text-amber-400 uppercase font-mono-code">Semana 1</span>
-            <span class="text-[11px] text-slate-400">Tracción y Giros</span>
-          </div>
-          <div class="space-y-2.5 text-xs">
-            <div class="level-card elem p-2.5 rounded-lg bg-blue-950/30 border border-blue-500/20">
-              <span class="font-bold text-blue-300 block mb-0.5 font-mono-code">Elementary</span>
-              Chasis estándar simétrico, avance por rotaciones y giros en pivote.
-            </div>
-            <div class="level-card jun p-2.5 rounded-lg bg-amber-950/30 border border-amber-500/20">
-              <span class="font-bold text-amber-300 block mb-0.5 font-mono-code">Junior</span>
-              Cálculo de $cm$ por rotación y giros de 90° con giroscopio (Yaw angle).
-            </div>
-            <div class="level-card sen p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/20">
-              <span class="font-bold text-emerald-300 block mb-0.5 font-mono-code">Senior</span>
-              Cinemática diferencial, control proporcional (P) para evitar sobregiro.
-            </div>
-          </div>
-        </div>
-
-        <!-- Semana 2 -->
-        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-xs font-bold text-amber-400 uppercase font-mono-code">Semana 2</span>
-            <span class="text-[11px] text-slate-400">Color y Distancia</span>
-          </div>
-          <div class="space-y-2.5 text-xs">
-            <div class="level-card elem p-2.5 rounded-lg bg-blue-950/30 border border-blue-500/20">
-              <span class="font-bold text-blue-300 block mb-0.5 font-mono-code">Elementary</span>
-              Detección de colores sólidos (semáforo) y frenado a 10 cm con ultrasónico.
-            </div>
-            <div class="level-card jun p-2.5 rounded-lg bg-amber-950/30 border border-amber-500/20">
-              <span class="font-bold text-amber-300 block mb-0.5 font-mono-code">Junior</span>
-              Umbral de luz reflejada $(Blanco + Negro)/2$ y desaceleración progresiva.
-            </div>
-            <div class="level-card sen p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/20">
-              <span class="font-bold text-emerald-300 block mb-0.5 font-mono-code">Senior</span>
-              Doble sensor frontal (Line Squaring) y mapeo dinámico de obstáculos en variables.
-            </div>
-          </div>
-        </div>
-
-        <!-- Semana 3 -->
-        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-xs font-bold text-amber-400 uppercase font-mono-code">Semana 3</span>
-            <span class="text-[11px] text-slate-400">Mecánica y Actuadores</span>
-          </div>
-          <div class="space-y-2.5 text-xs">
-            <div class="level-card elem p-2.5 rounded-lg bg-blue-950/30 border border-blue-500/20">
-              <span class="font-bold text-blue-300 block mb-0.5 font-mono-code">Elementary</span>
-              Pala fija para empujar bloques y pinza motorizada simple de 1 GDL.
-            </div>
-            <div class="level-card jun p-2.5 rounded-lg bg-amber-950/30 border border-amber-500/20">
-              <span class="font-bold text-amber-300 block mb-0.5 font-mono-code">Junior</span>
-              Trenes de engranajes (torque vs velocidad) y garra con auto-cero por torque.
-            </div>
-            <div class="level-card sen p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/20">
-              <span class="font-bold text-emerald-300 block mb-0.5 font-mono-code">Senior</span>
-              Cremalleras compuestas y sistema Quick-Release para acople rápido.
-            </div>
-          </div>
-        </div>
-
-        <!-- Semana 4 -->
-        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-xs font-bold text-amber-400 uppercase font-mono-code">Semana 4</span>
-            <span class="text-[11px] text-slate-400">Integración y Reto</span>
-          </div>
-          <div class="space-y-2.5 text-xs">
-            <div class="level-card elem p-2.5 rounded-lg bg-blue-950/30 border border-blue-500/20">
-              <span class="font-bold text-blue-300 block mb-0.5 font-mono-code">Elementary</span>
-              Mini-Rally en parejas: transportar carga por color y retornar al inicio.
-            </div>
-            <div class="level-card jun p-2.5 rounded-lg bg-amber-950/30 border border-amber-500/20">
-              <span class="font-bold text-amber-300 block mb-0.5 font-mono-code">Junior</span>
-              Seguidor de línea 2 estados y defensa técnica de MyBlocks ante jurado.
-            </div>
-            <div class="level-card sen p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/20">
-              <span class="font-bold text-emerald-300 block mb-0.5 font-mono-code">Senior</span>
-              Máquina de estados + prueba ciega: reconfiguración táctica en <15 min.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ================= SLIDE 4: MACRO-CICLO COMPETITIVO (ENE - JUL) ================= -->
-    <div id="slide-4" class="slide-content w-full hidden slide-enter space-y-5">
-      <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-wider">Cronograma de Temporada</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Macro-Ciclo Competitivo WRO</h2>
-        </div>
-        <div class="text-xs font-mono-code text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
-          Enero ──► Julio
-        </div>
-      </div>
-
-      <!-- Interactive Timeline Ribbon -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-        <button onclick="showMonth(1)" id="m-btn-1" class="month-btn p-3 rounded-xl border bg-amber-500/10 border-amber-500 text-left transition-all">
-          <div class="text-[10px] font-mono-code text-amber-400">FASE 1</div>
-          <div class="text-sm font-bold text-white">Enero</div>
-          <div class="text-xs text-slate-400 mt-1">Estrategia</div>
-        </button>
-        <button onclick="showMonth(2)" id="m-btn-2" class="month-btn p-3 rounded-xl border bg-slate-900 border-slate-800 text-left hover:border-slate-700 transition-all">
-          <div class="text-[10px] font-mono-code text-slate-500">FASE 2</div>
-          <div class="text-sm font-bold text-white">Febrero</div>
-          <div class="text-xs text-slate-400 mt-1">Prototipado</div>
-        </button>
-        <button onclick="showMonth(3)" id="m-btn-3" class="month-btn p-3 rounded-xl border bg-slate-900 border-slate-800 text-left hover:border-slate-700 transition-all">
-          <div class="text-[10px] font-mono-code text-slate-500">FASE 3</div>
-          <div class="text-sm font-bold text-white">Marzo</div>
-          <div class="text-xs text-slate-400 mt-1">Base & Chasis</div>
-        </button>
-        <button onclick="showMonth(4)" id="m-btn-4" class="month-btn p-3 rounded-xl border bg-slate-900 border-slate-800 text-left hover:border-slate-700 transition-all">
-          <div class="text-[10px] font-mono-code text-slate-500">FASE 4</div>
-          <div class="text-sm font-bold text-white">Abril</div>
-          <div class="text-xs text-slate-400 mt-1">Estrés & Luz</div>
-        </button>
-        <button onclick="showMonth(5)" id="m-btn-5" class="month-btn p-3 rounded-xl border bg-slate-900 border-slate-800 text-left hover:border-slate-700 transition-all">
-          <div class="text-[10px] font-mono-code text-slate-500">FASE 5</div>
-          <div class="text-sm font-bold text-white">Mayo</div>
-          <div class="text-xs text-slate-400 mt-1">Rutina 100%</div>
-        </button>
-        <button onclick="showMonth(6)" id="m-btn-6" class="month-btn p-3 rounded-xl border bg-slate-900 border-slate-800 text-left hover:border-slate-700 transition-all">
-          <div class="text-[10px] font-mono-code text-slate-500">FASE 6</div>
-          <div class="text-sm font-bold text-white">Jun - Jul</div>
-          <div class="text-xs text-slate-400 mt-1">Torneo</div>
-        </button>
-      </div>
-
-      <!-- Month Detail Display Card -->
-      <div id="month-detail-card" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4">
-        <!-- Injected via JS -->
-      </div>
-    </div>
-
-    <!-- ================= SLIDE 5: FACTORES CRÍTICOS DE PODIO (ADN WRO) ================= -->
-    <div id="slide-5" class="slide-content w-full hidden slide-enter space-y-6">
-      <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-wider">Diferenciales de Alto Rendimiento</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Factores Críticos para el Podio</h2>
-        </div>
-        <div class="text-xs text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-lg">
-          Detalles mecánicos y tácticos decisivos
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <!-- Factor 1 -->
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-amber-500/30 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          </div>
-          <h3 class="text-base font-bold text-white">Inmunidad Lumínica</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Los sensores de color se apantallan con piezas LEGO o campanas a <strong class="text-slate-200">8 - 10 mm del tapete</strong>. Esto neutraliza focos potentes y sombras del público durante el pesaje y la ronda.
-          </p>
-        </div>
-
-        <!-- Factor 2 -->
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-cyan-500/30 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          </div>
-          <h3 class="text-base font-bold text-white">Curvas de Batería</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Calibración de algoritmos bajo 100%, 75% y 50% de carga. Al depender del sensor giroscópico en vez de rotaciones fijas de motor, la velocidad de giro no se degrada por caída de tensión.
-          </p>
-        </div>
-
-        <!-- Factor 3 -->
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-emerald-500/30 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <h3 class="text-base font-bold text-white">Protocolo Pit Stop</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Limpieza estricta de neumáticos con alcohol isopropílico antes de cada salida para eliminar polvo del tapete, ajuste de ejes de tracción y rotación estricta de baterías en boxes.
-          </p>
-        </div>
-      </div>
-
-      <!-- Rule Box -->
-      <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-        <div class="flex items-start gap-3">
-          <span class="w-6 h-6 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono-code font-bold shrink-0">!</span>
-          <div>
-            <strong class="text-white block mb-0.5">Límite de Tiempo (120 s):</strong>
-            <span class="text-slate-400">Todo el barrido de misiones debe completarse en máximo 110 segundos para dejar 10 segundos de holgura ante desvíos imprevistos.</span>
-          </div>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono-code font-bold shrink-0">✓</span>
-          <div>
-            <strong class="text-white block mb-0.5">Surprise Rule (Regla Sorpresa):</strong>
-            <span class="text-slate-400">Entrenamiento específico para modificar código y mecánica en los 60-90 min de cuarentena estricta sin ayuda del coach.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ================= SLIDE 6: RESUMEN Y PRÓXIMOS PASOS ================= -->
-    <div id="slide-6" class="slide-content w-full hidden slide-enter space-y-6">
-      <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-wider">Plan de Acción</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Próximos Pasos & Hoja de Ruta</h2>
-        </div>
-        <div class="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-lg font-mono-code">
-          Listo para Implementación
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="text-amber-400 font-mono-code text-xs font-bold">PASO 01</div>
-          <h3 class="text-base font-bold text-white">Inventario y Kits</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Revisión exhaustiva de kits Spike Prime (45678) y set de expansión (45680). Verificación del estado de cables, neumáticos y baterías de reserva.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="text-cyan-400 font-mono-code text-xs font-bold">PASO 02</div>
-          <h3 class="text-base font-bold text-white">Lanzamiento de Nivelación</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Inicio formal de las 8 sesiones de Octubre (Martes y Jueves). Evaluación diagnóstica de partida para conformación equilibrada de equipos.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="text-emerald-400 font-mono-code text-xs font-bold">PASO 03</div>
-          <h3 class="text-base font-bold text-white">Control y Bitácora</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Creación de la bitácora técnica de cada equipo y repositorio de respaldo para versiones de código (.llsp3 / Python) en GitHub.
-          </p>
-        </div>
-      </div>
-
-      <!-- Action Footer Card -->
-      <div class="p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-cyan-500/10 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
-          <h4 class="text-sm font-bold text-white">Repositorio Oficial del Proyecto: PLAN-WRO</h4>
-          <p class="text-xs text-slate-400">Documentación técnica, rutinas de calibración y modelos de referencia sincronizados.</p>
-        </div>
-        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors flex items-center gap-2 shrink-0">
-          Ver en GitHub
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-medium text-slate-200 transition-all">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#nivelacion" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-lg shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all">
+          Ver Plan
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
         </a>
       </div>
     </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="relative z-10">
+
+    <!-- ================= 1. HERO SECTION ================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/30 text-xs text-amber-300 shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>World Robot Olympiad &middot; RoboMission Temporada Oficial</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+            Ingeniería de Podio con <br>
+            <span class="bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-400 bg-clip-text text-transparent animate-gradient">
+              LEGO SPIKE Prime
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
+            Metodología técnico-competitiva estructurada en 4 fases continuas: calibración matemática sensorial, control cinemático giroscópico y entrenamiento riguroso para la Regla Sorpresa.
+          </p>
+
+          <!-- Metric Badges -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 backdrop-blur">
+              <div class="text-2xl font-black text-amber-400 font-mono-code">8</div>
+              <div class="text-xs text-slate-400">Sesiones Nivelación</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 backdrop-blur">
+              <div class="text-2xl font-black text-cyan-400 font-mono-code">3</div>
+              <div class="text-xs text-slate-400">Categorías Oficiales</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 backdrop-blur">
+              <div class="text-2xl font-black text-emerald-400 font-mono-code">120s</div>
+              <div class="text-xs text-slate-400">Límite de Ronda</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 backdrop-blur">
+              <div class="text-2xl font-black text-yellow-300 font-mono-code">25cm³</div>
+              <div class="text-xs text-slate-400">Gálibo Máximo</div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#nivelacion" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-bold text-sm shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+              Explorar Plan de Octubre
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <a href="#macrociclo" class="px-6 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 font-semibold text-sm transition-all flex items-center gap-2">
+              Macro-Ciclo Anual
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Constraint Box & Live Visual -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center">
+          <div class="relative w-full max-w-md p-8 rounded-3xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl glow-amber space-y-6">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                <span class="text-xs font-mono-code text-amber-300 font-bold uppercase tracking-wider">Cubo Reglamentario WRO</span>
+              </div>
+              <span class="text-xs font-mono-code text-slate-400 bg-slate-800 px-2 py-0.5 rounded">RoboMission</span>
+            </div>
+
+            <!-- Animated 3D Wireframe Cube -->
+            <div class="h-48 flex items-center justify-center cube-container">
+              <div class="cube-box">
+                <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-code text-amber-300/80 font-bold">25 cm</div>
+                <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-code text-amber-300/80 font-bold">25 cm</div>
+                <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-code text-amber-300/80 font-bold">25 cm</div>
+                <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-code text-amber-300/80 font-bold">25 cm</div>
+                <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-code text-cyan-300/80 font-bold">TOP</div>
+                <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-code text-emerald-300/80 font-bold">BASE</div>
+              </div>
+            </div>
+
+            <!-- Cube Details -->
+            <div class="space-y-2.5 text-xs">
+              <div class="flex items-center justify-between text-slate-300">
+                <span class="text-slate-400">Dimensiones de inspección:</span>
+                <span class="font-mono-code font-bold text-amber-400">250 × 250 × 250 mm</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-300">
+                <span class="text-slate-400">Despliegue dinámico:</span>
+                <span class="font-mono-code text-emerald-400">Permitido tras salida</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-300">
+                <span class="text-slate-400">Límite Hub SPIKE Prime:</span>
+                <span class="font-mono-code text-cyan-400">6 Puertos (A - F)</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 2. LAS 4 FASES DE EVOLUCIÓN ================= -->
+    <section id="fases" class="py-20 border-t border-slate-900 bg-slate-950/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-widest">Metodología Pedagógica</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">4 Fases de Evolución del Estudiante</h2>
+          <p class="text-sm text-slate-400">
+            Un itinerario continuo que traslada a los jóvenes desde la intuición física hasta el control de lazo cerrado y la estrategia de alta competencia.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="group p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-blue-500/10 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+                01
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">Alfabetización</h3>
+              <p class="text-xs font-mono-code text-blue-400">Mecánica y Algoritmos Base</p>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Comprensión de vigas, ejes y simetría estructural. Lectura de planos, engranajes elementales y programación secuencial sin holguras.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] font-mono-code text-slate-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+              Meta: Chasis rígido estándar
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-amber-500/10 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+                02
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">Adaptabilidad</h3>
+              <p class="text-xs font-mono-code text-amber-400">Sensores y Lógica Libre</p>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Modificación autónoma de modelos sin manual. Integración de color, distancia y giroscopio con bucles condicionales de evasión.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] font-mono-code text-slate-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              Meta: Reacción sensorial activa
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/10 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+                03
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Ingeniería WRO</h3>
+              <p class="text-xs font-mono-code text-cyan-400">Cinemática y Odometría</p>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Ajuste al cubo de 25 cm, corrección de derrapes, giros por ángulo Yaw, seguimiento de líneas con control proporcional y autoalineación.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] font-mono-code text-slate-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+              Meta: Cero error acumulado
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="group p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-emerald-500/10 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+                04
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Optimización</h3>
+              <p class="text-xs font-mono-code text-emerald-400">Estrategia y Torneo</p>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Rutinas completas bajo 120s, protocolos de aborto ante fallos mecánicos, tolerancia a variaciones de luz y dominio de la Regla Sorpresa.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] font-mono-code text-slate-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              Meta: Consistencia de podio
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. PLAN DE NIVELACIÓN DE OCTUBRE ================= -->
+    <section id="nivelacion" class="py-20 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div class="space-y-3">
+            <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-widest">Currículo Intensivo</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Plan de Nivelación: Octubre</h2>
+            <p class="text-sm text-slate-400 max-w-xl">
+              8 sesiones de entrenamiento (Martes y Jueves) diseñadas para homogenizar las destrezas operativas antes de la temporada oficial.
+            </p>
+          </div>
+
+          <!-- Dynamic Level Filter Buttons -->
+          <div class="flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-900 border border-slate-800 self-start md:self-auto">
+            <button onclick="setFilter('all')" id="btn-filter-all" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition-all">Todos los Niveles</button>
+            <button onclick="setFilter('elem')" id="btn-filter-elem" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all">Elementary (8-12)</button>
+            <button onclick="setFilter('jun')" id="btn-filter-jun" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all">Junior (11-15)</button>
+            <button onclick="setFilter('sen')" id="btn-filter-sen" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all">Senior (14-19)</button>
+          </div>
+        </div>
+
+        <!-- 4 Weeks Schedule Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Semana 1 -->
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 space-y-4">
+            <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono-code text-amber-400 font-bold">SEMANA 1</span>
+                <h4 class="text-sm font-bold text-white">Chasis & Giros</h4>
+              </div>
+              <span class="text-[10px] font-mono-code bg-slate-800 text-slate-300 px-2 py-0.5 rounded">M1 & J1</span>
+            </div>
+            
+            <div class="space-y-3 text-xs">
+              <div class="level-box elem p-3 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1">
+                <span class="font-bold text-blue-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Elementary
+                </span>
+                <p class="text-slate-300">Ensamble de chasis rígido, simetría y giros en pivote por rotaciones exactas.</p>
+              </div>
+
+              <div class="level-box jun p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+                <span class="font-bold text-amber-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Junior
+                </span>
+                <p class="text-slate-300">Cálculo de cm/rotación según diámetro y giros de 90° con sensor de ángulo Yaw.</p>
+              </div>
+
+              <div class="level-box sen p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
+                <span class="font-bold text-emerald-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Senior
+                </span>
+                <p class="text-slate-300">Cinemática diferencial y control Proporcional (P) para anular el sobregiro inercial.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Semana 2 -->
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 space-y-4">
+            <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono-code text-amber-400 font-bold">SEMANA 2</span>
+                <h4 class="text-sm font-bold text-white">Color & Distancia</h4>
+              </div>
+              <span class="text-[10px] font-mono-code bg-slate-800 text-slate-300 px-2 py-0.5 rounded">M2 & J2</span>
+            </div>
+            
+            <div class="space-y-3 text-xs">
+              <div class="level-box elem p-3 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1">
+                <span class="font-bold text-blue-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Elementary
+                </span>
+                <p class="text-slate-300">Semáforo de colores sólidos y frenado a 10 cm con sensor ultrasónico sin colisión.</p>
+              </div>
+
+              <div class="level-box jun p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+                <span class="font-bold text-amber-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Junior
+                </span>
+                <p class="text-slate-300">Cálculo de umbral de reflectancia: <span class="font-mono-code text-amber-300">(B+N)/2</span> y desaceleración continua.</p>
+              </div>
+
+              <div class="level-box sen p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
+                <span class="font-bold text-emerald-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Senior
+                </span>
+                <p class="text-slate-300">Line Squaring con doble sensor frontal y mapeo dinámico de obstáculos en variables booleanas.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Semana 3 -->
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 space-y-4">
+            <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono-code text-amber-400 font-bold">SEMANA 3</span>
+                <h4 class="text-sm font-bold text-white">Mecánica & Pinzas</h4>
+              </div>
+              <span class="text-[10px] font-mono-code bg-slate-800 text-slate-300 px-2 py-0.5 rounded">M3 & J3</span>
+            </div>
+            
+            <div class="space-y-3 text-xs">
+              <div class="level-box elem p-3 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1">
+                <span class="font-bold text-blue-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Elementary
+                </span>
+                <p class="text-slate-300">Pala fija para empujar bloques y garra motorizada simple de un solo grado de libertad.</p>
+              </div>
+
+              <div class="level-box jun p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+                <span class="font-bold text-amber-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Junior
+                </span>
+                <p class="text-slate-300">Trenes de engranajes (torque vs velocidad) y retorno a cero por detección de bloqueo de motor (Stall).</p>
+              </div>
+
+              <div class="level-box sen p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
+                <span class="font-bold text-emerald-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Senior
+                </span>
+                <p class="text-slate-300">Mecanismos de cremallera y sistema Quick-Release para acople modular en base sin pines.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Semana 4 -->
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 space-y-4">
+            <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono-code text-amber-400 font-bold">SEMANA 4</span>
+                <h4 class="text-sm font-bold text-white">Integración & Rally</h4>
+              </div>
+              <span class="text-[10px] font-mono-code bg-slate-800 text-slate-300 px-2 py-0.5 rounded">M4 & J4</span>
+            </div>
+            
+            <div class="space-y-3 text-xs">
+              <div class="level-box elem p-3 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1">
+                <span class="font-bold text-blue-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Elementary
+                </span>
+                <p class="text-slate-300">Mini-Rally de habilidades: captura por color, transporte a zona segura y vuelta autónoma.</p>
+              </div>
+
+              <div class="level-box jun p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+                <span class="font-bold text-amber-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Junior
+                </span>
+                <p class="text-slate-300">Seguidor de línea 2 estados y defensa técnica de MyBlocks estructurados ante jurado.</p>
+              </div>
+
+              <div class="level-box sen p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
+                <span class="font-bold text-emerald-300 font-mono-code flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Senior
+                </span>
+                <p class="text-slate-300">Máquina de estados + prueba ciega: reconfiguración táctica y mecánica en menos de 15 min.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. MACRO-CICLO COMPETITIVO (ENE - JUL) ================= -->
+    <section id="macrociclo" class="py-20 border-t border-slate-900 bg-slate-950/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase tracking-widest">Planificación Temporal</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Macro-Ciclo de Temporada WRO</h2>
+          <p class="text-sm text-slate-400">
+            De la publicación de la regla oficial a la fase de torneo internacional. Haz clic en cada mes para desplegar sus directrices operativas.
+          </p>
+        </div>
+
+        <!-- Interactive Month Selector -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <button onclick="selectMonth(1)" id="m-btn-1" class="month-pill p-4 rounded-2xl bg-amber-500/15 border-2 border-amber-500 text-left transition-all group">
+            <span class="text-[10px] font-mono-code text-amber-400 font-bold block mb-1">FASE 1</span>
+            <span class="text-base font-extrabold text-white block">Enero</span>
+            <span class="text-xs text-slate-300">Estrategia</span>
+          </button>
+          <button onclick="selectMonth(2)" id="m-btn-2" class="month-pill p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left hover:border-slate-700 transition-all group">
+            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 2</span>
+            <span class="text-base font-extrabold text-white block">Febrero</span>
+            <span class="text-xs text-slate-400">Prototipado</span>
+          </button>
+          <button onclick="selectMonth(3)" id="m-btn-3" class="month-pill p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left hover:border-slate-700 transition-all group">
+            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 3</span>
+            <span class="text-base font-extrabold text-white block">Marzo</span>
+            <span class="text-xs text-slate-400">Base & Chasis</span>
+          </button>
+          <button onclick="selectMonth(4)" id="m-btn-4" class="month-pill p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left hover:border-slate-700 transition-all group">
+            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 4</span>
+            <span class="text-base font-extrabold text-white block">Abril</span>
+            <span class="text-xs text-slate-400">Estrés & Luz</span>
+          </button>
+          <button onclick="selectMonth(5)" id="m-btn-5" class="month-pill p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left hover:border-slate-700 transition-all group">
+            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 5</span>
+            <span class="text-base font-extrabold text-white block">Mayo</span>
+            <span class="text-xs text-slate-400">Rutina 100%</span>
+          </button>
+          <button onclick="selectMonth(6)" id="m-btn-6" class="month-pill p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left hover:border-slate-700 transition-all group">
+            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 6</span>
+            <span class="text-base font-extrabold text-white block">Jun - Jul</span>
+            <span class="text-xs text-slate-400">Torneo & Boxes</span>
+          </button>
+        </div>
+
+        <!-- Month Dynamic Detail Box -->
+        <div id="month-content-box" class="p-8 rounded-3xl bg-slate-900/90 border border-slate-800 backdrop-blur-xl space-y-6 glow-cyan transition-all duration-300">
+          <!-- Injected dynamically via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 5. ADN COMPETITIVO Y PROTOCOLOS DE TORNEO ================= -->
+    <section id="adn" class="py-20 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="text-xs font-mono-code text-emerald-400 font-bold uppercase tracking-widest">Factores Determinantes</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">ADN de Torneo: Lo que Decide el Podio</h2>
+          <p class="text-sm text-slate-400">
+            En WRO, el 80% de los fallos ocurren por variaciones ambientales no contempladas en laboratorio. Este protocolo blinda la ejecución del equipo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4 hover:border-amber-500/40 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white">Inmunidad Lumínica</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Sensores de color apantallados obligatoriamente a <strong class="text-amber-300 font-mono-code">8 - 10 mm del tapete</strong>. Esta tolerancia evita lecturas anómalas por reflectores del coliseo o sombras del juez de pista.
+            </p>
+            <div class="pt-2 text-[11px] font-mono-code text-slate-500 border-t border-slate-800">
+              Protocolo: Cortinas de vigas LEGO alrededor del lente.
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white">Degradación de Batería</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Calibración continua a 100%, 75% y 50% de carga. Al gobernar giros mediante <strong class="text-cyan-300 font-mono-code">Giroscopio (Yaw)</strong> y no por tiempo de motor, el robot mantiene precisión angular idéntica.
+            </p>
+            <div class="pt-2 text-[11px] font-mono-code text-slate-500 border-t border-slate-800">
+              Protocolo: Rotación estricta de 3 baterías en boxes.
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4 hover:border-emerald-500/40 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white">Mantenimiento de Boxes</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Limpieza de neumáticos con alcohol isopropílico antes de cada intento para remover el polvillo de la lona vinílica, asegurando un coeficiente de fricción constante en cada corrida.
+            </p>
+            <div class="pt-2 text-[11px] font-mono-code text-slate-500 border-t border-slate-800">
+              Protocolo: Checklist de neumáticos y verificación de ejes.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. INTERACTIVE WRO READINESS CHECKLIST ================= -->
+    <section id="checklist" class="py-20 border-t border-slate-900 bg-slate-950/70">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div class="text-center space-y-2">
+          <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-widest">Herramienta Interactiva</span>
+          <h2 class="text-3xl font-extrabold text-white">Simulador de Preparación de Misión</h2>
+          <p class="text-xs text-slate-400">Marca los hitos completados por tu equipo para calcular el índice de confiabilidad de salida.</p>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 backdrop-blur space-y-6">
+          
+          <!-- Readiness Gauge Bar -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-xs font-mono-code">
+              <span class="text-slate-300">Nivel de Confiabilidad de Salida:</span>
+              <span id="readiness-score" class="text-amber-400 font-bold text-sm">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+              <div id="readiness-bar" class="h-full bg-gradient-to-r from-amber-500 via-cyan-400 to-emerald-400 transition-all duration-300 w-0"></div>
+            </div>
+            <div id="readiness-status" class="text-[11px] font-mono-code text-slate-400">
+              Comienza verificando los parámetros mecánicos y de código.
+            </div>
+          </div>
+
+          <!-- Checklist items -->
+          <div class="space-y-3 pt-2 text-xs">
+            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <div>
+                <strong class="text-white block">Gálibo reglamentario de 25×25×25 cm verificado físicamente</strong>
+                <span class="text-slate-400">El robot entra y sale holgadamente de la caja de medición de arbitraje sin rozar vigas.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <div>
+                <strong class="text-white block">Sensores de color apantallados entre 8 y 10 mm del tapete</strong>
+                <span class="text-slate-400">Campana mecánica que anula reflejos superiores y sombras laterales de los jueces.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <div>
+                <strong class="text-white block">Control de giros por sensor giroscópico (Yaw) calibrado</strong>
+                <span class="text-slate-400">Rutina inmune a la caída de voltaje de la batería y al desgaste de goma de neumáticos.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <div>
+                <strong class="text-white block">Checkpoints y protocolo de aborto programados</strong>
+                <span class="text-slate-400">Si un elemento de juego no es detectado, el robot abandona la tarea y rescata los puntos restantes.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <div>
+                <strong class="text-white block">Rutina completa verificada en menos de 110 segundos (Margen de 10s)</strong>
+                <span class="text-slate-400">Tiempo suficiente para retorno a la base sin sufrir penalizaciones de tiempo límite.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <div>
+                <strong class="text-white block">Regla de las 5 corridas consecutivas superada</strong>
+                <span class="text-slate-400">Cinco ejecuciones perfectas seguidas sin intervención manual en el tapete de práctica.</span>
+              </div>
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 
   </main>
 
-  <!-- Bottom Navigation Control Bar -->
-  <footer class="px-6 py-4 border-t border-slate-800/80 bg-slate-900/60 backdrop-blur-md flex items-center justify-between shrink-0 z-20">
-    <div class="flex items-center gap-2">
-      <span class="text-xs text-slate-400 hidden md:inline">Atajos de teclado:</span>
-      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] font-mono-code text-slate-300">◀ Anterior</kbd>
-      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] font-mono-code text-slate-300">▶ Siguiente</kbd>
-      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] font-mono-code text-slate-300 hidden sm:inline">Espacio</kbd>
-    </div>
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-slate-900 bg-slate-950 py-12 relative z-10 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 font-black flex items-center justify-center font-mono-code text-sm">
+          WRO
+        </div>
+        <div>
+          <span class="text-white font-bold block">PLAN WRO &bull; LEGO SPIKE Prime</span>
+          <span>Desarrollado para la comunidad de robótica competitiva</span>
+        </div>
+      </div>
 
-    <!-- Navigation Buttons -->
-    <div class="flex items-center gap-2">
-      <button id="prev-btn" onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 font-medium text-xs transition-all flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        Anterior
-      </button>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hover:text-amber-400 transition-colors">Repositorio GitHub</a>
+        <a href="https://github.com/themiguedev/PLAN-WRO/blob/main/README.md" target="_blank" class="hover:text-amber-400 transition-colors">Documentación</a>
+        <a href="#top" class="hover:text-white transition-colors flex items-center gap-1 font-mono-code">
+          ↑ Volver arriba
+        </a>
+      </div>
 
-      <button id="next-btn" onclick="nextSlide()" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-amber-500/20 flex items-center gap-1.5">
-        Siguiente
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </button>
     </div>
   </footer>
 
-  <!-- Interactive Logic Script -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    let currentSlide = 1;
-    const totalSlides = 6;
+    // 1. Particle Canvas Background Animation
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
 
-    const monthData = {
-      1: {
-        title: "Enero: Ideas de Rutina y Estrategia",
-        badge: "Fase 1",
-        color: "amber",
-        items: [
-          "<strong>Análisis de Reglamento Oficial:</strong> Desglose minucioso de puntuaciones y zonas de penalización de la temporada.",
-          "<strong>Ruta Principal vs Contingencia:</strong> Definir ruta de máximo puntaje (100%) y ruta de puntos seguros en caso de fallo temprano.",
-          "<strong>Matriz Puntos/Segundo:</strong> Priorizar tareas con mejor relación costo de tiempo vs retorno de puntos."
-        ],
-        levelDiff: "Elementary: 40-50% puntos garantizados | Junior: Rutas combinadas 2 en 1 | Senior: Algoritmo dinámico para 100% en <120s"
-      },
-      2: {
-        title: "Febrero: Diseño Conceptual y Prototipado",
-        badge: "Fase 2",
-        color: "blue",
-        items: [
-          "<strong>Verificación de Cubo Reglamentario:</strong> Control de gálibo estricto de 25×25×25 cm antes de programar.",
-          "<strong>Prototipado Rápido de Actuadores:</strong> Brazos de 4 barras, garras con retención pasiva y empujadores.",
-          "<strong>Tracción y Radio de Giro:</strong> Selección de neumáticos según adherencia del tapete."
-        ],
-        levelDiff: "Elementary: Mecanismos pasivos sin motores extra | Junior: Paralelogramo articulado | Senior: Chasis modular ultracompacto"
-      },
-      3: {
-        title: "Marzo: Armado Estructural y Subrutinas Base",
-        badge: "Fase 3",
-        color: "cyan",
-        items: [
-          "<strong>Refuerzo Estructural:</strong> Vigas cruzadas para eliminar flexión y torsión repetitiva de chasis.",
-          "<strong>Sensores Apantallados:</strong> Montaje de sensores de color a 8-10 mm con cubierta anti-reflejos.",
-          "<strong>Librería de Subprogramas:</strong> Bloques reutilizables parametrizados (Avanzar_cm, Girar_Yaw, Line_Squaring)."
-        ],
-        levelDiff: "Elementary: Bloques parametrizados simples | Junior: Autoalineación contra paredes (Bumping) | Senior: Control PD y código Python"
-      },
-      4: {
-        title: "Abril: Pruebas de Estrés y Variabilidad de Entorno",
-        badge: "Fase 4",
-        color: "amber",
-        items: [
-          "<strong>Pruebas de Iluminación Crítica:</strong> Corridas bajo luz directa, penumbra y sombras proyectadas.",
-          "<strong>Imperfecciones del Terreno:</strong> Simulación en tapetes con pliegues, desniveles y piezas de juego desgastadas.",
-          "<strong>Mapeo de Batería:</strong> Comportamiento de curvas de aceleración al 100%, 75% y 50% de voltaje."
-        ],
-        levelDiff: "Elementary: Ajuste de pines y salida manual | Junior: Calibración dinámica de umbrales | Senior: Resiliencia ante desvíos de ±3°"
-      },
-      5: {
-        title: "Mayo: Programación de Rutina Completa",
-        badge: "Fase 5",
-        color: "emerald",
-        items: [
-          "<strong>Regla de las 5 Corridas Consecutivas:</strong> Se integra una nueva misión solo tras 5 éxitos seguidos de la anterior.",
-          "<strong>Puntos de Control (Checkpoints):</strong> Si falla la captura de un objeto, abortar misión y continuar sin agotar el cronómetro.",
-          "<strong>Sincronización Cinemática:</strong> Movimiento simultáneo de chasis y actuadores para recortar segundos muertos."
-        ],
-        levelDiff: "Elementary: Indicador de paso en pantalla LED | Junior: Recuperación ante piezas no detectadas | Senior: Trayectorias curvas continuas"
-      },
-      6: {
-        title: "Junio - Julio: Simulacros de Torneo y Calibración Final",
-        badge: "Fase 6",
-        color: "amber",
-        items: [
-          "<strong>Cronometraje Oficial de 2 Minutos:</strong> Planillas de evaluación oficiales con árbitros invitados.",
-          "<strong>Protocolo de Boxes (Pit Stop):</strong> Limpieza de ruedas con alcohol isopropílico y rotación de baterías.",
-          "<strong>Entrenamiento Regla Sorpresa:</strong> Resolución de consigna no anunciada en 60-90 min de cuarentena."
-        ],
-        levelDiff: "Elementary: Roles fijos y manejo de estrés | Junior: Bitácora formal de incidencias | Senior: Mínimo 30 corridas oficiales registradas"
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
       }
-    };
-
-    function updateSlide() {
-      // Hide all slides
-      for (let i = 1; i <= totalSlides; i++) {
-        const slide = document.getElementById(`slide-${i}`);
-        if (slide) {
-          slide.classList.add('hidden');
-          slide.classList.remove('slide-enter');
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 1.5 + 0.6;
+        this.alpha = Math.random() * 0.4 + 0.1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
         }
       }
-
-      // Show current slide
-      const current = document.getElementById(`slide-${currentSlide}`);
-      if (current) {
-        current.classList.remove('hidden');
-        current.classList.add('slide-enter');
-      }
-
-      // Update counters & progress
-      document.getElementById('current-slide-num').innerText = currentSlide;
-      const progressPercent = (currentSlide / totalSlides) * 100;
-      document.getElementById('progress-bar').style.width = `${progressPercent}%`;
-
-      // Update buttons
-      document.getElementById('prev-btn').disabled = (currentSlide === 1);
-      const nextBtn = document.getElementById('next-btn');
-      if (currentSlide === totalSlides) {
-        nextBtn.innerHTML = `Reiniciar <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`;
-      } else {
-        nextBtn.innerHTML = `Siguiente <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
-      }
-
-      if (currentSlide === 4) {
-        showMonth(1);
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(245, 158, 11, ${this.alpha})`;
+        ctx.fill();
       }
     }
 
-    function nextSlide() {
-      if (currentSlide < totalSlides) {
-        currentSlide++;
-      } else {
-        currentSlide = 1;
-      }
-      updateSlide();
+    const particleCount = Math.min(window.innerWidth > 768 ? 60 : 25, 70);
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
     }
 
-    function prevSlide() {
-      if (currentSlide > 1) {
-        currentSlide--;
-        updateSlide();
-      }
-    }
-
-    // Keyboard navigation
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'Space') {
-        e.preventDefault();
-        nextSlide();
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevSlide();
-      } else if (e.key.toLowerCase() === 'f') {
-        toggleFullScreen();
-      }
-    });
-
-    function toggleFullScreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => console.log(err));
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(245, 158, 11, ${0.12 * (1 - dist / 90)})`;
+            ctx.stroke();
+          }
         }
       }
+      requestAnimationFrame(animateParticles);
     }
+    animateParticles();
 
-    // Filter levels on Slide 3
-    function filterLevel(lvl) {
-      const cards = document.querySelectorAll('.level-card');
-      const tabs = document.querySelectorAll('.level-tab');
+    // 2. Filter Level on October Schedule
+    function setFilter(lvl) {
+      const boxes = document.querySelectorAll('.level-box');
+      const buttons = document.querySelectorAll('.filter-btn');
 
-      tabs.forEach(t => {
-        t.className = "level-tab px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all";
+      buttons.forEach(btn => {
+        btn.className = "filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
       });
 
-      const activeTab = document.getElementById(`tab-${lvl}`);
-      if (activeTab) {
-        activeTab.className = "level-tab px-3 py-1.5 rounded-lg font-medium bg-amber-500 text-slate-950 font-bold transition-all";
+      const activeBtn = document.getElementById(`btn-filter-${lvl}`);
+      if (activeBtn) {
+        activeBtn.className = "filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition-all";
       }
 
-      cards.forEach(c => {
+      boxes.forEach(box => {
         if (lvl === 'all') {
-          c.classList.remove('hidden');
+          box.classList.remove('hidden');
         } else {
-          if (c.classList.contains(lvl)) {
-            c.classList.remove('hidden');
+          if (box.classList.contains(lvl)) {
+            box.classList.remove('hidden');
           } else {
-            c.classList.add('hidden');
+            box.classList.add('hidden');
           }
         }
       });
     }
 
-    // Show Month details on Slide 4
-    function showMonth(m) {
+    // 3. Macro-Cycle Timeline Content Data
+    const macroCycleData = {
+      1: {
+        phase: "FASE 1 &middot; ENERO",
+        title: "Ideas de Rutina y Estrategia de Puntuación",
+        color: "amber",
+        items: [
+          "<strong>Análisis de Reglamento Oficial:</strong> Desglose exhaustivo del tapete oficial, zonas de penalización y sistema de puntuación.",
+          "<strong>Ruta Principal vs Contingencia:</strong> Separar misiones prioritarias (100% puntaje) de una ruta de emergencia para salvar puntos clave ante desvíos.",
+          "<strong>Matriz Puntos/Segundo:</strong> Priorizar tareas con menor costo de tiempo y menor riesgo cinemático."
+        ],
+        elementary: "Enfoque en asegurar entre el 40% y 50% de los puntos totales con tareas de empuje directo a la base.",
+        junior: "Matriz costo-beneficio de puntos por segundo; rutas combinadas de 2 acciones en un solo trayecto.",
+        senior: "Diagrama de flujo dinámico adaptado a las variables aleatorias de la temporada; barrido del 100% en menos de 120s."
+      },
+      2: {
+        phase: "FASE 2 &middot; FEBRERO",
+        title: "Diseño Conceptual, Prototipado y Gálibo",
+        color: "blue",
+        items: [
+          "<strong>Verificación Estricta del Cubo:</strong> Calibración para asegurar que el robot respete los 25×25×25 cm antes de programar.",
+          "<strong>Prototipado de Actuadores:</strong> Brazos articulados de 4 barras, garras con retención pasiva y empujadores modulares.",
+          "<strong>Centro de Masa y Neumáticos:</strong> Determinación del diámetro de ruedas óptimo para evitar derrapes al acelerar."
+        ],
+        elementary: "Mecanismos pasivos y guías anguladas para encauzar objetos sin requerir motores adicionales.",
+        junior: "Brazos de paralelogramo deformable que mantienen la orientación de la pieza en el aire.",
+        senior: "Chasis motriz ultracompacto con centro de gravedad bajo y aditamentos modulares intercambiables."
+      },
+      3: {
+        phase: "FASE 3 &middot; MARZO",
+        title: "Armado Estructural y Subrutinas Base",
+        color: "cyan",
+        items: [
+          "<strong>Refuerzo Estructural del Chasis:</strong> Vigas cruzadas para suprimir torsiones mecánicas repetitivas.",
+          "<strong>Sensores Apantallados:</strong> Montaje de dos sensores frontales de color apantallados entre 8 y 10 mm del tapete.",
+          "<strong>Librería de Subprogramas:</strong> Funciones reutilizables parametrizadas: Avanzar_cm(), Girar_Yaw(), Soltar_Pieza()."
+        ],
+        elementary: "Bloques parametrizados sencillos con nombres claros para fácil comprensión de los niños.",
+        junior: "Rutinas de autoalineación contra paredes (Bumping) y contra líneas perpendiculares para reiniciar odometría.",
+        senior: "Algoritmos de control Proporcional-Derivativo (PD) para seguimiento de línea y arquitectura modular en Python."
+      },
+      4: {
+        phase: "FASE 4 &middot; ABRIL",
+        title: "Pruebas de Estrés y Variabilidad de Entorno",
+        color: "amber",
+        items: [
+          "<strong>Pruebas de Iluminación Crítica:</strong> Operación bajo focos directos, penumbra y sombras proyectadas.",
+          "<strong>Imperfecciones del Terreno:</strong> Tapetes con pliegues, desniveles de mesa y piezas de juego con desgaste de uso.",
+          "<strong>Curvas de Batería:</strong> Mapeo del rendimiento del robot con batería al 100%, 75% y 50% de carga."
+        ],
+        elementary: "Refuerzo mecánico de pasadores flojos y entrenamiento de posicionamiento manual exacto en la base.",
+        junior: "Calibración dinámica de umbrales de reflectancia al inicio de cada intento de práctica.",
+        senior: "Simulación de errores estocásticos: arrancar con desvío de ±3° para comprobar autorrecuperación sensorial."
+      },
+      5: {
+        phase: "FASE 5 &middot; MAYO",
+        title: "Programación de la Rutina Completa",
+        color: "emerald",
+        items: [
+          "<strong>Regla de las 5 Corridas Consecutivas:</strong> Se incorpora una nueva misión solo tras 5 ejecuciones perfectas seguidas de la anterior.",
+          "<strong>Puntos de Control (Checkpoints):</strong> Si un sensor falla al detectar una pieza, abandonar la misión y avanzar a la siguiente sin detenerse.",
+          "<strong>Sincronización Mecatrónica:</strong> Movimiento continuo de chasis y actuadores para evitar paradas innecesarias."
+        ],
+        elementary: "Secuencia lineal con visualización de estado en la matriz LED del Hub Spike Prime.",
+        junior: "Estructura modular con puntos de rescate en caso de piezas extraviadas o caídas.",
+        senior: "Máquinas de estados finitas con trayectorias curvas interpoladas en lugar de paradas secas."
+      },
+      6: {
+        phase: "FASE 6 &middot; JUNIO - JULIO",
+        title: "Simulacros Oficiales y Puesta a Punto Final",
+        color: "amber",
+        items: [
+          "<strong>Cronometraje Oficial de 2 Minutos:</strong> Evaluaciones bajo planilla reglamentaria con árbitros invitados ajenos al club.",
+          "<strong>Mantenimiento en Boxes (Pit Stop):</strong> Limpieza de neumáticos con alcohol isopropílico y rotación de baterías.",
+          "<strong>Entrenamiento para la Regla Sorpresa:</strong> Resolución de consigna sorpresa en 60 a 90 minutos de cuarentena estricta sin el coach."
+        ],
+        elementary: "Asignación clara de roles de salida (posicionamiento, selección de programa y señal al árbitro).",
+        junior: "Bitácora formal de incidencias por corrida y habituación al rigor arbitral.",
+        senior: "Registro estadístico con un mínimo de 30 corridas completas antes de viajar al torneo."
+      }
+    };
+
+    function selectMonth(m) {
       for (let i = 1; i <= 6; i++) {
         const btn = document.getElementById(`m-btn-${i}`);
         if (btn) {
           if (i === m) {
-            btn.className = "month-btn p-3 rounded-xl border bg-amber-500/10 border-amber-500 text-left transition-all shadow-md";
+            btn.className = "month-pill p-4 rounded-2xl bg-amber-500/20 border-2 border-amber-500 text-left transition-all group shadow-lg shadow-amber-500/10";
           } else {
-            btn.className = "month-btn p-3 rounded-xl border bg-slate-900 border-slate-800 text-left hover:border-slate-700 transition-all";
+            btn.className = "month-pill p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left hover:border-slate-700 transition-all group";
           }
         }
       }
 
-      const data = monthData[m];
-      const card = document.getElementById('month-detail-card');
-      if (data && card) {
-        card.innerHTML = `
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      const d = macroCycleData[m];
+      const box = document.getElementById('month-content-box');
+      if (d && box) {
+        box.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-2">
             <div>
-              <span class="text-[11px] font-mono-code text-amber-400 uppercase tracking-wider">${data.badge}</span>
-              <h3 class="text-lg font-bold text-white">${data.title}</h3>
+              <span class="text-xs font-mono-code text-amber-400 font-bold uppercase tracking-wider">${d.phase}</span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-white">${d.title}</h3>
             </div>
-            <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-mono-code">Foco Operativo</span>
+            <span class="text-xs font-mono-code px-3 py-1 rounded-full bg-slate-800 text-slate-300 self-start sm:self-auto border border-slate-700">Objetivo Crítico</span>
           </div>
-          <div class="space-y-2.5 text-xs text-slate-300">
-            ${data.items.map(it => `<div class="flex items-start gap-2.5"><span class="text-amber-400 mt-0.5">▸</span><div>${it}</div></div>`).join('')}
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+            ${d.items.map(it => `
+              <div class="flex items-start gap-3">
+                <span class="text-amber-400 mt-1">▸</span>
+                <div>${it}</div>
+              </div>
+            `).join('')}
           </div>
-          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-            <strong class="text-white block mb-1">Diferenciación por Categorías:</strong>
-            ${data.levelDiff}
+
+          <div class="pt-4 border-t border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950/60 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1 font-mono-code">Elementary</span>
+              ${d.elementary}
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950/60 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1 font-mono-code">Junior</span>
+              ${d.junior}
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950/60 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1 font-mono-code">Senior</span>
+              ${d.senior}
+            </div>
           </div>
         `;
       }
     }
 
-    // Initialize presentation
-    updateSlide();
+    // 4. Mission Readiness Checklist Calculation
+    function calcReadiness() {
+      const items = document.querySelectorAll('.check-item');
+      let checked = 0;
+      items.forEach(it => {
+        if (it.checked) checked++;
+      });
+      const percent = Math.round((checked / items.length) * 100);
+
+      document.getElementById('readiness-score').innerText = `${percent}%`;
+      const bar = document.getElementById('readiness-bar');
+      bar.style.width = `${percent}%`;
+
+      const statusEl = document.getElementById('readiness-status');
+      if (percent === 100) {
+        statusEl.innerHTML = `<span class="text-emerald-400 font-bold">¡Robot en condiciones óptimas de podio! Listo para tapete oficial de torneo.</span>`;
+      } else if (percent >= 66) {
+        statusEl.innerHTML = `<span class="text-amber-400 font-bold">Alto grado de preparación. Completa los detalles de control o pruebas de estrés.</span>`;
+      } else if (percent > 0) {
+        statusEl.innerHTML = `<span class="text-slate-300">Fase de verificación inicial en curso. Continúa revisando los protocolos.</span>`;
+      } else {
+        statusEl.innerHTML = `Comienza verificando los parámetros mecánicos y de código.`;
+      }
+    }
+
+    // Initialize defaults
+    selectMonth(1);
+    setFilter('all');
   </script>
 </body>
 </html>
