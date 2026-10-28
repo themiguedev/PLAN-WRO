@@ -8,9 +8,8 @@
   <!-- Figma Design System Typography: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Figma Design System Rules */
     :root {
       --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -19,7 +18,7 @@
     body {
       font-family: var(--font-primary);
       font-feature-settings: "kern" 1;
-      letter-spacing: -0.012em;
+      letter-spacing: -0.015em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -29,18 +28,16 @@
       letter-spacing: 0.05em;
     }
 
-    /* Dashed focus outline echoing Figma editor handles */
     *:focus-visible {
       outline: 2px dashed #000000 !important;
       outline-offset: 3px !important;
     }
 
-    /* Figma Pill Geometry: 50px */
     .pill-btn {
       border-radius: 9999px;
     }
 
-    /* 3D Wireframe Cube effect styled as a Figma Canvas Vector Frame */
+    /* 3D Wireframe Cube effect */
     .cube-container {
       perspective: 900px;
     }
@@ -60,7 +57,7 @@
       width: 140px;
       height: 140px;
       border: 1.5px solid #000000;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     }
@@ -71,7 +68,7 @@
     .cube-top    { transform: rotateX(90deg) translateZ(70px); }
     .cube-bottom { transform: rotateX(-90deg) translateZ(70px); }
 
-    /* Custom ultra-clean scrollbar */
+    /* Custom light scrollbar */
     ::-webkit-scrollbar {
       width: 7px;
     }
@@ -89,30 +86,28 @@
 </head>
 <body class="bg-[#ffffff] text-[#000000] selection:bg-[#000000] selection:text-[#ffffff] relative overflow-x-hidden min-h-screen">
 
-  <!-- Figma Canvas Interactive Particle Dots -->
+  <!-- Interactive Canvas Background -->
   <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-  <!-- Figma Vibrant Hero Gradient Sphere (Chromatic Relief) -->
-  <div class="fixed top-[-14rem] left-1/2 -translate-x-1/2 w-[48rem] h-[34rem] bg-gradient-to-br from-[#10b981]/15 via-[#f59e0b]/20 to-[#8b5cf6]/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <!-- Ambient Light Soft Colors -->
+  <div class="fixed top-[-14rem] left-1/2 -translate-x-1/2 w-[52rem] h-[34rem] bg-gradient-to-br from-[#10b981]/15 via-[#f59e0b]/20 to-[#8b5cf6]/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
   <div class="fixed bottom-[-18rem] right-[-10rem] w-[38rem] h-[38rem] bg-gradient-to-tl from-[#06b6d4]/10 via-[#ec4899]/10 to-transparent rounded-full blur-[150px] pointer-events-none z-0"></div>
 
-  <!-- ================= 1. FIGMA HEADER / NAVIGATION ================= -->
+  <!-- ================= 1. HEADER / NAVIGATION ================= -->
   <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 border-b border-[#000000]/10 transition-all duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
       
       <!-- Brand Lockup -->
       <a href="#" class="flex items-center gap-3.5 group">
-        <!-- Logo Emblem -->
         <div class="relative w-10 h-10 rounded-2xl bg-[#000000] flex items-center justify-center font-black text-white shadow-sm ring-1 ring-black/10 group-hover:scale-105 transition-transform duration-200 shrink-0">
-          <span class="text-[12px] font-black tracking-widest leading-none text-white pl-0.5">WRO</span>
+          <span class="text-[12px] font-black tracking-widest leading-none text-white pl-0.5 font-mono-figma">WRO</span>
           <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-white rounded-full flex items-center justify-center shadow-sm">
             <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
           </span>
         </div>
-        <!-- Typographic Hierarchy -->
         <div class="flex flex-col">
           <div class="flex items-center gap-2">
-            <span class="text-[16px] font-extrabold tracking-tight text-[#000000] leading-none">
+            <span class="text-[16px] font-black tracking-tight text-[#000000] leading-none">
               PLAN <span class="text-[#000000]">WRO</span>
             </span>
             <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 pill-btn bg-[#f59e0b]/15 border border-[#f59e0b]/30 text-[10px] font-bold text-[#b45309] tracking-tight">
@@ -128,16 +123,20 @@
         </div>
       </a>
 
-      <!-- Figma Navigation Links -->
+      <!-- Navigation Links -->
       <nav class="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600">
         <a href="#fases" class="hover:text-black transition-colors">Fases</a>
         <a href="#nivelacion" class="hover:text-black transition-colors">Plan Noviembre</a>
+        <a href="#simulador" class="hover:text-black transition-colors flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Simulador en Pista
+        </a>
         <a href="#macrociclo" class="hover:text-black transition-colors">Macro-Ciclo</a>
-        <a href="#adn" class="hover:text-black transition-colors">ADN Competitivo</a>
+        <a href="#adn" class="hover:text-black transition-colors">ADN Torneo</a>
         <a href="#checklist" class="hover:text-black transition-colors">Checklist</a>
       </nav>
 
-      <!-- Figma Action Pills -->
+      <!-- Action Buttons -->
       <div class="flex items-center gap-3">
         <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 pill-btn bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-black shadow-sm transition-all hover:border-black">
           <svg class="w-4 h-4 fill-current text-black" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -151,10 +150,10 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
+  <!-- MAIN WRAPPER -->
   <main class="relative z-10">
 
-    <!-- ================= 2. HERO SECTION (FIGMA GALLERY DISPLAY) ================= -->
+    <!-- ================= 2. HERO SECTION ================= -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
@@ -165,7 +164,7 @@
             <span>WRO RoboMission &middot; Temporada Oficial 2026/2027</span>
           </div>
 
-          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-[-0.04em] text-[#000000] leading-[1.05]">
+          <h1 class="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#000000] leading-[1.05]">
             Plan de Desarrollo <br>
             <span class="bg-gradient-to-r from-[#000000] via-slate-800 to-slate-600 bg-clip-text text-transparent">
               Técnico & Competitivo
@@ -173,10 +172,10 @@
           </h1>
 
           <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl font-normal">
-            Metodología técnico-competitiva estructurada en 4 fases continuas para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras y preparación para la Regla Sorpresa.
+            Metodología de alto rendimiento para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras, pruebas de luz/batería y preparación para la Regla Sorpresa.
           </p>
 
-          <!-- Key Metrics Tiles (Figma Gallery Spec) -->
+          <!-- Key Metrics Tiles -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
               <div class="text-3xl font-black text-[#000000] font-mono-figma">8</div>
@@ -202,49 +201,86 @@
               Explorar Plan de Noviembre
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
-            <a href="#macrociclo" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
-              Macro-Ciclo Anual
+            <a href="#simulador" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Probar Simulador WRO
             </a>
           </div>
         </div>
 
-        <!-- 3D Figma Frame Showcase Box -->
+        <!-- Interactive Hub & Cube Multi-Tab Showcase -->
         <div class="lg:col-span-5 flex flex-col items-center justify-center">
-          <div class="relative w-full max-w-md p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6">
+          <div class="relative w-full max-w-md p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-5">
             
+            <!-- Switcher Tabs inside Showcase Box -->
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#f59e0b] animate-ping"></span>
-                <span class="text-xs font-mono-figma text-black font-bold uppercase">Cubo Reglamentario WRO</span>
+              <div class="inline-flex p-1 pill-btn bg-slate-100 text-xs">
+                <button onclick="toggleHeroView('cube')" id="tab-cube" class="px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all">🧊 Cubo 25 cm</button>
+                <button onclick="toggleHeroView('hub')" id="tab-hub" class="px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all">📟 Hub SPIKE 5×5</button>
               </div>
-              <span class="text-xs font-mono-figma text-slate-500 bg-slate-100 px-2.5 py-0.5 pill-btn font-semibold">250×250×250 mm</span>
+              <span class="text-[11px] font-mono-figma text-slate-500 uppercase font-semibold">Hardware WRO</span>
             </div>
 
-            <!-- Animated 3D Wireframe Cube -->
-            <div class="h-48 flex items-center justify-center cube-container">
-              <div class="cube-box">
-                <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-figma text-slate-600 font-bold">TOP</div>
-                <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-figma text-[#10b981] font-bold">BASE</div>
+            <!-- View 1: 3D Wireframe Cube -->
+            <div id="view-cube" class="space-y-5">
+              <div class="h-44 flex items-center justify-center cube-container">
+                <div class="cube-box">
+                  <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                  <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-figma text-slate-600 font-bold">TOP</div>
+                  <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-figma text-[#10b981] font-bold">BASE</div>
+                </div>
+              </div>
+              <div class="space-y-2 text-xs pt-1 border-t border-slate-100">
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Dimensiones de caja de arbitraje:</span>
+                  <span class="font-mono-figma font-bold text-black">250 × 250 × 250 mm</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600">
+                  <span>Despliegue dinámico de brazos:</span>
+                  <span class="font-mono-figma font-bold text-[#10b981]">Válido tras el inicio</span>
+                </div>
               </div>
             </div>
 
-            <!-- Exhibit Spec Info -->
-            <div class="space-y-2.5 text-xs">
-              <div class="flex items-center justify-between text-slate-600">
-                <span>Inspección de salida:</span>
-                <span class="font-mono-figma font-bold text-black">Ajuste estricto en caja</span>
+            <!-- View 2: Interactive SPIKE Prime Hub 5x5 Matrix Simulator -->
+            <div id="view-hub" class="hidden space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="text-xs font-semibold text-slate-700">Matriz de 5×5 LEDs & Puertos</div>
+                <div class="flex gap-1 text-[10px] font-mono-figma">
+                  <button onclick="setMatrixPattern('smile')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">😊</button>
+                  <button onclick="setMatrixPattern('arrow')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">⬆ 90°</button>
+                  <button onclick="setMatrixPattern('check')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">✓ OK</button>
+                  <button onclick="setMatrixPattern('wro')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 font-bold">WRO</button>
+                </div>
               </div>
-              <div class="flex items-center justify-between text-slate-600">
-                <span>Despliegue dinámico:</span>
-                <span class="font-mono-figma font-bold text-[#10b981]">Válido tras el arranque</span>
+
+              <!-- Realistic SPIKE Prime Yellow Hub Frame -->
+              <div class="p-4 rounded-2xl bg-amber-400 border-2 border-amber-500 shadow-md flex items-center justify-between gap-4">
+                <!-- Ports Left (A, C, E) -->
+                <div class="flex flex-col gap-2 font-mono-figma text-[9px] font-bold text-amber-950">
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">A Tracción Izq</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">C Color Frontal 1</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">E Motor Garra</div>
+                </div>
+
+                <!-- 5x5 LED Grid Display -->
+                <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 shadow-inner grid grid-cols-5 gap-1.5" id="led-grid">
+                  <!-- Generated via JS -->
+                </div>
+
+                <!-- Ports Right (B, D, F) -->
+                <div class="flex flex-col gap-2 font-mono-figma text-[9px] font-bold text-amber-950 text-right">
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">B Tracción Der</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">D Color Frontal 2</div>
+                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">F Motor Elevador</div>
+                </div>
               </div>
-              <div class="flex items-center justify-between text-slate-600">
-                <span>Límite Hub SPIKE Prime:</span>
-                <span class="font-mono-figma font-bold text-black">6 Puertos (A - F)</span>
+
+              <div class="text-[11px] text-slate-500 text-center font-mono-figma">
+                Configuración oficial de 6 puertos (2 Tracción + 2 Sensores Color + 2 Actuadores)
               </div>
             </div>
 
@@ -254,13 +290,13 @@
       </div>
     </section>
 
-    <!-- ================= 3. LAS 4 FASES DE EVOLUCIÓN (FIGMA EXHIBITS) ================= -->
+    <!-- ================= 3. LAS 4 FASES DE EVOLUCIÓN ================= -->
     <section id="fases" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         <div class="text-center max-w-2xl mx-auto space-y-2">
           <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Metodología Pedagógica</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">4 Fases de Evolución del Estudiante</h2>
+          <h2 class="text-3xl sm:text-4xl font-black tracking-[-0.03em] text-[#000000]">4 Fases de Evolución del Estudiante</h2>
           <p class="text-sm text-slate-600 font-normal">
             Un itinerario continuo desde la intuición mecánica de bloques hasta el control de lazo cerrado y la estrategia de alta competencia.
           </p>
@@ -344,14 +380,14 @@
       </div>
     </section>
 
-    <!-- ================= 4. PLAN DE NIVELACIÓN: NOVIEMBRE (FIGMA TAB SYSTEM) ================= -->
+    <!-- ================= 4. PLAN DE NIVELACIÓN: NOVIEMBRE ================= -->
     <section id="nivelacion" class="py-20 border-t border-slate-100 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div class="space-y-2">
             <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Currículo Intensivo</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">Plan de Nivelación: Noviembre</h2>
+            <h2 class="text-3xl sm:text-4xl font-black tracking-[-0.03em] text-[#000000]">Plan de Nivelación: Noviembre</h2>
             <p class="text-sm text-slate-600 max-w-xl font-normal">
               8 sesiones de entrenamiento (Martes y Jueves) diseñadas para homogeneizar las destrezas operativas antes de la temporada oficial.
             </p>
@@ -509,13 +545,138 @@
       </div>
     </section>
 
-    <!-- ================= 5. MACRO-CICLO COMPETITIVO (FIGMA TIMELINE EXHIBIT) ================= -->
+    <!-- ================= 5. SIMULADOR EN VIVO: TAPETE Y TELEMETRÍA WRO ================= -->
+    <section id="simulador" class="py-20 border-t border-slate-100 bg-[#f8fafc]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div class="space-y-2">
+            <span class="text-xs font-mono-figma text-emerald-600 uppercase tracking-widest font-semibold flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              Entorno Interactivo
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-black tracking-[-0.03em] text-[#000000]">Simulador de Rutina en Pista WRO</h2>
+            <p class="text-sm text-slate-600 max-w-xl font-normal">
+              Visualiza en tiempo real la cinemática del robot sobre el tapete oficial: giros giroscópicos calibrados, seguimiento de línea y detención por sensor.
+            </p>
+          </div>
+
+          <button onclick="runTrackSimulation()" id="sim-run-btn" class="px-6 py-3 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md flex items-center gap-2 transition-all">
+            <span>▶ Iniciar Corrida de 120s</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Interactive Field Canvas -->
+          <div class="lg:col-span-8 p-6 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-4">
+            <div class="flex items-center justify-between text-xs border-b border-slate-100 pb-3">
+              <span class="font-mono-figma font-bold text-slate-800">TAPETE OFICIAL: VISTA SUPERIOR 2D</span>
+              <span id="sim-step-badge" class="px-2.5 py-0.5 pill-btn bg-slate-100 text-slate-700 font-mono-figma font-semibold">Listo en Base</span>
+            </div>
+
+            <!-- SVG Mat -->
+            <div class="relative w-full h-72 sm:h-80 bg-slate-50 border-2 border-slate-300 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center">
+              <svg id="mat-svg" class="w-full h-full" viewBox="0 0 600 320" fill="none">
+                <!-- Grid Lines -->
+                <defs>
+                  <pattern id="matGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                  </pattern>
+                </defs>
+                <rect width="600" height="320" fill="url(#matGrid)" />
+
+                <!-- Base Zone (Green Start) -->
+                <rect x="30" y="30" width="100" height="100" fill="#dcfce7" stroke="#10b981" stroke-width="2" stroke-dasharray="4" rx="8" />
+                <text x="80" y="85" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#047857">BASE SALIDA</text>
+
+                <!-- Black Navigation Lines -->
+                <path d="M 80 130 L 80 230 L 320 230 L 320 100 L 520 100" stroke="#0f172a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+
+                <!-- Target Delivery Zone (Amber) -->
+                <rect x="460" y="50" width="100" height="100" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="8" />
+                <text x="510" y="105" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#b45309">ZONA META</text>
+
+                <!-- Game Element to collect -->
+                <circle id="mat-cube" cx="320" cy="100" r="14" fill="#ef4444" stroke="#991b1b" stroke-width="2" />
+                <text x="320" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#ffffff">CARGA</text>
+
+                <!-- Animated Robot SVG -->
+                <g id="robot-marker" transform="translate(80, 80)">
+                  <rect x="-18" y="-18" width="36" height="36" rx="8" fill="#ffcc00" stroke="#000000" stroke-width="2.5" />
+                  <rect x="-16" y="-10" width="4" height="20" rx="2" fill="#000000" />
+                  <rect x="12" y="-10" width="4" height="20" rx="2" fill="#000000" />
+                  <circle cx="0" cy="-6" r="3" fill="#000000" />
+                  <line x1="0" y1="-14" x2="0" y2="-22" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-500 font-mono-figma">
+              <span>Trayectoria: Base ➔ Avance ➔ Giro 90° ➔ Captura ➔ Meta</span>
+              <span id="sim-timer-display" class="font-bold text-black">Tiempo: 00.0s / 120s</span>
+            </div>
+          </div>
+
+          <!-- Telemetry Dashboard -->
+          <div class="lg:col-span-4 p-6 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-4">
+            <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+              <span class="text-xs font-mono-figma font-bold uppercase text-slate-800">Telemetría SPIKE Prime</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+
+            <!-- Gauge 1: Gyro Yaw Angle -->
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between text-xs font-mono-figma">
+                <span class="text-slate-600">Ángulo Yaw (Giroscopio):</span>
+                <span id="tel-yaw" class="font-bold text-black">0.0°</span>
+              </div>
+              <div class="w-full bg-slate-200 h-2 pill-btn overflow-hidden">
+                <div id="tel-yaw-bar" class="h-full bg-blue-600 transition-all duration-200" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Gauge 2: Light Reflection -->
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between text-xs font-mono-figma">
+                <span class="text-slate-600">Sensor Color (Reflectancia):</span>
+                <span id="tel-light" class="font-bold text-black">88% (Blanco)</span>
+              </div>
+              <div class="w-full bg-slate-200 h-2 pill-btn overflow-hidden">
+                <div id="tel-light-bar" class="h-full bg-amber-500 transition-all duration-200" style="width: 88%"></div>
+              </div>
+            </div>
+
+            <!-- Gauge 3: Battery & Motors -->
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="text-slate-600">Voltaje de Batería:</span>
+                <span class="font-mono-figma font-bold text-emerald-600">8.24 V (100%)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-600">Estado de Tracción:</span>
+                <span id="tel-motors" class="font-mono-figma font-bold text-black">En Espera</span>
+              </div>
+              <div class="flex items-center justify-between border-t border-slate-200 pt-2">
+                <span class="text-slate-600">Puntaje Estimado:</span>
+                <span id="tel-score" class="font-mono-figma font-bold text-[#10b981] text-sm">+0 pts</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 6. MACRO-CICLO COMPETITIVO (TIMELINE) ================= -->
     <section id="macrociclo" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         <div class="text-center max-w-2xl mx-auto space-y-2">
           <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Planificación Temporal</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">Macro-Ciclo de Temporada WRO</h2>
+          <h2 class="text-3xl sm:text-4xl font-black tracking-[-0.03em] text-[#000000]">Macro-Ciclo de Temporada WRO</h2>
           <p class="text-sm text-slate-600 font-normal">
             De la publicación de la regla oficial a la fase de torneo internacional. Haz clic en cada mes para desplegar sus directrices operativas.
           </p>
@@ -555,7 +716,7 @@
           </button>
         </div>
 
-        <!-- Month Dynamic Detail Box (Figma Canvas Surface) -->
+        <!-- Month Dynamic Detail Box -->
         <div id="month-content-box" class="p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6 transition-all duration-200">
           <!-- Injected dynamically via JS -->
         </div>
@@ -563,13 +724,13 @@
       </div>
     </section>
 
-    <!-- ================= 6. ADN COMPETITIVO (FIGMA GALLERY CARDS) ================= -->
+    <!-- ================= 7. ADN COMPETITIVO (BOXES & REGLA SORPRESA) ================= -->
     <section id="adn" class="py-20 border-t border-slate-100 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         <div class="text-center max-w-2xl mx-auto space-y-2">
           <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Factores Determinantes</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">ADN de Torneo: Lo que Decide el Podio</h2>
+          <h2 class="text-3xl sm:text-4xl font-black tracking-[-0.03em] text-[#000000]">ADN de Torneo: Lo que Decide el Podio</h2>
           <p class="text-sm text-slate-600 font-normal">
             En WRO, el 80% de los fallos ocurren por variaciones ambientales no contempladas en laboratorio. Este protocolo blinda la ejecución del equipo.
           </p>
@@ -620,13 +781,13 @@
       </div>
     </section>
 
-    <!-- ================= 7. SIMULADOR / CHECKLIST INTERACTIVO ================= -->
+    <!-- ================= 8. SIMULADOR / CHECKLIST INTERACTIVO ================= -->
     <section id="checklist" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div class="text-center space-y-2">
           <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Herramienta Interactiva</span>
-          <h2 class="text-3xl font-extrabold tracking-[-0.03em] text-[#000000]">Simulador de Preparación de Misión</h2>
+          <h2 class="text-3xl font-black tracking-[-0.03em] text-[#000000]">Simulador de Preparación de Misión</h2>
           <p class="text-xs text-slate-600 font-normal">Marca los hitos completados por tu equipo para calcular el índice de confiabilidad de salida.</p>
         </div>
 
@@ -704,12 +865,12 @@
 
   </main>
 
-  <!-- ================= 8. FIGMA FOOTER ================= -->
+  <!-- ================= 9. FOOTER ================= -->
   <footer class="border-t border-slate-200 bg-white py-12 relative z-10 text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3.5">
-        <div class="w-9 h-9 rounded-xl bg-[#000000] text-white font-black flex items-center justify-center text-[11px] tracking-widest shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-[#000000] text-white font-black flex items-center justify-center text-[11px] tracking-widest shadow-sm font-mono-figma">
           WRO
         </div>
         <div>
@@ -729,7 +890,7 @@
     </div>
   </footer>
 
-  <!-- SCRIPT LOGIC (FIGMA CANVAS INTEGRATION) -->
+  <!-- SCRIPT LOGIC (ANIMATIONS, SIMULATOR & HUB) -->
   <script>
     // 1. Particle Canvas Background Animation
     const canvas = document.getElementById('bg-canvas');
@@ -797,7 +958,149 @@
     }
     animateParticles();
 
-    // 2. Filter Level on November Schedule (Figma Pill Active Style)
+    // 2. Hero Box Tab Switcher (Cube vs SPIKE Hub)
+    function toggleHeroView(view) {
+      const vCube = document.getElementById('view-cube');
+      const vHub = document.getElementById('view-hub');
+      const tCube = document.getElementById('tab-cube');
+      const tHub = document.getElementById('tab-hub');
+
+      if (view === 'cube') {
+        vCube.classList.remove('hidden');
+        vHub.classList.add('hidden');
+        tCube.className = "px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all";
+        tHub.className = "px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all";
+      } else {
+        vCube.classList.add('hidden');
+        vHub.classList.remove('hidden');
+        tHub.className = "px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all";
+        tCube.className = "px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all";
+      }
+    }
+
+    // 3. Interactive 5x5 LED Matrix Grid Generator & Presets
+    const ledGrid = document.getElementById('led-grid');
+    const ledState = Array(25).fill(0);
+
+    const patterns = {
+      smile: [
+        0,1,0,1,0,
+        0,1,0,1,0,
+        0,0,0,0,0,
+        1,0,0,0,1,
+        0,1,1,1,0
+      ],
+      arrow: [
+        0,0,1,0,0,
+        0,1,1,1,0,
+        1,0,1,0,1,
+        0,0,1,0,0,
+        0,0,1,0,0
+      ],
+      check: [
+        0,0,0,0,1,
+        0,0,0,1,0,
+        1,0,1,0,0,
+        0,1,0,0,0,
+        0,0,0,0,0
+      ],
+      wro: [
+        1,0,1,0,1,
+        1,0,1,0,1,
+        1,1,1,1,1,
+        1,1,0,1,1,
+        1,0,0,0,1
+      ]
+    };
+
+    function renderMatrix(arr) {
+      ledGrid.innerHTML = '';
+      arr.forEach((val, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `w-3 h-3 rounded-full transition-all duration-200 cursor-pointer ${val ? 'bg-amber-400 shadow-[0_0_8px_#f59e0b]' : 'bg-slate-800 hover:bg-slate-700'}`;
+        dot.onclick = () => {
+          arr[idx] = arr[idx] ? 0 : 1;
+          renderMatrix(arr);
+        };
+        ledGrid.appendChild(dot);
+      });
+    }
+
+    function setMatrixPattern(name) {
+      if (patterns[name]) {
+        renderMatrix([...patterns[name]]);
+      }
+    }
+    setMatrixPattern('smile');
+
+    // 4. Interactive Field Mat Track Simulation
+    let simRunning = false;
+    function runTrackSimulation() {
+      if (simRunning) return;
+      simRunning = true;
+
+      const robot = document.getElementById('robot-marker');
+      const cube = document.getElementById('mat-cube');
+      const timerDisp = document.getElementById('sim-timer-display');
+      const stepBadge = document.getElementById('sim-step-badge');
+      const telYaw = document.getElementById('tel-yaw');
+      const telYawBar = document.getElementById('tel-yaw-bar');
+      const telLight = document.getElementById('tel-light');
+      const telLightBar = document.getElementById('tel-light-bar');
+      const telMotors = document.getElementById('tel-motors');
+      const telScore = document.getElementById('tel-score');
+      const btn = document.getElementById('sim-run-btn');
+
+      btn.disabled = true;
+      btn.className = "px-6 py-3 pill-btn bg-slate-300 text-slate-500 font-semibold text-xs cursor-not-allowed";
+
+      const waypoints = [
+        { x: 80, y: 80, yaw: 0, light: 88, status: "Salida de Base (Lazo Abierto)", motors: "Avance 20 cm", score: 0, time: 2.0 },
+        { x: 80, y: 230, yaw: 0, light: 15, status: "Detección de Cinta Negra", motors: "Frenado Activo", score: 10, time: 5.5 },
+        { x: 80, y: 230, yaw: 90, light: 15, status: "Giro Giroscópico de 90° (Yaw)", motors: "Control P Activo", score: 15, time: 8.0 },
+        { x: 320, y: 230, yaw: 90, light: 88, status: "Seguimiento de Línea PD", motors: "Velocidad Crucero", score: 25, time: 14.5 },
+        { x: 320, y: 100, yaw: 0, light: 50, status: "Captura de Carga (Stalled Autocero)", motors: "Garra Cerrada", score: 50, time: 21.0 },
+        { x: 520, y: 100, yaw: 90, light: 85, status: "Depósito en Meta & Alto", motors: "Parada Completa", score: 85, time: 28.4 }
+      ];
+
+      let step = 0;
+      function nextStep() {
+        if (step >= waypoints.length) {
+          stepBadge.innerText = "¡Misión Cumplida!";
+          stepBadge.className = "px-2.5 py-0.5 pill-btn bg-emerald-100 text-emerald-800 font-mono-figma font-semibold";
+          telMotors.innerText = "Parada Oficial";
+          btn.disabled = false;
+          btn.className = "px-6 py-3 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md transition-all";
+          simRunning = false;
+          return;
+        }
+
+        const wp = waypoints[step];
+        robot.style.transition = "transform 1.4s cubic-bezier(0.25, 1, 0.5, 1)";
+        robot.setAttribute('transform', `translate(${wp.x}, ${wp.y}) rotate(${wp.yaw})`);
+
+        if (step === 4) {
+          cube.setAttribute('fill', '#10b981');
+          cube.setAttribute('stroke', '#047857');
+        }
+
+        stepBadge.innerText = wp.status;
+        telYaw.innerText = `${wp.yaw}.0°`;
+        telYawBar.style.width = `${(wp.yaw / 90) * 100}%`;
+        telLight.innerText = `${wp.light}% ${wp.light < 30 ? '(Negro)' : '(Blanco)'}`;
+        telLightBar.style.width = `${wp.light}%`;
+        telMotors.innerText = wp.motors;
+        telScore.innerText = `+${wp.score} pts`;
+        timerDisp.innerText = `Tiempo: ${wp.time}s / 120s`;
+
+        step++;
+        setTimeout(nextStep, 1600);
+      }
+
+      nextStep();
+    }
+
+    // 5. Filter Level on November Schedule
     function setFilter(lvl) {
       const boxes = document.querySelectorAll('.level-box');
       const buttons = document.querySelectorAll('.filter-btn');
@@ -824,7 +1127,7 @@
       });
     }
 
-    // 3. Macro-Cycle Timeline Content Data (Figma Specs)
+    // 6. Macro-Cycle Timeline Content Data
     const macroCycleData = {
       1: {
         phase: "FASE 1 &middot; ENERO",
@@ -951,7 +1254,7 @@
       }
     }
 
-    // 4. Mission Readiness Checklist Calculation (Figma Precision)
+    // 7. Mission Readiness Checklist Calculation
     function calcReadiness() {
       const items = document.querySelectorAll('.check-item');
       let checked = 0;
