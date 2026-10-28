@@ -5,51 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PLAN WRO | Plataforma Técnica y Competitiva SPIKE Prime</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <!-- Figma Design System Typography: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Figma Design System Rules */
+    :root {
+      --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    }
-    .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Subtle gradient animation */
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .animate-gradient {
-      background-size: 200% 200%;
-      animation: gradientShift 6s ease infinite;
+      font-family: var(--font-primary);
+      font-feature-settings: "kern" 1;
+      letter-spacing: -0.012em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* 3D Wireframe Cube effect in Light Mode */
+    .font-mono-figma {
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* Dashed focus outline echoing Figma editor handles */
+    *:focus-visible {
+      outline: 2px dashed #000000 !important;
+      outline-offset: 3px !important;
+    }
+
+    /* Figma Pill Geometry: 50px */
+    .pill-btn {
+      border-radius: 9999px;
+    }
+
+    /* 3D Wireframe Cube effect styled as a Figma Canvas Vector Frame */
     .cube-container {
-      perspective: 800px;
+      perspective: 900px;
     }
     .cube-box {
       width: 140px;
       height: 140px;
       position: relative;
       transform-style: preserve-3d;
-      animation: rotateCube 16s linear infinite;
+      animation: rotateFigmaCube 18s linear infinite;
     }
-    @keyframes rotateCube {
-      0% { transform: rotateX(15deg) rotateY(0deg); }
-      100% { transform: rotateX(15deg) rotateY(360deg); }
+    @keyframes rotateFigmaCube {
+      0% { transform: rotateX(18deg) rotateY(0deg); }
+      100% { transform: rotateX(18deg) rotateY(360deg); }
     }
     .cube-face {
       position: absolute;
       width: 140px;
       height: 140px;
-      border: 1.5px solid rgba(217, 119, 6, 0.75);
-      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid #000000;
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     }
     .cube-front  { transform: rotateY(0deg) translateZ(70px); }
     .cube-back   { transform: rotateY(180deg) translateZ(70px); }
@@ -58,77 +71,79 @@
     .cube-top    { transform: rotateX(90deg) translateZ(70px); }
     .cube-bottom { transform: rotateX(-90deg) translateZ(70px); }
 
-    /* Custom light scrollbar */
+    /* Custom ultra-clean scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: #f1f5f9;
+      background: #ffffff;
     }
     ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 4px;
+      background: #e2e8f0;
+      border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
+      background: #cbd5e1;
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-slate-950 relative overflow-x-hidden min-h-screen">
+<body class="bg-[#ffffff] text-[#000000] selection:bg-[#000000] selection:text-[#ffffff] relative overflow-x-hidden min-h-screen">
 
-  <!-- Interactive Canvas Particle Background (Light Mode) -->
-  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-45"></canvas>
+  <!-- Figma Canvas Interactive Particle Dots -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-  <!-- Ambient Light Soft Color Blobs -->
-  <div class="fixed top-[-10rem] left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] bg-gradient-to-tr from-amber-200/40 via-blue-100/40 to-transparent rounded-full blur-[130px] pointer-events-none z-0"></div>
-  <div class="fixed bottom-[-15rem] right-[-10rem] w-[35rem] h-[35rem] bg-emerald-100/50 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <!-- Figma Vibrant Hero Gradient Sphere (Chromatic Relief) -->
+  <div class="fixed top-[-14rem] left-1/2 -translate-x-1/2 w-[48rem] h-[34rem] bg-gradient-to-br from-[#10b981]/15 via-[#f59e0b]/20 to-[#8b5cf6]/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[-18rem] right-[-10rem] w-[38rem] h-[38rem] bg-gradient-to-tl from-[#06b6d4]/10 via-[#ec4899]/10 to-transparent rounded-full blur-[150px] pointer-events-none z-0"></div>
 
-  <!-- STICKY NAVBAR (LIGHT MODE) -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/90 transition-all duration-300 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- ================= 1. FIGMA HEADER / NAVIGATION ================= -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 border-b border-[#000000]/10 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      
+      <!-- Brand Lockup -->
       <a href="#" class="flex items-center gap-3.5 group">
-        <!-- High-End WRO Emblem -->
-        <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 flex items-center justify-center font-black text-slate-950 shadow-md shadow-amber-500/20 ring-1 ring-amber-400/40 group-hover:scale-105 group-hover:shadow-amber-500/35 transition-all duration-300 shrink-0">
-          <span class="text-[12px] font-black tracking-widest leading-none text-slate-950 pl-0.5">WRO</span>
+        <!-- Logo Emblem -->
+        <div class="relative w-10 h-10 rounded-2xl bg-[#000000] flex items-center justify-center font-black text-white shadow-sm ring-1 ring-black/10 group-hover:scale-105 transition-transform duration-200 shrink-0">
+          <span class="text-[12px] font-black tracking-widest leading-none text-white pl-0.5">WRO</span>
           <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-white rounded-full flex items-center justify-center shadow-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
           </span>
         </div>
-        <!-- Typographic Brand Hierarchy -->
+        <!-- Typographic Hierarchy -->
         <div class="flex flex-col">
           <div class="flex items-center gap-2">
-            <span class="text-[16px] font-extrabold tracking-tight text-slate-900 leading-none group-hover:text-amber-600 transition-colors">
-              PLAN <span class="bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">WRO</span>
+            <span class="text-[16px] font-extrabold tracking-tight text-[#000000] leading-none">
+              PLAN <span class="text-[#000000]">WRO</span>
             </span>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200/90 text-[10px] font-bold text-amber-900 tracking-wide shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 pill-btn bg-[#f59e0b]/15 border border-[#f59e0b]/30 text-[10px] font-bold text-[#b45309] tracking-tight">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span>
               SPIKE™ Prime
             </span>
           </div>
           <div class="flex items-center gap-1.5 text-[11px] font-medium text-slate-500 tracking-tight leading-tight mt-1">
             <span>Centro Técnico & Competitivo</span>
             <span class="text-slate-300">•</span>
-            <span class="text-slate-700 font-semibold">RoboMission</span>
+            <span class="text-slate-800 font-semibold">RoboMission</span>
           </div>
         </div>
       </a>
 
-      <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
-        <a href="#fases" class="hover:text-amber-600 transition-colors">Fases</a>
-        <a href="#nivelacion" class="hover:text-amber-600 transition-colors">Plan Noviembre</a>
-        <a href="#macrociclo" class="hover:text-amber-600 transition-colors">Macro-Ciclo</a>
-        <a href="#adn" class="hover:text-amber-600 transition-colors">ADN Competitivo</a>
-        <a href="#checklist" class="hover:text-amber-600 transition-colors">Checklist de Torneo</a>
+      <!-- Figma Navigation Links -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600">
+        <a href="#fases" class="hover:text-black transition-colors">Fases</a>
+        <a href="#nivelacion" class="hover:text-black transition-colors">Plan Noviembre</a>
+        <a href="#macrociclo" class="hover:text-black transition-colors">Macro-Ciclo</a>
+        <a href="#adn" class="hover:text-black transition-colors">ADN Competitivo</a>
+        <a href="#checklist" class="hover:text-black transition-colors">Checklist</a>
       </nav>
 
-      <!-- Action Buttons -->
+      <!-- Figma Action Pills -->
       <div class="flex items-center gap-3">
-        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-xs font-semibold text-slate-700 shadow-sm transition-all">
-          <svg class="w-4 h-4 fill-current text-slate-800" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 pill-btn bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-black shadow-sm transition-all hover:border-black">
+          <svg class="w-4 h-4 fill-current text-black" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           GitHub
         </a>
-        <a href="#nivelacion" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-md shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all">
+        <a href="#nivelacion" class="inline-flex items-center gap-1.5 px-5 py-2.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]">
           Ver Plan
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
         </a>
@@ -136,100 +151,100 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT CONTAINER -->
   <main class="relative z-10">
 
-    <!-- ================= 1. HERO SECTION ================= -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-18 lg:pt-20 lg:pb-24">
+    <!-- ================= 2. HERO SECTION (FIGMA GALLERY DISPLAY) ================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Hero Text -->
+        <!-- Hero Text Column -->
         <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-amber-300 text-xs font-semibold text-amber-800 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>World Robot Olympiad &middot; RoboMission Temporada Oficial</span>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 pill-btn bg-slate-100 border border-slate-200/90 text-xs font-mono-figma text-slate-800 uppercase">
+            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+            <span>WRO RoboMission &middot; Temporada Oficial 2026/2027</span>
           </div>
 
-          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-            Ingeniería de Podio con <br>
-            <span class="bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 bg-clip-text text-transparent">
-              LEGO SPIKE Prime
+          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-[-0.04em] text-[#000000] leading-[1.05]">
+            Plan de Desarrollo <br>
+            <span class="bg-gradient-to-r from-[#000000] via-slate-800 to-slate-600 bg-clip-text text-transparent">
+              Técnico & Competitivo
             </span>
           </h1>
 
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
-            Metodología técnico-competitiva estructurada en 4 fases continuas: calibración matemática sensorial, control cinemático giroscópico y entrenamiento riguroso para la Regla Sorpresa.
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl font-normal">
+            Metodología técnico-competitiva estructurada en 4 fases continuas para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras y preparación para la Regla Sorpresa.
           </p>
 
-          <!-- Metric Badges -->
+          <!-- Key Metrics Tiles (Figma Gallery Spec) -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
-              <div class="text-2xl font-black text-amber-600 font-mono-code">8</div>
-              <div class="text-xs text-slate-500 font-medium">Sesiones Noviembre</div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">8</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Sesiones Noviembre</div>
             </div>
-            <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
-              <div class="text-2xl font-black text-blue-600 font-mono-code">3</div>
-              <div class="text-xs text-slate-500 font-medium">Categorías Oficiales</div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">3</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Categorías Oficiales</div>
             </div>
-            <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
-              <div class="text-2xl font-black text-emerald-600 font-mono-code">120s</div>
-              <div class="text-xs text-slate-500 font-medium">Límite de Ronda</div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">120s</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Límite de Ronda</div>
             </div>
-            <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
-              <div class="text-2xl font-black text-amber-600 font-mono-code">25cm³</div>
-              <div class="text-xs text-slate-500 font-medium">Gálibo Máximo</div>
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+              <div class="text-3xl font-black text-[#000000] font-mono-figma">25cm³</div>
+              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Gálibo Máximo</div>
             </div>
           </div>
 
-          <!-- Buttons -->
-          <div class="flex flex-wrap items-center gap-4 pt-4">
-            <a href="#nivelacion" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-md shadow-amber-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+          <!-- Hero CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-3">
+            <a href="#nivelacion" class="px-7 py-3.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
               Explorar Plan de Noviembre
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
-            <a href="#macrociclo" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm shadow-sm transition-all flex items-center gap-2">
+            <a href="#macrociclo" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
               Macro-Ciclo Anual
             </a>
           </div>
         </div>
 
-        <!-- 3D Interactive Constraint Box & Live Visual -->
+        <!-- 3D Figma Frame Showcase Box -->
         <div class="lg:col-span-5 flex flex-col items-center justify-center">
-          <div class="relative w-full max-w-md p-8 rounded-3xl bg-white/90 border border-slate-200/90 shadow-xl shadow-slate-200/60 backdrop-blur-xl space-y-6">
+          <div class="relative w-full max-w-md p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6">
             
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
               <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
-                <span class="text-xs font-mono-code text-amber-800 font-bold uppercase tracking-wider">Cubo Reglamentario WRO</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#f59e0b] animate-ping"></span>
+                <span class="text-xs font-mono-figma text-black font-bold uppercase">Cubo Reglamentario WRO</span>
               </div>
-              <span class="text-xs font-mono-code text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-semibold">RoboMission</span>
+              <span class="text-xs font-mono-figma text-slate-500 bg-slate-100 px-2.5 py-0.5 pill-btn font-semibold">250×250×250 mm</span>
             </div>
 
-            <!-- Animated 3D Wireframe Cube (Light mode styled) -->
+            <!-- Animated 3D Wireframe Cube -->
             <div class="h-48 flex items-center justify-center cube-container">
               <div class="cube-box">
-                <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-code text-amber-800 font-bold">25 cm</div>
-                <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-code text-amber-800 font-bold">25 cm</div>
-                <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-code text-amber-800 font-bold">25 cm</div>
-                <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-code text-amber-800 font-bold">25 cm</div>
-                <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-code text-blue-800 font-bold">TOP</div>
-                <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-code text-emerald-800 font-bold">BASE</div>
+                <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
+                <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-figma text-slate-600 font-bold">TOP</div>
+                <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-figma text-[#10b981] font-bold">BASE</div>
               </div>
             </div>
 
-            <!-- Cube Details -->
+            <!-- Exhibit Spec Info -->
             <div class="space-y-2.5 text-xs">
               <div class="flex items-center justify-between text-slate-600">
-                <span>Dimensiones de inspección:</span>
-                <span class="font-mono-code font-bold text-slate-900">250 × 250 × 250 mm</span>
+                <span>Inspección de salida:</span>
+                <span class="font-mono-figma font-bold text-black">Ajuste estricto en caja</span>
               </div>
               <div class="flex items-center justify-between text-slate-600">
                 <span>Despliegue dinámico:</span>
-                <span class="font-mono-code font-bold text-emerald-600">Permitido tras salida</span>
+                <span class="font-mono-figma font-bold text-[#10b981]">Válido tras el arranque</span>
               </div>
               <div class="flex items-center justify-between text-slate-600">
                 <span>Límite Hub SPIKE Prime:</span>
-                <span class="font-mono-code font-bold text-blue-600">6 Puertos (A - F)</span>
+                <span class="font-mono-figma font-bold text-black">6 Puertos (A - F)</span>
               </div>
             </div>
 
@@ -239,88 +254,88 @@
       </div>
     </section>
 
-    <!-- ================= 2. LAS 4 FASES DE EVOLUCIÓN ================= -->
-    <section id="fases" class="py-20 border-t border-slate-200/80 bg-white/70">
+    <!-- ================= 3. LAS 4 FASES DE EVOLUCIÓN (FIGMA EXHIBITS) ================= -->
+    <section id="fases" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
-        <div class="text-center max-w-2xl mx-auto space-y-3">
-          <span class="text-xs font-mono-code text-amber-600 font-bold uppercase tracking-widest">Metodología Pedagógica</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">4 Fases de Evolución del Estudiante</h2>
-          <p class="text-sm text-slate-600">
-            Un itinerario continuo que traslada a los jóvenes desde la intuición física hasta el control de lazo cerrado y la estrategia de alta competencia.
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Metodología Pedagógica</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">4 Fases de Evolución del Estudiante</h2>
+          <p class="text-sm text-slate-600 font-normal">
+            Un itinerario continuo desde la intuición mecánica de bloques hasta el control de lazo cerrado y la estrategia de alta competencia.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          <!-- Card 1 -->
-          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 shadow-sm flex flex-col justify-between">
+          <!-- Phase 1 -->
+          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-black hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-200 flex flex-col justify-between">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 pill-btn bg-slate-100 border border-slate-200 flex items-center justify-center font-black font-mono-figma text-sm text-black group-hover:bg-black group-hover:text-white transition-colors">
                 01
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Alfabetización</h3>
-              <p class="text-xs font-mono-code text-blue-700 font-semibold">Mecánica y Algoritmos Base</p>
-              <p class="text-xs text-slate-600 leading-relaxed">
+              <h3 class="text-lg font-bold text-black tracking-tight">Alfabetización</h3>
+              <p class="text-xs font-mono-figma text-slate-500 uppercase font-semibold">Mecánica y Algoritmos Base</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
                 Comprensión de vigas, ejes y simetría estructural. Lectura de planos, engranajes elementales y programación secuencial sin holguras.
               </p>
             </div>
-            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-code text-slate-500 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-figma text-slate-500 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
               Meta: Chasis rígido estándar
             </div>
           </div>
 
-          <!-- Card 2 -->
-          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1 shadow-sm flex flex-col justify-between">
+          <!-- Phase 2 -->
+          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-black hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-200 flex flex-col justify-between">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 pill-btn bg-slate-100 border border-slate-200 flex items-center justify-center font-black font-mono-figma text-sm text-black group-hover:bg-black group-hover:text-white transition-colors">
                 02
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-amber-700 transition-colors">Adaptabilidad</h3>
-              <p class="text-xs font-mono-code text-amber-700 font-semibold">Sensores y Lógica Libre</p>
-              <p class="text-xs text-slate-600 leading-relaxed">
+              <h3 class="text-lg font-bold text-black tracking-tight">Adaptabilidad</h3>
+              <p class="text-xs font-mono-figma text-slate-500 uppercase font-semibold">Sensores y Lógica Libre</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
                 Modificación autónoma de modelos sin manual. Integración de color, distancia y giroscopio con bucles condicionales de evasión.
               </p>
             </div>
-            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-code text-slate-500 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-figma text-slate-500 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
               Meta: Reacción sensorial activa
             </div>
           </div>
 
-          <!-- Card 3 -->
-          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1 shadow-sm flex flex-col justify-between">
+          <!-- Phase 3 -->
+          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-black hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-200 flex flex-col justify-between">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-700 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 pill-btn bg-slate-100 border border-slate-200 flex items-center justify-center font-black font-mono-figma text-sm text-black group-hover:bg-black group-hover:text-white transition-colors">
                 03
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-cyan-700 transition-colors">Ingeniería WRO</h3>
-              <p class="text-xs font-mono-code text-cyan-700 font-semibold">Cinemática y Odometría</p>
-              <p class="text-xs text-slate-600 leading-relaxed">
+              <h3 class="text-lg font-bold text-black tracking-tight">Ingeniería WRO</h3>
+              <p class="text-xs font-mono-figma text-slate-500 uppercase font-semibold">Cinemática y Odometría</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
                 Ajuste al cubo de 25 cm, corrección de derrapes, giros por ángulo Yaw, seguimiento de líneas con control proporcional y autoalineación.
               </p>
             </div>
-            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-code text-slate-500 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-figma text-slate-500 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
               Meta: Cero error acumulado
             </div>
           </div>
 
-          <!-- Card 4 -->
-          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 shadow-sm flex flex-col justify-between">
+          <!-- Phase 4 -->
+          <div class="group p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-black hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-200 flex flex-col justify-between">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center font-black font-mono-code text-base group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 pill-btn bg-slate-100 border border-slate-200 flex items-center justify-center font-black font-mono-figma text-sm text-black group-hover:bg-black group-hover:text-white transition-colors">
                 04
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">Optimización</h3>
-              <p class="text-xs font-mono-code text-emerald-700 font-semibold">Estrategia y Torneo</p>
-              <p class="text-xs text-slate-600 leading-relaxed">
+              <h3 class="text-lg font-bold text-black tracking-tight">Optimización</h3>
+              <p class="text-xs font-mono-figma text-slate-500 uppercase font-semibold">Estrategia y Torneo</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
                 Rutinas completas bajo 120s, protocolos de aborto ante fallos mecánicos, tolerancia a variaciones de luz y dominio de la Regla Sorpresa.
               </p>
             </div>
-            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-code text-slate-500 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono-figma text-slate-500 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
               Meta: Consistencia de podio
             </div>
           </div>
@@ -329,61 +344,61 @@
       </div>
     </section>
 
-    <!-- ================= 3. PLAN DE NIVELACIÓN DE NOVIEMBRE ================= -->
-    <section id="nivelacion" class="py-20 border-t border-slate-200/80">
+    <!-- ================= 4. PLAN DE NIVELACIÓN: NOVIEMBRE (FIGMA TAB SYSTEM) ================= -->
+    <section id="nivelacion" class="py-20 border-t border-slate-100 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div class="space-y-3">
-            <span class="text-xs font-mono-code text-amber-600 font-bold uppercase tracking-widest">Currículo Intensivo</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Plan de Nivelación: Noviembre</h2>
-            <p class="text-sm text-slate-600 max-w-xl">
+          <div class="space-y-2">
+            <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Currículo Intensivo</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">Plan de Nivelación: Noviembre</h2>
+            <p class="text-sm text-slate-600 max-w-xl font-normal">
               8 sesiones de entrenamiento (Martes y Jueves) diseñadas para homogeneizar las destrezas operativas antes de la temporada oficial.
             </p>
           </div>
 
-          <!-- Dynamic Level Filter Buttons (Light Mode) -->
-          <div class="flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-200/80 border border-slate-300 self-start md:self-auto shadow-inner">
-            <button onclick="setFilter('all')" id="btn-filter-all" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 shadow-sm transition-all">Todos los Niveles</button>
-            <button onclick="setFilter('elem')" id="btn-filter-elem" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all">Elementary (8-12)</button>
-            <button onclick="setFilter('jun')" id="btn-filter-jun" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all">Junior (11-15)</button>
-            <button onclick="setFilter('sen')" id="btn-filter-sen" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all">Senior (14-19)</button>
+          <!-- Figma Signature Pill Tab Switcher -->
+          <div class="inline-flex items-center gap-1 p-1 pill-btn bg-slate-100 border border-slate-200/80 self-start md:self-auto">
+            <button onclick="setFilter('all')" id="btn-filter-all" class="filter-btn px-4 py-2 pill-btn text-xs font-semibold bg-[#000000] text-white shadow-sm transition-all">Todos los Niveles</button>
+            <button onclick="setFilter('elem')" id="btn-filter-elem" class="filter-btn px-4 py-2 pill-btn text-xs font-medium text-slate-600 hover:text-black transition-all">Elementary (8-12)</button>
+            <button onclick="setFilter('jun')" id="btn-filter-jun" class="filter-btn px-4 py-2 pill-btn text-xs font-medium text-slate-600 hover:text-black transition-all">Junior (11-15)</button>
+            <button onclick="setFilter('sen')" id="btn-filter-sen" class="filter-btn px-4 py-2 pill-btn text-xs font-medium text-slate-600 hover:text-black transition-all">Senior (14-19)</button>
           </div>
         </div>
 
-        <!-- 4 Weeks Schedule Grid -->
+        <!-- 4 Weeks Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           
           <!-- Semana 1 -->
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
-                <span class="text-[11px] font-mono-code text-amber-600 font-bold">SEMANA 1</span>
-                <h4 class="text-sm font-bold text-slate-900">Chasis & Giros</h4>
+                <span class="text-[11px] font-mono-figma text-slate-400 font-bold uppercase">SEMANA 1</span>
+                <h4 class="text-sm font-bold text-black">Chasis & Giros</h4>
               </div>
-              <span class="text-[10px] font-mono-code bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">M1 & J1</span>
+              <span class="text-[10px] font-mono-figma bg-slate-100 text-slate-700 px-2 py-0.5 pill-btn font-semibold">M1 & J1</span>
             </div>
             
             <div class="space-y-3 text-xs">
-              <div class="level-box elem p-3 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1">
-                <span class="font-bold text-blue-800 font-mono-code flex items-center gap-1">
+              <div class="level-box elem p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Elementary
                 </span>
-                <p class="text-slate-700">Ensamble de chasis rígido, simetría y giros en pivote por rotaciones exactas.</p>
+                <p class="text-slate-600">Ensamble de chasis rígido, simetría y giros en pivote por rotaciones exactas.</p>
               </div>
 
-              <div class="level-box jun p-3 rounded-xl bg-amber-50/70 border border-amber-200 space-y-1">
-                <span class="font-bold text-amber-900 font-mono-code flex items-center gap-1">
+              <div class="level-box jun p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Junior
                 </span>
-                <p class="text-slate-700">Cálculo de cm/rotación según diámetro y giros de 90° con sensor de ángulo Yaw.</p>
+                <p class="text-slate-600">Cálculo de cm/rotación según diámetro y giros de 90° con sensor de ángulo Yaw.</p>
               </div>
 
-              <div class="level-box sen p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
-                <span class="font-bold text-emerald-900 font-mono-code flex items-center gap-1">
+              <div class="level-box sen p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Senior
                 </span>
-                <p class="text-slate-700">Cinemática diferencial y control Proporcional (P) para anular el sobregiro inercial.</p>
+                <p class="text-slate-600">Cinemática diferencial y control Proporcional (P) para anular el sobregiro inercial.</p>
               </div>
             </div>
           </div>
@@ -392,32 +407,32 @@
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
-                <span class="text-[11px] font-mono-code text-amber-600 font-bold">SEMANA 2</span>
-                <h4 class="text-sm font-bold text-slate-900">Color & Distancia</h4>
+                <span class="text-[11px] font-mono-figma text-slate-400 font-bold uppercase">SEMANA 2</span>
+                <h4 class="text-sm font-bold text-black">Color & Distancia</h4>
               </div>
-              <span class="text-[10px] font-mono-code bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">M2 & J2</span>
+              <span class="text-[10px] font-mono-figma bg-slate-100 text-slate-700 px-2 py-0.5 pill-btn font-semibold">M2 & J2</span>
             </div>
             
             <div class="space-y-3 text-xs">
-              <div class="level-box elem p-3 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1">
-                <span class="font-bold text-blue-800 font-mono-code flex items-center gap-1">
+              <div class="level-box elem p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Elementary
                 </span>
-                <p class="text-slate-700">Semáforo de colores sólidos y frenado a 10 cm con sensor ultrasónico sin colisión.</p>
+                <p class="text-slate-600">Semáforo de colores sólidos y frenado a 10 cm con sensor ultrasónico sin colisión.</p>
               </div>
 
-              <div class="level-box jun p-3 rounded-xl bg-amber-50/70 border border-amber-200 space-y-1">
-                <span class="font-bold text-amber-900 font-mono-code flex items-center gap-1">
+              <div class="level-box jun p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Junior
                 </span>
-                <p class="text-slate-700">Cálculo de umbral de reflectancia: <span class="font-mono-code text-amber-800 font-bold">(B+N)/2</span> y desaceleración continua.</p>
+                <p class="text-slate-600">Cálculo de umbral de reflectancia: <span class="font-mono-figma font-bold text-black">(B+N)/2</span> y desaceleración.</p>
               </div>
 
-              <div class="level-box sen p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
-                <span class="font-bold text-emerald-900 font-mono-code flex items-center gap-1">
+              <div class="level-box sen p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Senior
                 </span>
-                <p class="text-slate-700">Line Squaring con doble sensor frontal y mapeo dinámico de obstáculos en variables booleanas.</p>
+                <p class="text-slate-600">Line Squaring con doble sensor frontal y mapeo dinámico de obstáculos en variables.</p>
               </div>
             </div>
           </div>
@@ -426,32 +441,32 @@
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
-                <span class="text-[11px] font-mono-code text-amber-600 font-bold">SEMANA 3</span>
-                <h4 class="text-sm font-bold text-slate-900">Mecánica & Pinzas</h4>
+                <span class="text-[11px] font-mono-figma text-slate-400 font-bold uppercase">SEMANA 3</span>
+                <h4 class="text-sm font-bold text-black">Mecánica & Pinzas</h4>
               </div>
-              <span class="text-[10px] font-mono-code bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">M3 & J3</span>
+              <span class="text-[10px] font-mono-figma bg-slate-100 text-slate-700 px-2 py-0.5 pill-btn font-semibold">M3 & J3</span>
             </div>
             
             <div class="space-y-3 text-xs">
-              <div class="level-box elem p-3 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1">
-                <span class="font-bold text-blue-800 font-mono-code flex items-center gap-1">
+              <div class="level-box elem p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Elementary
                 </span>
-                <p class="text-slate-700">Pala fija para empujar bloques y garra motorizada simple de un solo grado de libertad.</p>
+                <p class="text-slate-600">Pala fija para empujar bloques y garra motorizada simple de un solo grado de libertad.</p>
               </div>
 
-              <div class="level-box jun p-3 rounded-xl bg-amber-50/70 border border-amber-200 space-y-1">
-                <span class="font-bold text-amber-900 font-mono-code flex items-center gap-1">
+              <div class="level-box jun p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Junior
                 </span>
-                <p class="text-slate-700">Trenes de engranajes (torque vs velocidad) y retorno a cero por detección de bloqueo de motor (Stall).</p>
+                <p class="text-slate-600">Trenes de engranajes (torque vs velocidad) y retorno a cero por detección de bloqueo (Stall).</p>
               </div>
 
-              <div class="level-box sen p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
-                <span class="font-bold text-emerald-900 font-mono-code flex items-center gap-1">
+              <div class="level-box sen p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Senior
                 </span>
-                <p class="text-slate-700">Mecanismos de cremallera y sistema Quick-Release para acople modular en base sin pines.</p>
+                <p class="text-slate-600">Mecanismos de cremallera y sistema Quick-Release para acople modular en base sin pines.</p>
               </div>
             </div>
           </div>
@@ -460,32 +475,32 @@
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
-                <span class="text-[11px] font-mono-code text-amber-600 font-bold">SEMANA 4</span>
-                <h4 class="text-sm font-bold text-slate-900">Integración & Rally</h4>
+                <span class="text-[11px] font-mono-figma text-slate-400 font-bold uppercase">SEMANA 4</span>
+                <h4 class="text-sm font-bold text-black">Integración & Rally</h4>
               </div>
-              <span class="text-[10px] font-mono-code bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">M4 & J4</span>
+              <span class="text-[10px] font-mono-figma bg-slate-100 text-slate-700 px-2 py-0.5 pill-btn font-semibold">M4 & J4</span>
             </div>
             
             <div class="space-y-3 text-xs">
-              <div class="level-box elem p-3 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1">
-                <span class="font-bold text-blue-800 font-mono-code flex items-center gap-1">
+              <div class="level-box elem p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Elementary
                 </span>
-                <p class="text-slate-700">Mini-Rally de habilidades: captura por color, transporte a zona segura y vuelta autónoma.</p>
+                <p class="text-slate-600">Mini-Rally de habilidades: captura por color, transporte a zona segura y vuelta autónoma.</p>
               </div>
 
-              <div class="level-box jun p-3 rounded-xl bg-amber-50/70 border border-amber-200 space-y-1">
-                <span class="font-bold text-amber-900 font-mono-code flex items-center gap-1">
+              <div class="level-box jun p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Junior
                 </span>
-                <p class="text-slate-700">Seguidor de línea 2 estados y defensa técnica de MyBlocks estructurados ante jurado.</p>
+                <p class="text-slate-600">Seguidor de línea 2 estados y defensa técnica de MyBlocks estructurados ante jurado.</p>
               </div>
 
-              <div class="level-box sen p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
-                <span class="font-bold text-emerald-900 font-mono-code flex items-center gap-1">
+              <div class="level-box sen p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <span class="font-bold text-black font-mono-figma flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Senior
                 </span>
-                <p class="text-slate-700">Máquina de estados + prueba ciega: reconfiguración táctica y mecánica en menos de 15 min.</p>
+                <p class="text-slate-600">Máquina de estados + prueba ciega: reconfiguración táctica y mecánica en menos de 15 min.</p>
               </div>
             </div>
           </div>
@@ -494,109 +509,109 @@
       </div>
     </section>
 
-    <!-- ================= 4. MACRO-CICLO COMPETITIVO (ENE - JUL) ================= -->
-    <section id="macrociclo" class="py-20 border-t border-slate-200/80 bg-white/70">
+    <!-- ================= 5. MACRO-CICLO COMPETITIVO (FIGMA TIMELINE EXHIBIT) ================= -->
+    <section id="macrociclo" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
-        <div class="text-center max-w-2xl mx-auto space-y-3">
-          <span class="text-xs font-mono-code text-blue-600 font-bold uppercase tracking-widest">Planificación Temporal</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Macro-Ciclo de Temporada WRO</h2>
-          <p class="text-sm text-slate-600">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Planificación Temporal</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">Macro-Ciclo de Temporada WRO</h2>
+          <p class="text-sm text-slate-600 font-normal">
             De la publicación de la regla oficial a la fase de torneo internacional. Haz clic en cada mes para desplegar sus directrices operativas.
           </p>
         </div>
 
-        <!-- Interactive Month Selector -->
+        <!-- Figma Pill Timeline Selector -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <button onclick="selectMonth(1)" id="m-btn-1" class="month-pill p-4 rounded-2xl bg-amber-50 border-2 border-amber-500 text-left transition-all shadow-sm group">
-            <span class="text-[10px] font-mono-code text-amber-700 font-bold block mb-1">FASE 1</span>
-            <span class="text-base font-extrabold text-slate-900 block">Enero</span>
+          <button onclick="selectMonth(1)" id="m-btn-1" class="month-pill p-4 rounded-2xl bg-white border-2 border-black text-left transition-all shadow-sm group">
+            <span class="text-[10px] font-mono-figma text-black font-bold block mb-1">FASE 1</span>
+            <span class="text-base font-extrabold text-black block tracking-tight">Enero</span>
             <span class="text-xs text-slate-600 font-medium">Estrategia</span>
           </button>
-          <button onclick="selectMonth(2)" id="m-btn-2" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-slate-400 transition-all shadow-sm group">
-            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 2</span>
-            <span class="text-base font-extrabold text-slate-900 block">Febrero</span>
+          <button onclick="selectMonth(2)" id="m-btn-2" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-black transition-all shadow-sm group">
+            <span class="text-[10px] font-mono-figma text-slate-400 font-bold block mb-1">FASE 2</span>
+            <span class="text-base font-extrabold text-black block tracking-tight">Febrero</span>
             <span class="text-xs text-slate-500 font-medium">Prototipado</span>
           </button>
-          <button onclick="selectMonth(3)" id="m-btn-3" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-slate-400 transition-all shadow-sm group">
-            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 3</span>
-            <span class="text-base font-extrabold text-slate-900 block">Marzo</span>
+          <button onclick="selectMonth(3)" id="m-btn-3" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-black transition-all shadow-sm group">
+            <span class="text-[10px] font-mono-figma text-slate-400 font-bold block mb-1">FASE 3</span>
+            <span class="text-base font-extrabold text-black block tracking-tight">Marzo</span>
             <span class="text-xs text-slate-500 font-medium">Base & Chasis</span>
           </button>
-          <button onclick="selectMonth(4)" id="m-btn-4" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-slate-400 transition-all shadow-sm group">
-            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 4</span>
-            <span class="text-base font-extrabold text-slate-900 block">Abril</span>
+          <button onclick="selectMonth(4)" id="m-btn-4" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-black transition-all shadow-sm group">
+            <span class="text-[10px] font-mono-figma text-slate-400 font-bold block mb-1">FASE 4</span>
+            <span class="text-base font-extrabold text-black block tracking-tight">Abril</span>
             <span class="text-xs text-slate-500 font-medium">Estrés & Luz</span>
           </button>
-          <button onclick="selectMonth(5)" id="m-btn-5" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-slate-400 transition-all shadow-sm group">
-            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 5</span>
-            <span class="text-base font-extrabold text-slate-900 block">Mayo</span>
+          <button onclick="selectMonth(5)" id="m-btn-5" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-black transition-all shadow-sm group">
+            <span class="text-[10px] font-mono-figma text-slate-400 font-bold block mb-1">FASE 5</span>
+            <span class="text-base font-extrabold text-black block tracking-tight">Mayo</span>
             <span class="text-xs text-slate-500 font-medium">Rutina 100%</span>
           </button>
-          <button onclick="selectMonth(6)" id="m-btn-6" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-slate-400 transition-all shadow-sm group">
-            <span class="text-[10px] font-mono-code text-slate-500 font-bold block mb-1">FASE 6</span>
-            <span class="text-base font-extrabold text-slate-900 block">Jun - Jul</span>
+          <button onclick="selectMonth(6)" id="m-btn-6" class="month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-black transition-all shadow-sm group">
+            <span class="text-[10px] font-mono-figma text-slate-400 font-bold block mb-1">FASE 6</span>
+            <span class="text-base font-extrabold text-black block tracking-tight">Jun - Jul</span>
             <span class="text-xs text-slate-500 font-medium">Torneo & Boxes</span>
           </button>
         </div>
 
-        <!-- Month Dynamic Detail Box (Light Mode) -->
-        <div id="month-content-box" class="p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6 transition-all duration-300">
+        <!-- Month Dynamic Detail Box (Figma Canvas Surface) -->
+        <div id="month-content-box" class="p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6 transition-all duration-200">
           <!-- Injected dynamically via JS -->
         </div>
 
       </div>
     </section>
 
-    <!-- ================= 5. ADN COMPETITIVO Y PROTOCOLOS DE TORNEO ================= -->
-    <section id="adn" class="py-20 border-t border-slate-200/80">
+    <!-- ================= 6. ADN COMPETITIVO (FIGMA GALLERY CARDS) ================= -->
+    <section id="adn" class="py-20 border-t border-slate-100 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
-        <div class="text-center max-w-2xl mx-auto space-y-3">
-          <span class="text-xs font-mono-code text-emerald-600 font-bold uppercase tracking-widest">Factores Determinantes</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">ADN de Torneo: Lo que Decide el Podio</h2>
-          <p class="text-sm text-slate-600">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Factores Determinantes</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#000000]">ADN de Torneo: Lo que Decide el Podio</h2>
+          <p class="text-sm text-slate-600 font-normal">
             En WRO, el 80% de los fallos ocurren por variaciones ambientales no contempladas en laboratorio. Este protocolo blinda la ejecución del equipo.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-amber-400 hover:shadow-md transition-all">
-            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-black hover:shadow-md transition-all">
+            <div class="w-12 h-12 pill-btn bg-slate-100 text-black flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Inmunidad Lumínica</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Sensores de color apantallados obligatoriamente a <strong class="text-amber-800 font-mono-code font-bold">8 - 10 mm del tapete</strong>. Esta tolerancia evita lecturas anómalas por reflectores del coliseo o sombras del juez de pista.
+            <h3 class="text-lg font-bold text-black tracking-tight">Inmunidad Lumínica</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              Sensores de color apantallados obligatoriamente a <strong class="text-black font-mono-figma font-bold">8 - 10 mm del tapete</strong>. Esta tolerancia evita lecturas anómalas por reflectores del coliseo o sombras del juez de pista.
             </p>
-            <div class="pt-2 text-[11px] font-mono-code text-slate-500 border-t border-slate-100">
+            <div class="pt-2 text-[11px] font-mono-figma text-slate-400 border-t border-slate-100">
               Protocolo: Cortinas de vigas LEGO alrededor del lente.
             </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-blue-400 hover:shadow-md transition-all">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-black hover:shadow-md transition-all">
+            <div class="w-12 h-12 pill-btn bg-slate-100 text-black flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Degradación de Batería</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Calibración continua a 100%, 75% y 50% de carga. Al gobernar giros mediante <strong class="text-blue-800 font-mono-code font-bold">Giroscopio (Yaw)</strong> y no por tiempo de motor, el robot mantiene precisión angular idéntica.
+            <h3 class="text-lg font-bold text-black tracking-tight">Degradación de Batería</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              Calibración continua a 100%, 75% y 50% de carga. Al gobernar giros mediante <strong class="text-black font-mono-figma font-bold">Giroscopio (Yaw)</strong> y no por tiempo de motor, el robot mantiene precisión angular idéntica.
             </p>
-            <div class="pt-2 text-[11px] font-mono-code text-slate-500 border-t border-slate-100">
+            <div class="pt-2 text-[11px] font-mono-figma text-slate-400 border-t border-slate-100">
               Protocolo: Rotación estricta de 3 baterías en boxes.
             </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-emerald-400 hover:shadow-md transition-all">
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-black hover:shadow-md transition-all">
+            <div class="w-12 h-12 pill-btn bg-slate-100 text-black flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Mantenimiento de Boxes</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-bold text-black tracking-tight">Mantenimiento de Boxes</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
               Limpieza de neumáticos con alcohol isopropílico antes de cada intento para remover el polvillo de la lona vinílica, asegurando un coeficiente de fricción constante en cada corrida.
             </p>
-            <div class="pt-2 text-[11px] font-mono-code text-slate-500 border-t border-slate-100">
+            <div class="pt-2 text-[11px] font-mono-figma text-slate-400 border-t border-slate-100">
               Protocolo: Checklist de neumáticos y verificación de ejes.
             </div>
           </div>
@@ -605,79 +620,79 @@
       </div>
     </section>
 
-    <!-- ================= 6. INTERACTIVE WRO READINESS CHECKLIST ================= -->
-    <section id="checklist" class="py-20 border-t border-slate-200/80 bg-white/80">
+    <!-- ================= 7. SIMULADOR / CHECKLIST INTERACTIVO ================= -->
+    <section id="checklist" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div class="text-center space-y-2">
-          <span class="text-xs font-mono-code text-amber-600 font-bold uppercase tracking-widest">Herramienta Interactiva</span>
-          <h2 class="text-3xl font-extrabold text-slate-900">Simulador de Preparación de Misión</h2>
-          <p class="text-xs text-slate-500">Marca los hitos completados por tu equipo para calcular el índice de confiabilidad de salida.</p>
+          <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Herramienta Interactiva</span>
+          <h2 class="text-3xl font-extrabold tracking-[-0.03em] text-[#000000]">Simulador de Preparación de Misión</h2>
+          <p class="text-xs text-slate-600 font-normal">Marca los hitos completados por tu equipo para calcular el índice de confiabilidad de salida.</p>
         </div>
 
-        <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/60 space-y-6">
+        <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6">
           
           <!-- Readiness Gauge Bar -->
           <div class="space-y-2">
-            <div class="flex items-center justify-between text-xs font-mono-code">
-              <span class="text-slate-700 font-semibold">Nivel de Confiabilidad de Salida:</span>
-              <span id="readiness-score" class="text-amber-600 font-black text-sm">0%</span>
+            <div class="flex items-center justify-between text-xs font-mono-figma">
+              <span class="text-slate-800 font-semibold">Nivel de Confiabilidad de Salida:</span>
+              <span id="readiness-score" class="text-black font-black text-sm">0%</span>
             </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
-              <div id="readiness-bar" class="h-full bg-gradient-to-r from-amber-500 via-blue-500 to-emerald-500 transition-all duration-300 w-0"></div>
+            <div class="w-full bg-slate-100 h-2 pill-btn overflow-hidden border border-slate-200">
+              <div id="readiness-bar" class="h-full bg-black transition-all duration-300 w-0"></div>
             </div>
-            <div id="readiness-status" class="text-[11px] font-mono-code text-slate-500">
+            <div id="readiness-status" class="text-[11px] font-mono-figma text-slate-500">
               Comienza verificando los parámetros mecánicos y de código.
             </div>
           </div>
 
-          <!-- Checklist items (Light mode) -->
+          <!-- Checklist items -->
           <div class="space-y-3 pt-2 text-xs">
-            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-white border-slate-300 text-amber-500 focus:ring-amber-500 w-4 h-4 cursor-pointer">
+            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
               <div>
-                <strong class="text-slate-900 block">Gálibo reglamentario de 25×25×25 cm verificado físicamente</strong>
-                <span class="text-slate-600">El robot entra y sale holgadamente de la caja de medición de arbitraje sin rozar vigas.</span>
+                <strong class="text-black block font-semibold">Gálibo reglamentario de 25×25×25 cm verificado físicamente</strong>
+                <span class="text-slate-600 font-normal">El robot entra y sale holgadamente de la caja de medición de arbitraje sin rozar vigas.</span>
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-white border-slate-300 text-amber-500 focus:ring-amber-500 w-4 h-4 cursor-pointer">
+            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
               <div>
-                <strong class="text-slate-900 block">Sensores de color apantallados entre 8 y 10 mm del tapete</strong>
-                <span class="text-slate-600">Campana mecánica que anula reflejos superiores y sombras laterales de los jueces.</span>
+                <strong class="text-black block font-semibold">Sensores de color apantallados entre 8 y 10 mm del tapete</strong>
+                <span class="text-slate-600 font-normal">Campana mecánica que anula reflejos superiores y sombras laterales de los jueces.</span>
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-white border-slate-300 text-amber-500 focus:ring-amber-500 w-4 h-4 cursor-pointer">
+            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
               <div>
-                <strong class="text-slate-900 block">Control de giros por sensor giroscópico (Yaw) calibrado</strong>
-                <span class="text-slate-600">Rutina inmune a la caída de voltaje de la batería y al desgaste de goma de neumáticos.</span>
+                <strong class="text-black block font-semibold">Control de giros por sensor giroscópico (Yaw) calibrado</strong>
+                <span class="text-slate-600 font-normal">Rutina inmune a la caída de voltaje de la batería y al desgaste de goma de neumáticos.</span>
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-white border-slate-300 text-amber-500 focus:ring-amber-500 w-4 h-4 cursor-pointer">
+            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
               <div>
-                <strong class="text-slate-900 block">Checkpoints y protocolo de aborto programados</strong>
-                <span class="text-slate-600">Si un elemento de juego no es detectado, el robot abandona la tarea y rescata los puntos restantes.</span>
+                <strong class="text-black block font-semibold">Checkpoints y protocolo de aborto programados</strong>
+                <span class="text-slate-600 font-normal">Si un elemento de juego no es detectado, el robot abandona la tarea y rescata los puntos restantes.</span>
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-white border-slate-300 text-amber-500 focus:ring-amber-500 w-4 h-4 cursor-pointer">
+            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
               <div>
-                <strong class="text-slate-900 block">Rutina completa verificada en menos de 110 segundos (Margen de 10s)</strong>
-                <span class="text-slate-600">Tiempo suficiente para retorno a la base sin sufrir penalizaciones de tiempo límite.</span>
+                <strong class="text-black block font-semibold">Rutina completa verificada en menos de 110 segundos (Margen de 10s)</strong>
+                <span class="text-slate-600 font-normal">Tiempo suficiente para retorno a la base sin sufrir penalizaciones de tiempo límite.</span>
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded bg-white border-slate-300 text-amber-500 focus:ring-amber-500 w-4 h-4 cursor-pointer">
+            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
+              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
               <div>
-                <strong class="text-slate-900 block">Regla de las 5 corridas consecutivas superada</strong>
-                <span class="text-slate-600">Cinco ejecuciones perfectas seguidas sin intervención manual en el tapete de práctica.</span>
+                <strong class="text-black block font-semibold">Regla de las 5 corridas consecutivas superada</strong>
+                <span class="text-slate-600 font-normal">Cinco ejecuciones perfectas seguidas sin intervención manual en el tapete de práctica.</span>
               </div>
             </label>
           </div>
@@ -689,24 +704,24 @@
 
   </main>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- ================= 8. FIGMA FOOTER ================= -->
   <footer class="border-t border-slate-200 bg-white py-12 relative z-10 text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-black flex items-center justify-center text-[11px] tracking-wider shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-[#000000] text-white font-black flex items-center justify-center text-[11px] tracking-widest shadow-sm">
           WRO
         </div>
         <div>
-          <span class="text-slate-900 font-extrabold block text-sm">PLAN WRO &bull; LEGO SPIKE™ Prime</span>
+          <span class="text-black font-extrabold block text-sm">PLAN WRO &bull; LEGO SPIKE™ Prime</span>
           <span class="text-slate-500 text-[11px]">Centro Técnico & Competitivo para la comunidad de robótica</span>
         </div>
       </div>
 
       <div class="flex items-center gap-6">
-        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hover:text-amber-700 transition-colors font-medium">Repositorio GitHub</a>
-        <a href="https://github.com/themiguedev/PLAN-WRO/blob/main/README.md" target="_blank" class="hover:text-amber-700 transition-colors font-medium">Documentación</a>
-        <a href="#top" class="hover:text-slate-900 transition-colors flex items-center gap-1 font-mono-code">
+        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hover:text-black transition-colors font-medium">Repositorio GitHub</a>
+        <a href="https://github.com/themiguedev/PLAN-WRO/blob/main/README.md" target="_blank" class="hover:text-black transition-colors font-medium">Documentación</a>
+        <a href="#top" class="hover:text-black transition-colors flex items-center gap-1 font-mono-figma">
           ↑ Volver arriba
         </a>
       </div>
@@ -714,9 +729,9 @@
     </div>
   </footer>
 
-  <!-- SCRIPT LOGIC (LIGHT MODE TUNED) -->
+  <!-- SCRIPT LOGIC (FIGMA CANVAS INTEGRATION) -->
   <script>
-    // 1. Particle Canvas Background Animation for Light Mode
+    // 1. Particle Canvas Background Animation
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -735,10 +750,10 @@
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.45;
-        this.vy = (Math.random() - 0.5) * 0.45;
-        this.radius = Math.random() * 1.6 + 0.6;
-        this.alpha = Math.random() * 0.4 + 0.15;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.alpha = Math.random() * 0.25 + 0.1;
       }
       update() {
         this.x += this.vx;
@@ -750,12 +765,12 @@
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(217, 119, 6, ${this.alpha})`;
+        ctx.fillStyle = `rgba(0, 0, 0, ${this.alpha})`;
         ctx.fill();
       }
     }
 
-    const particleCount = Math.min(window.innerWidth > 768 ? 55 : 25, 65);
+    const particleCount = Math.min(window.innerWidth > 768 ? 50 : 20, 60);
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
@@ -769,11 +784,11 @@
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 90) {
+          if (dist < 85) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(217, 119, 6, ${0.16 * (1 - dist / 90)})`;
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.08 * (1 - dist / 85)})`;
             ctx.stroke();
           }
         }
@@ -782,18 +797,18 @@
     }
     animateParticles();
 
-    // 2. Filter Level on November Schedule
+    // 2. Filter Level on November Schedule (Figma Pill Active Style)
     function setFilter(lvl) {
       const boxes = document.querySelectorAll('.level-box');
       const buttons = document.querySelectorAll('.filter-btn');
 
       buttons.forEach(btn => {
-        btn.className = "filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all";
+        btn.className = "filter-btn px-4 py-2 pill-btn text-xs font-medium text-slate-600 hover:text-black transition-all";
       });
 
       const activeBtn = document.getElementById(`btn-filter-${lvl}`);
       if (activeBtn) {
-        activeBtn.className = "filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 shadow-sm transition-all";
+        activeBtn.className = "filter-btn px-4 py-2 pill-btn text-xs font-semibold bg-[#000000] text-white shadow-sm transition-all";
       }
 
       boxes.forEach(box => {
@@ -809,7 +824,7 @@
       });
     }
 
-    // 3. Macro-Cycle Timeline Content Data
+    // 3. Macro-Cycle Timeline Content Data (Figma Specs)
     const macroCycleData = {
       1: {
         phase: "FASE 1 &middot; ENERO",
@@ -890,9 +905,9 @@
         const btn = document.getElementById(`m-btn-${i}`);
         if (btn) {
           if (i === m) {
-            btn.className = "month-pill p-4 rounded-2xl bg-amber-50 border-2 border-amber-500 text-left transition-all shadow-sm group";
+            btn.className = "month-pill p-4 rounded-2xl bg-white border-2 border-black text-left transition-all shadow-sm group";
           } else {
-            btn.className = "month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-slate-400 transition-all shadow-sm group";
+            btn.className = "month-pill p-4 rounded-2xl bg-white border border-slate-200 text-left hover:border-black transition-all shadow-sm group";
           }
         }
       }
@@ -903,40 +918,40 @@
         box.innerHTML = `
           <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 gap-2">
             <div>
-              <span class="text-xs font-mono-code text-amber-600 font-bold uppercase tracking-wider">${d.phase}</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">${d.title}</h3>
+              <span class="text-xs font-mono-figma text-slate-500 font-bold uppercase tracking-wider">${d.phase}</span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-black tracking-tight">${d.title}</h3>
             </div>
-            <span class="text-xs font-mono-code px-3 py-1 rounded-full bg-slate-100 text-slate-700 self-start sm:self-auto border border-slate-200 font-semibold">Objetivo Crítico</span>
+            <span class="text-xs font-mono-figma px-3 py-1 pill-btn bg-slate-100 text-slate-700 self-start sm:self-auto border border-slate-200 font-semibold">Objetivo Crítico</span>
           </div>
 
-          <div class="space-y-3 text-xs sm:text-sm text-slate-700">
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 font-normal">
             ${d.items.map(it => `
               <div class="flex items-start gap-3">
-                <span class="text-amber-600 font-bold mt-0.5">▸</span>
+                <span class="text-black font-bold mt-0.5">▸</span>
                 <div>${it}</div>
               </div>
             `).join('')}
           </div>
 
           <div class="pt-4 border-t border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-            <div class="p-3.5 rounded-xl bg-blue-50/60 border border-blue-200">
-              <span class="font-bold text-blue-900 block mb-1 font-mono-code">Elementary</span>
-              ${d.elementary}
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-black block mb-1 font-mono-figma uppercase text-[11px]">Elementary</span>
+              <p class="text-slate-600 font-normal">${d.elementary}</p>
             </div>
-            <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200">
-              <span class="font-bold text-amber-900 block mb-1 font-mono-code">Junior</span>
-              ${d.junior}
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-black block mb-1 font-mono-figma uppercase text-[11px]">Junior</span>
+              <p class="text-slate-600 font-normal">${d.junior}</p>
             </div>
-            <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
-              <span class="font-bold text-emerald-900 block mb-1 font-mono-code">Senior</span>
-              ${d.senior}
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-black block mb-1 font-mono-figma uppercase text-[11px]">Senior</span>
+              <p class="text-slate-600 font-normal">${d.senior}</p>
             </div>
           </div>
         `;
       }
     }
 
-    // 4. Mission Readiness Checklist Calculation
+    // 4. Mission Readiness Checklist Calculation (Figma Precision)
     function calcReadiness() {
       const items = document.querySelectorAll('.check-item');
       let checked = 0;
@@ -951,9 +966,9 @@
 
       const statusEl = document.getElementById('readiness-status');
       if (percent === 100) {
-        statusEl.innerHTML = `<span class="text-emerald-700 font-bold">¡Robot en condiciones óptimas de podio! Listo para tapete oficial de torneo.</span>`;
+        statusEl.innerHTML = `<span class="text-[#10b981] font-bold">¡Robot en condiciones óptimas de podio! Listo para tapete oficial de torneo.</span>`;
       } else if (percent >= 66) {
-        statusEl.innerHTML = `<span class="text-amber-700 font-bold">Alto grado de preparación. Completa los detalles de control o pruebas de estrés.</span>`;
+        statusEl.innerHTML = `<span class="text-[#b45309] font-bold">Alto grado de preparación. Completa los detalles de control o pruebas de estrés.</span>`;
       } else if (percent > 0) {
         statusEl.innerHTML = `<span class="text-slate-600">Fase de verificación inicial en curso. Continúa revisando los protocolos.</span>`;
       } else {
