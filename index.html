@@ -6,8 +6,6 @@
   <title>PLAN WRO | Plataforma Técnica y Competitiva SPIKE Prime</title>
   <link rel="icon" type="image/png" href="assets/logo.png">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
-  <script src="assets/three.min.js"></script>
-  <script>window.THREE || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');</script>
   <!-- Figma Design System Typography: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +82,6 @@
         <a href="#nivelacion" class="hover:text-black transition-colors">Plan Noviembre</a>
         <a href="#macrociclo" class="hover:text-black transition-colors">Temporada 2027</a>
         <a href="#adn" class="hover:text-black transition-colors">ADN Torneo</a>
-        <a href="#checklist" class="hover:text-black transition-colors">Checklist</a>
       </nav>
 
       <!-- Action Buttons -->
@@ -102,132 +99,45 @@
 
     <!-- ================= 2. HERO SECTION ================= -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Hero Text Column -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 pill-btn bg-slate-100 border border-slate-200/90 text-xs font-mono-figma text-slate-800 uppercase">
-            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-            <span>WRO RoboMission &middot; Temporada Oficial 2027</span>
+      <div class="max-w-4xl space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 pill-btn bg-slate-100 border border-slate-200/90 text-xs font-mono-figma text-slate-800 uppercase">
+          <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+          <span>WRO RoboMission &middot; Temporada Oficial 2027</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#000000] leading-[1.05]">
+          Plan de Desarrollo <br>
+          <span class="bg-gradient-to-r from-[#000000] via-slate-800 to-slate-600 bg-clip-text text-transparent">
+            Técnico & Competitivo
+          </span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
+          Metodología de alto rendimiento para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras, pruebas de luz/batería y preparación para la Regla Sorpresa.
+        </p>
+
+        <!-- Key Metrics Tiles -->
+        <div class="grid grid-cols-2 gap-3 pt-2 max-w-md">
+          <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+            <div class="text-3xl font-black text-[#000000] font-mono-figma">8</div>
+            <div class="text-[11px] text-slate-500 font-medium mt-0.5">Sesiones Noviembre</div>
           </div>
-
-          <h1 class="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#000000] leading-[1.05]">
-            Plan de Desarrollo <br>
-            <span class="bg-gradient-to-r from-[#000000] via-slate-800 to-slate-600 bg-clip-text text-transparent">
-              Técnico & Competitivo
-            </span>
-          </h1>
-
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl font-normal">
-            Metodología de alto rendimiento para <strong class="text-black font-semibold">LEGO® SPIKE™ Prime</strong>: control cinemático giroscópico, odometría sin holguras, pruebas de luz/batería y preparación para la Regla Sorpresa.
-          </p>
-
-          <!-- Key Metrics Tiles -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-              <div class="text-3xl font-black text-[#000000] font-mono-figma">8</div>
-              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Sesiones Noviembre</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-              <div class="text-3xl font-black text-[#000000] font-mono-figma">3</div>
-              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Categorías Oficiales</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-              <div class="text-3xl font-black text-[#000000] font-mono-figma">120s</div>
-              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Límite de Ronda</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
-              <div class="text-3xl font-black text-[#000000] font-mono-figma">25cm³</div>
-              <div class="text-[11px] text-slate-500 font-medium mt-0.5">Gálibo Máximo</div>
-            </div>
-          </div>
-
-          <!-- Hero CTAs -->
-          <div class="flex flex-wrap items-center gap-4 pt-3">
-            <a href="#nivelacion" class="px-7 py-3.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
-              Explorar Plan de Noviembre
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-            <a href="#macrociclo" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
-              Temporada WRO 2027
-            </a>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-black transition-colors">
+            <div class="text-3xl font-black text-[#000000] font-mono-figma">3</div>
+            <div class="text-[11px] text-slate-500 font-medium mt-0.5">Categorías Oficiales</div>
           </div>
         </div>
 
-        <!-- Interactive Hub & Cube Multi-Tab Showcase -->
-        <div class="lg:col-span-5 flex flex-col items-center justify-center">
-          <div class="relative w-full max-w-md p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-5">
-            
-            <!-- Header inside Showcase Box -->
-            <div class="flex items-center border-b border-slate-100 pb-3">
-              <span class="px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm flex items-center gap-1.5">
-                <span>⚙️</span> Motor SPIKE
-              </span>
-            </div>
-
-            <!-- View 1: 3D LEGO SPIKE Prime Motor (Realistic & Faithful) -->
-            <div id="view-motor" class="space-y-4">
-              <!-- 3D Canvas Showcase Box -->
-              <div class="relative w-full h-56 rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200/60 border border-slate-200/90 overflow-hidden flex items-center justify-center select-none group shadow-inner">
-                <!-- Status Badge -->
-                <div class="absolute top-2.5 left-3 z-10 flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200/80 text-[10px] font-mono-figma font-bold text-slate-800 shadow-sm">
-                  <span class="relative flex h-2 w-2">
-                    <span id="motor-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span id="motor-dot" class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  <span id="motor-status-text">175 RPM • Giro Activo</span>
-                </div>
-
-                <!-- 3D Interaction Hint -->
-                <div class="absolute top-2.5 right-3 z-10 text-[9px] font-mono-figma text-slate-500 bg-white/80 backdrop-blur-sm px-2 py-0.5 rounded-full border border-slate-200/70 pointer-events-none flex items-center gap-1 shadow-sm">
-                  <span>🔄</span> Arrastra en 3D
-                </div>
-
-                <!-- Three.js Canvas Mount Point -->
-                <div id="spike-motor-3d" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
-
-                <!-- Real-time Encoder Angle HUD Pill -->
-                <div class="absolute bottom-2.5 right-3 z-10 px-2.5 py-1 rounded-lg bg-black/85 backdrop-blur-sm text-white text-[11px] font-mono-figma font-bold flex items-center gap-1.5 shadow-md">
-                  <span class="text-cyan-400">θ</span>
-                  <span id="live-angle-display">0.0°</span>
-                </div>
-              </div>
-
-              <!-- Speed & Calibration Control Deck -->
-              <div class="flex items-center justify-between gap-1.5 pt-0.5">
-                <div class="flex items-center gap-1">
-                  <button onclick="setMotorSpeed(0)" id="spd-btn-0" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer">⏸ 0</button>
-                  <button onclick="setMotorSpeed(50)" id="spd-btn-50" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer">50%</button>
-                  <button onclick="setMotorSpeed(100)" id="spd-btn-100" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold bg-black text-white border border-black shadow-sm transition-all cursor-pointer">100%</button>
-                  <button onclick="setMotorSpeed(-100)" id="spd-btn-rev" class="motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer">⟲ Rev</button>
-                </div>
-                <button onclick="calibrateMotorZero()" id="btn-auto-zero" class="px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold bg-cyan-600 hover:bg-cyan-700 text-white shadow-sm transition-all flex items-center gap-1 cursor-pointer" title="Alinear al cero absoluto (0°)">
-                  <span>🎯</span> Auto-Cero
-                </button>
-              </div>
-
-              <!-- Technical Specifications Data -->
-              <div class="space-y-1.5 text-xs pt-1.5 border-t border-slate-100">
-                <div class="flex items-center justify-between text-slate-600">
-                  <span>Motor Angular Mediano SPIKE:</span>
-                  <span class="font-mono-figma font-bold text-black">LEGO® 45603</span>
-                </div>
-                <div class="flex items-center justify-between text-slate-600">
-                  <span>Sensor de Rotación / Encoder:</span>
-                  <span class="font-mono-figma font-bold text-cyan-600">±1° Absoluto (Cero Calibrado)</span>
-                </div>
-                <div class="flex items-center justify-between text-slate-600">
-                  <span>Torque & Control de Carga:</span>
-                  <span class="font-mono-figma font-bold text-slate-800">18 N·cm • run_until_stalled()</span>
-                </div>
-              </div>
-            </div>
-
-
-
-          </div>
+        <!-- Hero CTAs -->
+        <div class="flex flex-wrap items-center gap-4 pt-3">
+          <a href="#nivelacion" class="px-7 py-3.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white font-semibold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+            Explorar Plan de Noviembre
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="#macrociclo" class="px-7 py-3.5 pill-btn bg-white hover:bg-slate-50 border border-slate-300 text-black font-semibold text-xs shadow-sm hover:border-black transition-all flex items-center gap-2">
+            Temporada WRO 2027
+          </a>
         </div>
-
       </div>
     </section>
 
@@ -598,87 +508,6 @@
       </div>
     </section>
 
-    <!-- ================= 7. CHECKLIST INTERACTIVO DE PREPARACIÓN ================= -->
-    <section id="checklist" class="py-20 border-t border-slate-100 bg-[#fbfbfb]">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
-        <div class="text-center space-y-2">
-          <span class="text-xs font-mono-figma text-slate-500 uppercase tracking-widest font-semibold">Herramienta Interactiva</span>
-          <h2 class="text-3xl font-black tracking-[-0.03em] text-[#000000]">Checklist de Preparación de Misión</h2>
-          <p class="text-xs text-slate-600 font-normal">Marca los hitos completados por tu equipo para calcular el índice de confiabilidad de salida.</p>
-        </div>
-
-        <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6">
-          
-          <!-- Readiness Gauge Bar -->
-          <div class="space-y-2">
-            <div class="flex items-center justify-between text-xs font-mono-figma">
-              <span class="text-slate-800 font-semibold">Nivel de Confiabilidad de Salida:</span>
-              <span id="readiness-score" class="text-black font-black text-sm">0%</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2 pill-btn overflow-hidden border border-slate-200">
-              <div id="readiness-bar" class="h-full bg-black transition-all duration-300 w-0"></div>
-            </div>
-            <div id="readiness-status" class="text-[11px] font-mono-figma text-slate-500">
-              Comienza verificando los parámetros mecánicos y de código.
-            </div>
-          </div>
-
-          <!-- Checklist items -->
-          <div class="space-y-3 pt-2 text-xs">
-            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
-              <div>
-                <strong class="text-black block font-semibold">Gálibo reglamentario de 25×25×25 cm verificado físicamente</strong>
-                <span class="text-slate-600 font-normal">El robot entra y sale holgadamente de la caja de medición de arbitraje sin rozar vigas.</span>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
-              <div>
-                <strong class="text-black block font-semibold">Sensores de color apantallados entre 8 y 10 mm del tapete</strong>
-                <span class="text-slate-600 font-normal">Campana mecánica que anula reflejos superiores y sombras laterales de los jueces.</span>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
-              <div>
-                <strong class="text-black block font-semibold">Control de giros por sensor giroscópico (Yaw) calibrado</strong>
-                <span class="text-slate-600 font-normal">Rutina inmune a la caída de voltaje de la batería y al desgaste de goma de neumáticos.</span>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
-              <div>
-                <strong class="text-black block font-semibold">Checkpoints y protocolo de aborto programados</strong>
-                <span class="text-slate-600 font-normal">Si un elemento de juego no es detectado, el robot abandona la tarea y rescata los puntos restantes.</span>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
-              <div>
-                <strong class="text-black block font-semibold">Rutina completa verificada en menos de 110 segundos (Margen de 10s)</strong>
-                <span class="text-slate-600 font-normal">Tiempo suficiente para retorno a la base sin sufrir penalizaciones de tiempo límite.</span>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/70 border border-slate-200 hover:border-black cursor-pointer transition-all">
-              <input type="checkbox" onchange="calcReadiness()" class="check-item mt-0.5 rounded-md bg-white border-slate-300 text-black focus:ring-black w-4 h-4 cursor-pointer">
-              <div>
-                <strong class="text-black block font-semibold">Regla de las 5 corridas consecutivas superada</strong>
-                <span class="text-slate-600 font-normal">Cinco ejecuciones perfectas seguidas sin intervención manual en el tapete de práctica.</span>
-              </div>
-            </label>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
 
   </main>
 
@@ -771,460 +600,6 @@
       requestAnimationFrame(animateParticles);
     }
     animateParticles();
-
-    // ==========================================
-    // 2. 3D LEGO SPIKE PRIME ANGULAR MOTOR (THREE.JS)
-    // ==========================================
-    let currentMotorRpm = 175;
-    let motorRotorAngle = 0;
-    let isCalibratingZero = false;
-    let handleMotorResize = null;
-
-    function initSpikeMotor3D() {
-      const mount = document.getElementById('spike-motor-3d');
-      if (!mount || typeof THREE === 'undefined') return;
-
-      const width = mount.clientWidth || 360;
-      const height = mount.clientHeight || 224;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
-      camera.position.set(5.8, 3.4, 6.4);
-      camera.lookAt(0, -0.15, 0);
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      mount.innerHTML = '';
-      mount.appendChild(renderer.domElement);
-
-      // Studio Lighting for LEGO ABS Plastic (High-Definition Contrast)
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.52);
-      scene.add(ambientLight);
-
-      const keyLight = new THREE.DirectionalLight(0xffffff, 0.95);
-      keyLight.position.set(5.5, 7.5, 6.5);
-      keyLight.castShadow = true;
-      scene.add(keyLight);
-
-      const fillLight = new THREE.DirectionalLight(0xbfdbfe, 0.38);
-      fillLight.position.set(-5, 2.5, 4);
-      scene.add(fillLight);
-
-      const rimLight = new THREE.DirectionalLight(0xffffff, 0.4);
-      rimLight.position.set(0, 5.5, -5.5);
-      scene.add(rimLight);
-
-      // Materials (Faithful LEGO Plastic Aesthetics)
-      const whitePlastic = new THREE.MeshStandardMaterial({
-        color: 0xedf0f4,
-        roughness: 0.32,
-        metalness: 0.02
-      });
-
-      const whiteBevelPlastic = new THREE.MeshStandardMaterial({
-        color: 0xe2e8f0,
-        roughness: 0.35,
-        metalness: 0.02
-      });
-
-      const tealPlastic = new THREE.MeshStandardMaterial({
-        color: 0x009ea0,
-        roughness: 0.24,
-        metalness: 0.05
-      });
-
-      const darkInterior = new THREE.MeshStandardMaterial({
-        color: 0x090d16,
-        roughness: 0.9
-      });
-
-      const holeRimMat = new THREE.MeshStandardMaterial({
-        color: 0xcfd6df,
-        roughness: 0.45
-      });
-
-      const redAxleMat = new THREE.MeshStandardMaterial({
-        color: 0xd32f2f,
-        roughness: 0.32,
-        metalness: 0.04
-      });
-
-      const slateRubberMat = new THREE.MeshStandardMaterial({
-        color: 0x334155,
-        roughness: 0.65
-      });
-
-      // Motor Root Object
-      const motorGroup = new THREE.Group();
-      motorGroup.scale.set(0.72, 0.72, 0.72);
-      motorGroup.rotation.set(0.18, 0.45, 0);
-      scene.add(motorGroup);
-
-      // 1. White Motor Chassis (Proportional LEGO Technic Assembly)
-      // Seam joint between front and rear sections
-      const seamGeo = new THREE.BoxGeometry(3.14, 4.24, 0.08);
-      const seam = new THREE.Mesh(seamGeo, new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.8 }));
-      seam.position.set(0, -0.2, 0.8);
-      motorGroup.add(seam);
-      // Rear Motor & Gearbox Body
-      const rearBodyGeo = new THREE.BoxGeometry(3.1, 4.2, 5.0);
-      const rearBody = new THREE.Mesh(rearBodyGeo, whitePlastic);
-      rearBody.position.set(0, -0.3, -1.3);
-      rearBody.castShadow = true;
-      rearBody.receiveShadow = true;
-      motorGroup.add(rearBody);
-
-      // Front Face Bearing Head
-      const frontHeadGeo = new THREE.BoxGeometry(3.1, 3.1, 1.4);
-      const frontHead = new THREE.Mesh(frontHeadGeo, whitePlastic);
-      frontHead.position.set(0, 0, 1.5);
-      frontHead.castShadow = true;
-      frontHead.receiveShadow = true;
-      motorGroup.add(frontHead);
-
-      // Circular Collar Boss on Front Face
-      const bossGeo = new THREE.CylinderGeometry(1.36, 1.38, 0.36, 48);
-      bossGeo.rotateX(Math.PI / 2);
-      const boss = new THREE.Mesh(bossGeo, whiteBevelPlastic);
-      boss.position.set(0, 0, 2.12);
-      boss.castShadow = true;
-      motorGroup.add(boss);
-
-      // Zero-Alignment Molded Tick on Chassis at 12 o'clock
-      const chassisZeroGeo = new THREE.ConeGeometry(0.08, 0.2, 4);
-      chassisZeroGeo.rotateZ(Math.PI);
-      const chassisZero = new THREE.Mesh(chassisZeroGeo, new THREE.MeshStandardMaterial({ color: 0x009ea0, roughness: 0.3 }));
-      chassisZero.position.set(0, 1.42, 2.24);
-      motorGroup.add(chassisZero);
-
-      // 4 Front Face Corner Technic Pin Holes
-      const cornerOffsets = [
-        [-1.12, 1.12], [1.12, 1.12],
-        [-1.12, -1.12], [1.12, -1.12]
-      ];
-      cornerOffsets.forEach(([cx, cy]) => {
-        const holeGeo = new THREE.CylinderGeometry(0.17, 0.17, 0.25, 24);
-        holeGeo.rotateX(Math.PI / 2);
-        const hole = new THREE.Mesh(holeGeo, darkInterior);
-        hole.position.set(cx, cy, 2.12);
-        motorGroup.add(hole);
-
-        const rimGeo = new THREE.RingGeometry(0.17, 0.24, 24);
-        const rim = new THREE.Mesh(rimGeo, holeRimMat);
-        rim.position.set(cx, cy, 2.21);
-        motorGroup.add(rim);
-      });
-
-      // Side Technic Pin Hole Grid (Cleanly embedded in Left & Right Walls)
-      [-1.56, 1.56].forEach((sx) => {
-        const rotY = sx > 0 ? Math.PI / 2 : -Math.PI / 2;
-        [-0.2, -1.2, -2.2, -3.2].forEach((sz) => {
-          [0.6, -0.6].forEach((sy) => {
-            const sideHoleGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.06, 20);
-            sideHoleGeo.rotateZ(Math.PI / 2);
-            const sideHole = new THREE.Mesh(sideHoleGeo, darkInterior);
-            sideHole.position.set(sx, sy, sz);
-            motorGroup.add(sideHole);
-
-            const rimGeo = new THREE.RingGeometry(0.18, 0.25, 20);
-            const rim = new THREE.Mesh(rimGeo, holeRimMat);
-            rim.position.set(sx + (sx > 0 ? 0.005 : -0.005), sy, sz);
-            rim.rotation.y = rotY;
-            motorGroup.add(rim);
-          });
-        });
-      });
-
-      // Rear Cable & Strain Relief
-      const strainGeo = new THREE.BoxGeometry(0.7, 0.45, 0.6);
-      const strain = new THREE.Mesh(strainGeo, slateRubberMat);
-      strain.position.set(0, -1.3, -3.85);
-      motorGroup.add(strain);
-
-      const cableGeo = new THREE.BoxGeometry(0.42, 0.12, 1.6);
-      const cable = new THREE.Mesh(cableGeo, darkInterior);
-      cable.position.set(0, -1.35, -4.8);
-      cable.rotation.x = -0.22;
-      motorGroup.add(cable);
-
-      // Yellow Strain Relief Ring (Authentic SPIKE wire accent)
-      const yellowBandGeo = new THREE.BoxGeometry(0.5, 0.2, 0.15);
-      const yellowBand = new THREE.Mesh(yellowBandGeo, new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 }));
-      yellowBand.position.set(0, -1.32, -4.15);
-      motorGroup.add(yellowBand);
-
-      // Side Turquoise SPIKE Accent Badge
-      const badgeGeo = new THREE.BoxGeometry(0.04, 0.45, 1.4);
-      const badge = new THREE.Mesh(badgeGeo, tealPlastic);
-      badge.position.set(1.57, 0.55, -0.9);
-      motorGroup.add(badge);
-
-      // 2. Rotating Turntable / Rotor Assembly
-      const rotorGroup = new THREE.Group();
-      rotorGroup.position.set(0, 0, 2.24);
-      motorGroup.add(rotorGroup);
-
-      // Main Vibrant Teal Rotor Disc
-      const discGeo = new THREE.CylinderGeometry(1.22, 1.22, 0.2, 64);
-      discGeo.rotateX(Math.PI / 2);
-      const disc = new THREE.Mesh(discGeo, tealPlastic);
-      disc.castShadow = true;
-      rotorGroup.add(disc);
-
-      // Raised Concentric Center Boss
-      const rotorBossGeo = new THREE.CylinderGeometry(1.05, 1.05, 0.24, 48);
-      rotorBossGeo.rotateX(Math.PI / 2);
-      const rotorBoss = new THREE.Mesh(rotorBossGeo, tealPlastic);
-      rotorBoss.position.set(0, 0, 0.02);
-      rotorGroup.add(rotorBoss);
-
-      // Rotor Zero Calibration Indicator Notch (White pointer at 12 o'clock)
-      const zeroMarkerGeo = new THREE.ConeGeometry(0.07, 0.16, 4);
-      const zeroMarker = new THREE.Mesh(zeroMarkerGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.15 }));
-      zeroMarker.position.set(0, 1.14, 0.12);
-      rotorGroup.add(zeroMarker);
-
-      // 4 Technic Pin Holes on the Turntable (90° pitch)
-      const rotorHoleRadius = 0.62;
-      [0, Math.PI / 2, Math.PI, Math.PI * 1.5].forEach((ang) => {
-        const hx = Math.cos(ang) * rotorHoleRadius;
-        const hy = Math.sin(ang) * rotorHoleRadius;
-        const rHoleGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.22, 24);
-        rHoleGeo.rotateX(Math.PI / 2);
-        const rHole = new THREE.Mesh(rHoleGeo, darkInterior);
-        rHole.position.set(hx, hy, 0.06);
-        rotorGroup.add(rHole);
-
-        const rRimGeo = new THREE.RingGeometry(0.16, 0.22, 24);
-        const rRim = new THREE.Mesh(rRimGeo, new THREE.MeshStandardMaterial({ color: 0x00787a, roughness: 0.4 }));
-        rRim.position.set(hx, hy, 0.14);
-        rotorGroup.add(rRim);
-      });
-
-      // Center Cross Axle Socket ("+" Hole)
-      const crossBar1 = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.15, 0.3), darkInterior);
-      crossBar1.position.set(0, 0, 0.08);
-      rotorGroup.add(crossBar1);
-
-      const crossBar2 = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.48, 0.3), darkInterior);
-      crossBar2.position.set(0, 0, 0.08);
-      rotorGroup.add(crossBar2);
-
-      // Protruding Red LEGO Technic Cross Axle
-      const axleLength = 0.75;
-      const axleBeam1 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, axleLength), redAxleMat);
-      axleBeam1.position.set(0, 0, 0.42);
-      axleBeam1.castShadow = true;
-      rotorGroup.add(axleBeam1);
-
-      const axleBeam2 = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.38, axleLength), redAxleMat);
-      axleBeam2.position.set(0, 0, 0.42);
-      axleBeam2.castShadow = true;
-      rotorGroup.add(axleBeam2);
-
-      // Axle End Chamfer
-      const axleTipGeo = new THREE.BoxGeometry(0.32, 0.32, 0.04);
-      const axleTip = new THREE.Mesh(axleTipGeo, redAxleMat);
-      axleTip.position.set(0, 0, 0.8);
-      rotorGroup.add(axleTip);
-
-      // Soft Contact Shadow Plane Underneath
-      const shadowCanvas = document.createElement('canvas');
-      shadowCanvas.width = 128;
-      shadowCanvas.height = 128;
-      const sCtx = shadowCanvas.getContext('2d');
-      const grad = sCtx.createRadialGradient(64, 64, 10, 64, 64, 64);
-      grad.addColorStop(0, 'rgba(15, 23, 42, 0.35)');
-      grad.addColorStop(0.5, 'rgba(15, 23, 42, 0.12)');
-      grad.addColorStop(1, 'rgba(15, 23, 42, 0)');
-      sCtx.fillStyle = grad;
-      sCtx.fillRect(0, 0, 128, 128);
-
-      const shadowTex = new THREE.CanvasTexture(shadowCanvas);
-      const shadowPlaneGeo = new THREE.PlaneGeometry(6.5, 6.5);
-      const shadowPlaneMat = new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0.8 });
-      const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
-      shadowPlane.rotation.x = -Math.PI / 2;
-      shadowPlane.position.y = -2.55;
-      scene.add(shadowPlane);
-
-      // Interactive Drag-to-Rotate in 3D
-      let isDragging = false;
-      let prevPointerX = 0;
-      let prevPointerY = 0;
-      let targetRotY = 0.45;
-      let targetRotX = 0.18;
-      let lastDragTime = performance.now();
-
-      const onPointerDown = (e) => {
-        isDragging = true;
-        prevPointerX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-        prevPointerY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-        lastDragTime = performance.now();
-      };
-
-      const onPointerMove = (e) => {
-        if (!isDragging) return;
-        const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-        const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-        const deltaX = clientX - prevPointerX;
-        const deltaY = clientY - prevPointerY;
-        prevPointerX = clientX;
-        prevPointerY = clientY;
-
-        targetRotY += deltaX * 0.009;
-        targetRotX += deltaY * 0.009;
-        targetRotX = Math.max(-0.4, Math.min(0.65, targetRotX));
-        lastDragTime = performance.now();
-      };
-
-      const onPointerUp = () => {
-        isDragging = false;
-      };
-
-      mount.addEventListener('mousedown', onPointerDown);
-      window.addEventListener('mousemove', onPointerMove);
-      window.addEventListener('mouseup', onPointerUp);
-
-      mount.addEventListener('touchstart', onPointerDown, { passive: true });
-      window.addEventListener('touchmove', onPointerMove, { passive: true });
-      window.addEventListener('touchend', onPointerUp);
-
-      // Handle Resize smoothly
-      handleMotorResize = () => {
-        if (!mount) return;
-        const w = mount.clientWidth;
-        const h = mount.clientHeight;
-        if (w > 0 && h > 0) {
-          camera.aspect = w / h;
-          camera.updateProjectionMatrix();
-          renderer.setSize(w, h);
-        }
-      };
-      window.addEventListener('resize', handleMotorResize);
-
-      // DOM Elements for Telemetry HUD
-      const angleDisplay = document.getElementById('live-angle-display');
-      const statusText = document.getElementById('motor-status-text');
-
-      // Main Animation Loop
-      let lastTime = performance.now();
-
-      function animate(now) {
-        requestAnimationFrame(animate);
-        const dt = Math.min((now - lastTime) / 1000, 0.1);
-        lastTime = now;
-
-        // Auto-Cero Calibration or Continuous Rotation
-        if (isCalibratingZero) {
-          const currentModulo = ((motorRotorAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-          const diff = Math.PI * 2 - currentModulo;
-          if (diff < 0.03 || currentModulo < 0.03) {
-            motorRotorAngle = 0;
-            isCalibratingZero = false;
-            currentMotorRpm = 0;
-            updateSpeedButtonsUI(0);
-            if (statusText) statusText.textContent = "0.0° • Auto-Cero Calibrado";
-            const ping = document.getElementById('motor-ping');
-            if (ping) ping.classList.remove('animate-ping');
-          } else {
-            motorRotorAngle += Math.min(diff * 8 * dt, 4 * dt);
-          }
-        } else {
-          const deltaAngle = (currentMotorRpm * 2 * Math.PI / 60) * dt;
-          motorRotorAngle = (motorRotorAngle + deltaAngle) % (2 * Math.PI);
-        }
-
-        rotorGroup.rotation.z = -motorRotorAngle;
-
-        // Update Live Angle HUD
-        if (angleDisplay) {
-          let deg = ((-motorRotorAngle * 180 / Math.PI) % 360);
-          if (deg < 0) deg += 360;
-          angleDisplay.textContent = deg.toFixed(1) + '°';
-        }
-
-        // Return slowly to presentation view if not dragging
-        if (!isDragging && (now - lastDragTime > 2500)) {
-          targetRotY += (0.45 - targetRotY) * 0.02;
-          targetRotX += (0.18 - targetRotX) * 0.02;
-        }
-
-        // Smooth rotation damping
-        motorGroup.rotation.y += (targetRotY - motorGroup.rotation.y) * 0.1;
-        motorGroup.rotation.x += (targetRotX - motorGroup.rotation.x) * 0.1;
-
-        // Subtle floating bob
-        motorGroup.position.y = Math.sin(now * 0.0016) * 0.05;
-
-        renderer.render(scene, camera);
-      }
-      requestAnimationFrame(animate);
-    }
-
-    function updateSpeedButtonsUI(rpm) {
-      document.querySelectorAll('.motor-spd-btn').forEach(btn => {
-        btn.className = "motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all cursor-pointer";
-      });
-      let activeBtn = null;
-      if (rpm === 0) activeBtn = document.getElementById('spd-btn-0');
-      else if (rpm === 50) activeBtn = document.getElementById('spd-btn-50');
-      else if (rpm === 100) activeBtn = document.getElementById('spd-btn-100');
-      else if (rpm === -100) activeBtn = document.getElementById('spd-btn-rev');
-
-      if (activeBtn) {
-        activeBtn.className = "motor-spd-btn px-2.5 py-1 rounded-lg text-[10px] font-mono-figma font-bold bg-black text-white border border-black shadow-sm transition-all cursor-pointer";
-      }
-    }
-
-    function setMotorSpeed(percent) {
-      isCalibratingZero = false;
-      const statusText = document.getElementById('motor-status-text');
-      const ping = document.getElementById('motor-ping');
-      const dot = document.getElementById('motor-dot');
-
-      if (percent === 0) {
-        currentMotorRpm = 0;
-        if (statusText) statusText.textContent = "0 RPM • En Pausa";
-        if (ping) ping.classList.remove('animate-ping');
-        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-amber-500";
-      } else if (percent === 50) {
-        currentMotorRpm = 88;
-        if (statusText) statusText.textContent = "88 RPM • 50% PWM";
-        if (ping) {
-          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
-        }
-        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
-      } else if (percent === 100) {
-        currentMotorRpm = 175;
-        if (statusText) statusText.textContent = "175 RPM • Giro Activo";
-        if (ping) {
-          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
-        }
-        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
-      } else if (percent === -100) {
-        currentMotorRpm = -175;
-        if (statusText) statusText.textContent = "-175 RPM • Inversión Pol";
-        if (ping) {
-          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75";
-        }
-        if (dot) dot.className = "relative inline-flex rounded-full h-2 w-2 bg-cyan-500";
-      }
-
-      updateSpeedButtonsUI(percent);
-    }
-
-    function calibrateMotorZero() {
-      isCalibratingZero = true;
-      const statusText = document.getElementById('motor-status-text');
-      if (statusText) statusText.textContent = "Calibrando al Cero (0°)...";
-      const ping = document.getElementById('motor-ping');
-      if (ping) ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75";
-    }
-
 
     // 4. Filter Level on November Schedule
     function setFilter(lvl) {
@@ -1380,39 +755,9 @@
       }
     }
 
-    // 7. Mission Readiness Checklist Calculation
-    function calcReadiness() {
-      const items = document.querySelectorAll('.check-item');
-      let checked = 0;
-      items.forEach(it => {
-        if (it.checked) checked++;
-      });
-      const percent = Math.round((checked / items.length) * 100);
-
-      document.getElementById('readiness-score').innerText = `${percent}%`;
-      const bar = document.getElementById('readiness-bar');
-      bar.style.width = `${percent}%`;
-
-      const statusEl = document.getElementById('readiness-status');
-      if (percent === 100) {
-        statusEl.innerHTML = `<span class="text-[#10b981] font-bold">¡Robot en condiciones óptimas de podio! Listo para tapete oficial de torneo.</span>`;
-      } else if (percent >= 66) {
-        statusEl.innerHTML = `<span class="text-[#b45309] font-bold">Alto grado de preparación. Completa los detalles de control o pruebas de estrés.</span>`;
-      } else if (percent > 0) {
-        statusEl.innerHTML = `<span class="text-slate-600">Fase de verificación inicial en curso. Continúa revisando los protocolos.</span>`;
-      } else {
-        statusEl.innerHTML = `Comienza verificando los parámetros mecánicos y de código.`;
-      }
-    }
-
     // Initialize defaults
     selectMonth(1);
     setFilter('all');
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', initSpikeMotor3D);
-    } else {
-      initSpikeMotor3D();
-    }
   </script>
 </body>
 </html>
