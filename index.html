@@ -6,6 +6,8 @@
   <title>PLAN WRO | Plataforma Técnica y Competitiva SPIKE Prime</title>
   <link rel="icon" type="image/png" href="assets/logo.png">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="assets/three.min.js"></script>
+  <script>window.THREE || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');</script>
   <!-- Figma Design System Typography: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,36 +40,6 @@
       border-radius: 9999px;
     }
 
-    /* 3D Wireframe Cube effect */
-    .cube-container {
-      perspective: 900px;
-    }
-    .cube-box {
-      width: 140px;
-      height: 140px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: rotateFigmaCube 18s linear infinite;
-    }
-    @keyframes rotateFigmaCube {
-      0% { transform: rotateX(18deg) rotateY(0deg); }
-      100% { transform: rotateX(18deg) rotateY(360deg); }
-    }
-    .cube-face {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      border: 1.5px solid #000000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    }
-    .cube-front  { transform: rotateY(0deg) translateZ(70px); }
-    .cube-back   { transform: rotateY(180deg) translateZ(70px); }
-    .cube-right  { transform: rotateY(90deg) translateZ(70px); }
-    .cube-left   { transform: rotateY(-90deg) translateZ(70px); }
-    .cube-top    { transform: rotateX(90deg) translateZ(70px); }
-    .cube-bottom { transform: rotateX(-90deg) translateZ(70px); }
 
     /* Custom light scrollbar */
     ::-webkit-scrollbar {
@@ -117,10 +89,6 @@
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-3">
-        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 pill-btn bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-black shadow-sm transition-all hover:border-black">
-          <svg class="w-4 h-4 fill-current text-black" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          GitHub
-        </a>
         <a href="#nivelacion" class="inline-flex items-center gap-1.5 px-5 py-2.5 pill-btn bg-[#000000] hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]">
           Ver Plan
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
@@ -190,26 +158,17 @@
         <div class="lg:col-span-5 flex flex-col items-center justify-center">
           <div class="relative w-full max-w-md p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 space-y-5">
             
-            <!-- Switcher Tabs inside Showcase Box -->
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div class="inline-flex p-1 pill-btn bg-slate-100 text-xs">
-                <button onclick="toggleHeroView('motor')" id="tab-motor" class="px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all flex items-center gap-1.5">
-                  <span>⚙️</span> Motor SPIKE
-                </button>
-                <button onclick="toggleHeroView('hub')" id="tab-hub" class="px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all flex items-center gap-1.5">
-                  <span>📟</span> Hub SPIKE 5×5
-                </button>
-                <button onclick="toggleHeroView('cube')" id="tab-cube" class="px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all flex items-center gap-1.5">
-                  <span>🧊</span> Cubo 25 cm
-                </button>
-              </div>
-              <span class="text-[11px] font-mono-figma text-slate-500 uppercase font-semibold">Hardware WRO</span>
+            <!-- Header inside Showcase Box -->
+            <div class="flex items-center border-b border-slate-100 pb-3">
+              <span class="px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm flex items-center gap-1.5">
+                <span>⚙️</span> Motor SPIKE
+              </span>
             </div>
 
             <!-- View 1: 3D LEGO SPIKE Prime Motor (Realistic & Faithful) -->
             <div id="view-motor" class="space-y-4">
               <!-- 3D Canvas Showcase Box -->
-              <div class="relative w-full h-56 rounded-2xl bg-gradient-to-b from-slate-50/90 to-slate-100/70 border border-slate-200/90 overflow-hidden flex items-center justify-center select-none group shadow-inner">
+              <div class="relative w-full h-56 rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200/60 border border-slate-200/90 overflow-hidden flex items-center justify-center select-none group shadow-inner">
                 <!-- Status Badge -->
                 <div class="absolute top-2.5 left-3 z-10 flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200/80 text-[10px] font-mono-figma font-bold text-slate-800 shadow-sm">
                   <span class="relative flex h-2 w-2">
@@ -264,68 +223,7 @@
               </div>
             </div>
 
-            <!-- View 3: 3D Wireframe Cube (Preserved) -->
-            <div id="view-cube" class="hidden space-y-5">
-              <div class="h-44 flex items-center justify-center cube-container">
-                <div class="cube-box">
-                  <div class="cube-face cube-front flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                  <div class="cube-face cube-back flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                  <div class="cube-face cube-right flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                  <div class="cube-face cube-left flex items-center justify-center text-[10px] font-mono-figma text-black font-bold">25 cm</div>
-                  <div class="cube-face cube-top flex items-center justify-center text-[10px] font-mono-figma text-slate-600 font-bold">TOP</div>
-                  <div class="cube-face cube-bottom flex items-center justify-center text-[10px] font-mono-figma text-[#10b981] font-bold">BASE</div>
-                </div>
-              </div>
-              <div class="space-y-2 text-xs pt-1 border-t border-slate-100">
-                <div class="flex items-center justify-between text-slate-600">
-                  <span>Dimensiones de caja de arbitraje:</span>
-                  <span class="font-mono-figma font-bold text-black">250 × 250 × 250 mm</span>
-                </div>
-                <div class="flex items-center justify-between text-slate-600">
-                  <span>Despliegue dinámico de brazos:</span>
-                  <span class="font-mono-figma font-bold text-[#10b981]">Válido tras el inicio</span>
-                </div>
-              </div>
-            </div>
 
-            <!-- View 2: Interactive SPIKE Prime Hub 5x5 Matrix Simulator -->
-            <div id="view-hub" class="hidden space-y-4">
-              <div class="flex items-center justify-between">
-                <div class="text-xs font-semibold text-slate-700">Matriz de 5×5 LEDs & Puertos</div>
-                <div class="flex gap-1 text-[10px] font-mono-figma">
-                  <button onclick="setMatrixPattern('smile')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">😊</button>
-                  <button onclick="setMatrixPattern('arrow')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">⬆ 90°</button>
-                  <button onclick="setMatrixPattern('check')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200">✓ OK</button>
-                  <button onclick="setMatrixPattern('wro')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 font-bold">WRO</button>
-                </div>
-              </div>
-
-              <!-- Realistic SPIKE Prime Yellow Hub Frame -->
-              <div class="p-4 rounded-2xl bg-amber-400 border-2 border-amber-500 shadow-md flex items-center justify-between gap-4">
-                <!-- Ports Left (A, C, E) -->
-                <div class="flex flex-col gap-2 font-mono-figma text-[9px] font-bold text-amber-950">
-                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">A Tracción Izq</div>
-                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">C Color Frontal 1</div>
-                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">E Motor Garra</div>
-                </div>
-
-                <!-- 5x5 LED Grid Display -->
-                <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 shadow-inner grid grid-cols-5 gap-1.5" id="led-grid">
-                  <!-- Generated via JS -->
-                </div>
-
-                <!-- Ports Right (B, D, F) -->
-                <div class="flex flex-col gap-2 font-mono-figma text-[9px] font-bold text-amber-950 text-right">
-                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">B Tracción Der</div>
-                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">D Color Frontal 2</div>
-                  <div class="px-1.5 py-0.5 rounded bg-amber-200 border border-amber-300">F Motor Elevador</div>
-                </div>
-              </div>
-
-              <div class="text-[11px] text-slate-500 text-center font-mono-figma">
-                Configuración oficial de 6 puertos (2 Tracción + 2 Sensores Color + 2 Actuadores)
-              </div>
-            </div>
 
           </div>
         </div>
@@ -797,7 +695,6 @@
       </div>
 
       <div class="flex items-center gap-6">
-        <a href="https://github.com/themiguedev/PLAN-WRO" target="_blank" class="hover:text-black transition-colors font-medium">Repositorio GitHub</a>
         <a href="https://github.com/themiguedev/PLAN-WRO/blob/main/README.md" target="_blank" class="hover:text-black transition-colors font-medium">Documentación</a>
         <a href="#top" class="hover:text-black transition-colors flex items-center gap-1 font-mono-figma">
           ↑ Volver arriba
@@ -891,9 +788,9 @@
       const height = mount.clientHeight || 224;
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
-      camera.position.set(4.6, 3.2, 5.8);
-      camera.lookAt(0, 0, 0.2);
+      const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+      camera.position.set(5.8, 3.4, 6.4);
+      camera.lookAt(0, -0.15, 0);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
       renderer.setSize(width, height);
@@ -903,119 +800,140 @@
       mount.innerHTML = '';
       mount.appendChild(renderer.domElement);
 
-      // Studio Lighting for LEGO ABS Plastic
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      // Studio Lighting for LEGO ABS Plastic (High-Definition Contrast)
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.52);
       scene.add(ambientLight);
 
-      const keyLight = new THREE.DirectionalLight(0xffffff, 1.15);
-      keyLight.position.set(6, 8, 7);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 0.95);
+      keyLight.position.set(5.5, 7.5, 6.5);
       keyLight.castShadow = true;
       scene.add(keyLight);
 
-      const fillLight = new THREE.DirectionalLight(0xbae6fd, 0.5);
-      fillLight.position.set(-5, -3, 4);
+      const fillLight = new THREE.DirectionalLight(0xbfdbfe, 0.38);
+      fillLight.position.set(-5, 2.5, 4);
       scene.add(fillLight);
 
-      const rimLight = new THREE.DirectionalLight(0xffffff, 0.45);
-      rimLight.position.set(0, 6, -6);
+      const rimLight = new THREE.DirectionalLight(0xffffff, 0.4);
+      rimLight.position.set(0, 5.5, -5.5);
       scene.add(rimLight);
 
       // Materials (Faithful LEGO Plastic Aesthetics)
       const whitePlastic = new THREE.MeshStandardMaterial({
-        color: 0xf6f7f9,
-        roughness: 0.26,
-        metalness: 0.04
+        color: 0xedf0f4,
+        roughness: 0.32,
+        metalness: 0.02
+      });
+
+      const whiteBevelPlastic = new THREE.MeshStandardMaterial({
+        color: 0xe2e8f0,
+        roughness: 0.35,
+        metalness: 0.02
       });
 
       const tealPlastic = new THREE.MeshStandardMaterial({
-        color: 0x00a3a6,
-        roughness: 0.22,
-        metalness: 0.06
+        color: 0x009ea0,
+        roughness: 0.24,
+        metalness: 0.05
       });
 
       const darkInterior = new THREE.MeshStandardMaterial({
-        color: 0x0f172a,
-        roughness: 0.85
+        color: 0x090d16,
+        roughness: 0.9
       });
 
       const holeRimMat = new THREE.MeshStandardMaterial({
-        color: 0xd1d5db,
-        roughness: 0.4
+        color: 0xcfd6df,
+        roughness: 0.45
       });
 
       const redAxleMat = new THREE.MeshStandardMaterial({
-        color: 0xdc2626,
+        color: 0xd32f2f,
         roughness: 0.32,
-        metalness: 0.05
+        metalness: 0.04
       });
 
       const slateRubberMat = new THREE.MeshStandardMaterial({
         color: 0x334155,
-        roughness: 0.6
+        roughness: 0.65
       });
 
       // Motor Root Object
       const motorGroup = new THREE.Group();
+      motorGroup.scale.set(0.72, 0.72, 0.72);
       motorGroup.rotation.set(0.18, 0.45, 0);
       scene.add(motorGroup);
 
-      // 1. White Motor Chassis
-      const frontHeadGeo = new THREE.BoxGeometry(2.8, 2.8, 1.8);
-      const frontHead = new THREE.Mesh(frontHeadGeo, whitePlastic);
-      frontHead.position.set(0, 0, 0.9);
-      frontHead.castShadow = true;
-      frontHead.receiveShadow = true;
-      motorGroup.add(frontHead);
-
-      const rearBodyGeo = new THREE.BoxGeometry(2.5, 3.4, 3.8);
+      // 1. White Motor Chassis (Proportional LEGO Technic Assembly)
+      // Seam joint between front and rear sections
+      const seamGeo = new THREE.BoxGeometry(3.14, 4.24, 0.08);
+      const seam = new THREE.Mesh(seamGeo, new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.8 }));
+      seam.position.set(0, -0.2, 0.8);
+      motorGroup.add(seam);
+      // Rear Motor & Gearbox Body
+      const rearBodyGeo = new THREE.BoxGeometry(3.1, 4.2, 5.0);
       const rearBody = new THREE.Mesh(rearBodyGeo, whitePlastic);
-      rearBody.position.set(0, -0.2, -1.5);
+      rearBody.position.set(0, -0.3, -1.3);
       rearBody.castShadow = true;
       rearBody.receiveShadow = true;
       motorGroup.add(rearBody);
 
-      // Front Circular Collar (Housing boss)
-      const bossGeo = new THREE.CylinderGeometry(1.36, 1.36, 0.35, 48);
+      // Front Face Bearing Head
+      const frontHeadGeo = new THREE.BoxGeometry(3.1, 3.1, 1.4);
+      const frontHead = new THREE.Mesh(frontHeadGeo, whitePlastic);
+      frontHead.position.set(0, 0, 1.5);
+      frontHead.castShadow = true;
+      frontHead.receiveShadow = true;
+      motorGroup.add(frontHead);
+
+      // Circular Collar Boss on Front Face
+      const bossGeo = new THREE.CylinderGeometry(1.36, 1.38, 0.36, 48);
       bossGeo.rotateX(Math.PI / 2);
-      const boss = new THREE.Mesh(bossGeo, whitePlastic);
-      boss.position.set(0, 0, 1.85);
+      const boss = new THREE.Mesh(bossGeo, whiteBevelPlastic);
+      boss.position.set(0, 0, 2.12);
       boss.castShadow = true;
       motorGroup.add(boss);
 
       // Zero-Alignment Molded Tick on Chassis at 12 o'clock
-      const chassisZeroGeo = new THREE.ConeGeometry(0.1, 0.22, 4);
+      const chassisZeroGeo = new THREE.ConeGeometry(0.08, 0.2, 4);
       chassisZeroGeo.rotateZ(Math.PI);
-      const chassisZero = new THREE.Mesh(chassisZeroGeo, new THREE.MeshStandardMaterial({ color: 0x00a3a6, roughness: 0.3 }));
-      chassisZero.position.set(0, 1.42, 2.02);
+      const chassisZero = new THREE.Mesh(chassisZeroGeo, new THREE.MeshStandardMaterial({ color: 0x009ea0, roughness: 0.3 }));
+      chassisZero.position.set(0, 1.42, 2.24);
       motorGroup.add(chassisZero);
 
       // 4 Front Face Corner Technic Pin Holes
       const cornerOffsets = [
-        [-1.08, 1.08], [1.08, 1.08],
-        [-1.08, -1.08], [1.08, -1.08]
+        [-1.12, 1.12], [1.12, 1.12],
+        [-1.12, -1.12], [1.12, -1.12]
       ];
       cornerOffsets.forEach(([cx, cy]) => {
-        const holeGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.4, 24);
+        const holeGeo = new THREE.CylinderGeometry(0.17, 0.17, 0.25, 24);
         holeGeo.rotateX(Math.PI / 2);
         const hole = new THREE.Mesh(holeGeo, darkInterior);
-        hole.position.set(cx, cy, 1.75);
+        hole.position.set(cx, cy, 2.12);
         motorGroup.add(hole);
 
-        const rimGeo = new THREE.RingGeometry(0.18, 0.26, 24);
+        const rimGeo = new THREE.RingGeometry(0.17, 0.24, 24);
         const rim = new THREE.Mesh(rimGeo, holeRimMat);
-        rim.position.set(cx, cy, 1.81);
+        rim.position.set(cx, cy, 2.21);
         motorGroup.add(rim);
       });
 
-      // Side Technic Pin Hole Grid (Left & Right Flanks)
-      [-1.26, 1.26].forEach((sx) => {
-        [-0.5, -1.5, -2.5].forEach((sz) => {
+      // Side Technic Pin Hole Grid (Cleanly embedded in Left & Right Walls)
+      [-1.56, 1.56].forEach((sx) => {
+        const rotY = sx > 0 ? Math.PI / 2 : -Math.PI / 2;
+        [-0.2, -1.2, -2.2, -3.2].forEach((sz) => {
           [0.6, -0.6].forEach((sy) => {
-            const sideHoleGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.3, 20);
+            const sideHoleGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.06, 20);
             sideHoleGeo.rotateZ(Math.PI / 2);
             const sideHole = new THREE.Mesh(sideHoleGeo, darkInterior);
             sideHole.position.set(sx, sy, sz);
             motorGroup.add(sideHole);
+
+            const rimGeo = new THREE.RingGeometry(0.18, 0.25, 20);
+            const rim = new THREE.Mesh(rimGeo, holeRimMat);
+            rim.position.set(sx + (sx > 0 ? 0.005 : -0.005), sy, sz);
+            rim.rotation.y = rotY;
+            motorGroup.add(rim);
           });
         });
       });
@@ -1023,44 +941,50 @@
       // Rear Cable & Strain Relief
       const strainGeo = new THREE.BoxGeometry(0.7, 0.45, 0.6);
       const strain = new THREE.Mesh(strainGeo, slateRubberMat);
-      strain.position.set(0, -1.2, -3.4);
+      strain.position.set(0, -1.3, -3.85);
       motorGroup.add(strain);
 
-      const cableGeo = new THREE.BoxGeometry(0.45, 0.14, 1.5);
+      const cableGeo = new THREE.BoxGeometry(0.42, 0.12, 1.6);
       const cable = new THREE.Mesh(cableGeo, darkInterior);
-      cable.position.set(0, -1.25, -4.3);
-      cable.rotation.x = -0.25;
+      cable.position.set(0, -1.35, -4.8);
+      cable.rotation.x = -0.22;
       motorGroup.add(cable);
 
+      // Yellow Strain Relief Ring (Authentic SPIKE wire accent)
+      const yellowBandGeo = new THREE.BoxGeometry(0.5, 0.2, 0.15);
+      const yellowBand = new THREE.Mesh(yellowBandGeo, new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 }));
+      yellowBand.position.set(0, -1.32, -4.15);
+      motorGroup.add(yellowBand);
+
       // Side Turquoise SPIKE Accent Badge
-      const badgeGeo = new THREE.BoxGeometry(0.05, 0.4, 1.2);
+      const badgeGeo = new THREE.BoxGeometry(0.04, 0.45, 1.4);
       const badge = new THREE.Mesh(badgeGeo, tealPlastic);
-      badge.position.set(1.27, 0.4, -0.8);
+      badge.position.set(1.57, 0.55, -0.9);
       motorGroup.add(badge);
 
       // 2. Rotating Turntable / Rotor Assembly
       const rotorGroup = new THREE.Group();
-      rotorGroup.position.set(0, 0, 1.95);
+      rotorGroup.position.set(0, 0, 2.24);
       motorGroup.add(rotorGroup);
 
       // Main Vibrant Teal Rotor Disc
-      const discGeo = new THREE.CylinderGeometry(1.22, 1.22, 0.22, 64);
+      const discGeo = new THREE.CylinderGeometry(1.22, 1.22, 0.2, 64);
       discGeo.rotateX(Math.PI / 2);
       const disc = new THREE.Mesh(discGeo, tealPlastic);
       disc.castShadow = true;
       rotorGroup.add(disc);
 
       // Raised Concentric Center Boss
-      const rotorBossGeo = new THREE.CylinderGeometry(1.06, 1.06, 0.26, 48);
+      const rotorBossGeo = new THREE.CylinderGeometry(1.05, 1.05, 0.24, 48);
       rotorBossGeo.rotateX(Math.PI / 2);
       const rotorBoss = new THREE.Mesh(rotorBossGeo, tealPlastic);
-      rotorBoss.position.set(0, 0, 0.03);
+      rotorBoss.position.set(0, 0, 0.02);
       rotorGroup.add(rotorBoss);
 
       // Rotor Zero Calibration Indicator Notch (White pointer at 12 o'clock)
-      const zeroMarkerGeo = new THREE.ConeGeometry(0.08, 0.18, 4);
-      const zeroMarker = new THREE.Mesh(zeroMarkerGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 }));
-      zeroMarker.position.set(0, 1.15, 0.14);
+      const zeroMarkerGeo = new THREE.ConeGeometry(0.07, 0.16, 4);
+      const zeroMarker = new THREE.Mesh(zeroMarkerGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.15 }));
+      zeroMarker.position.set(0, 1.14, 0.12);
       rotorGroup.add(zeroMarker);
 
       // 4 Technic Pin Holes on the Turntable (90° pitch)
@@ -1068,33 +992,44 @@
       [0, Math.PI / 2, Math.PI, Math.PI * 1.5].forEach((ang) => {
         const hx = Math.cos(ang) * rotorHoleRadius;
         const hy = Math.sin(ang) * rotorHoleRadius;
-        const rHoleGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.35, 24);
+        const rHoleGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.22, 24);
         rHoleGeo.rotateX(Math.PI / 2);
         const rHole = new THREE.Mesh(rHoleGeo, darkInterior);
-        rHole.position.set(hx, hy, 0.08);
+        rHole.position.set(hx, hy, 0.06);
         rotorGroup.add(rHole);
+
+        const rRimGeo = new THREE.RingGeometry(0.16, 0.22, 24);
+        const rRim = new THREE.Mesh(rRimGeo, new THREE.MeshStandardMaterial({ color: 0x00787a, roughness: 0.4 }));
+        rRim.position.set(hx, hy, 0.14);
+        rotorGroup.add(rRim);
       });
 
       // Center Cross Axle Socket ("+" Hole)
-      const crossBar1 = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.16, 0.35), darkInterior);
-      crossBar1.position.set(0, 0, 0.1);
+      const crossBar1 = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.15, 0.3), darkInterior);
+      crossBar1.position.set(0, 0, 0.08);
       rotorGroup.add(crossBar1);
 
-      const crossBar2 = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.5, 0.35), darkInterior);
-      crossBar2.position.set(0, 0, 0.1);
+      const crossBar2 = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.48, 0.3), darkInterior);
+      crossBar2.position.set(0, 0, 0.08);
       rotorGroup.add(crossBar2);
 
       // Protruding Red LEGO Technic Cross Axle
-      const axleLength = 0.95;
-      const axleBeam1 = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.13, axleLength), redAxleMat);
-      axleBeam1.position.set(0, 0, 0.48);
+      const axleLength = 0.75;
+      const axleBeam1 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, axleLength), redAxleMat);
+      axleBeam1.position.set(0, 0, 0.42);
       axleBeam1.castShadow = true;
       rotorGroup.add(axleBeam1);
 
-      const axleBeam2 = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.42, axleLength), redAxleMat);
-      axleBeam2.position.set(0, 0, 0.48);
+      const axleBeam2 = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.38, axleLength), redAxleMat);
+      axleBeam2.position.set(0, 0, 0.42);
       axleBeam2.castShadow = true;
       rotorGroup.add(axleBeam2);
+
+      // Axle End Chamfer
+      const axleTipGeo = new THREE.BoxGeometry(0.32, 0.32, 0.04);
+      const axleTip = new THREE.Mesh(axleTipGeo, redAxleMat);
+      axleTip.position.set(0, 0, 0.8);
+      rotorGroup.add(axleTip);
 
       // Soft Contact Shadow Plane Underneath
       const shadowCanvas = document.createElement('canvas');
@@ -1113,7 +1048,7 @@
       const shadowPlaneMat = new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0.8 });
       const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
       shadowPlane.rotation.x = -Math.PI / 2;
-      shadowPlane.position.y = -2.1;
+      shadowPlane.position.y = -2.55;
       scene.add(shadowPlane);
 
       // Interactive Drag-to-Rotate in 3D
@@ -1290,95 +1225,6 @@
       if (ping) ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75";
     }
 
-    // 2. Hero Box Tab Switcher (Motor SPIKE vs Hub vs Cubo 25cm)
-    function toggleHeroView(view) {
-      const vMotor = document.getElementById('view-motor');
-      const vHub = document.getElementById('view-hub');
-      const vCube = document.getElementById('view-cube');
-      const tMotor = document.getElementById('tab-motor');
-      const tHub = document.getElementById('tab-hub');
-      const tCube = document.getElementById('tab-cube');
-
-      if (vMotor) vMotor.classList.add('hidden');
-      if (vHub) vHub.classList.add('hidden');
-      if (vCube) vCube.classList.add('hidden');
-
-      const inactiveStyle = "px-3 py-1.5 pill-btn font-medium text-xs text-slate-600 hover:text-black transition-all flex items-center gap-1.5 cursor-pointer";
-      const activeStyle = "px-3 py-1.5 pill-btn font-semibold text-xs bg-black text-white shadow-sm transition-all flex items-center gap-1.5 cursor-pointer";
-
-      if (tMotor) tMotor.className = inactiveStyle;
-      if (tHub) tHub.className = inactiveStyle;
-      if (tCube) tCube.className = inactiveStyle;
-
-      if (view === 'motor') {
-        if (vMotor) vMotor.classList.remove('hidden');
-        if (tMotor) tMotor.className = activeStyle;
-        if (typeof handleMotorResize === 'function') {
-          setTimeout(handleMotorResize, 30);
-        }
-      } else if (view === 'hub') {
-        if (vHub) vHub.classList.remove('hidden');
-        if (tHub) tHub.className = activeStyle;
-      } else if (view === 'cube') {
-        if (vCube) vCube.classList.remove('hidden');
-        if (tCube) tCube.className = activeStyle;
-      }
-    }
-
-    // 3. Interactive 5x5 LED Matrix Grid Generator & Presets
-    const ledGrid = document.getElementById('led-grid');
-    const ledState = Array(25).fill(0);
-
-    const patterns = {
-      smile: [
-        0,1,0,1,0,
-        0,1,0,1,0,
-        0,0,0,0,0,
-        1,0,0,0,1,
-        0,1,1,1,0
-      ],
-      arrow: [
-        0,0,1,0,0,
-        0,1,1,1,0,
-        1,0,1,0,1,
-        0,0,1,0,0,
-        0,0,1,0,0
-      ],
-      check: [
-        0,0,0,0,1,
-        0,0,0,1,0,
-        1,0,1,0,0,
-        0,1,0,0,0,
-        0,0,0,0,0
-      ],
-      wro: [
-        1,0,1,0,1,
-        1,0,1,0,1,
-        1,1,1,1,1,
-        1,1,0,1,1,
-        1,0,0,0,1
-      ]
-    };
-
-    function renderMatrix(arr) {
-      ledGrid.innerHTML = '';
-      arr.forEach((val, idx) => {
-        const dot = document.createElement('div');
-        dot.className = `w-3 h-3 rounded-full transition-all duration-200 cursor-pointer ${val ? 'bg-amber-400 shadow-[0_0_8px_#f59e0b]' : 'bg-slate-800 hover:bg-slate-700'}`;
-        dot.onclick = () => {
-          arr[idx] = arr[idx] ? 0 : 1;
-          renderMatrix(arr);
-        };
-        ledGrid.appendChild(dot);
-      });
-    }
-
-    function setMatrixPattern(name) {
-      if (patterns[name]) {
-        renderMatrix([...patterns[name]]);
-      }
-    }
-    setMatrixPattern('smile');
 
     // 4. Filter Level on November Schedule
     function setFilter(lvl) {
