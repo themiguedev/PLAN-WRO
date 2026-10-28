@@ -52,7 +52,7 @@ El progreso técnico de los estudiantes se estructura en cuatro fases continuas:
 
 ---
 
-## 3. Macro-Ciclo Competitivo WRO (Enero a Julio)
+## 3. Temporada WRO 2027 (Enero a Julio)
 
 `
 Ene: Estrategia  ──► Feb: Diseño  ──► Mar: Base y Chasis  ──► Abr: Estrés  ──► May: Rutina  ──► Jun/Jul: Torneo
