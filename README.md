@@ -6,9 +6,11 @@
 
 ---
 
-## 🖥️ Presentación Interactiva
+## 🌐 Plataforma Web Interactiva
+Puedes visualizar la plataforma web interactiva y dinámica (visualizador 3D del cubo de 25 cm, cronograma de Noviembre, macro-ciclo y simulador de preparación) en:
+👉 **[https://themiguedev.github.io/PLAN-WRO/](https://themiguedev.github.io/PLAN-WRO/)**
 
-Puedes visualizar la presentación interactiva de este plan abriendo el archivo [presentacion_wro.html](./presentacion_wro.html) en tu navegador, o verla online si está activado GitHub Pages.
+O abrir en local: [index.html](./index.html) y [presentacion_wro.html](./presentacion_wro.html).
 
 ---
 # Plan de Desarrollo TÃ©cnico y Competitivo: LEGO SPIKE Prime
@@ -33,7 +35,7 @@ El progreso tÃ©cnico de los estudiantes se estructura en cuatro fases continua
 
 ---
 
-## 2. Plan Mensual de NivelaciÃ³n: Octubre
+## 2. Plan Mensual de Nivelación: Noviembre
 * **RÃ©gimen:** 8 sesiones al mes (Martes y Jueves).
 * **Objetivo:** Nivelar fundamentos mecÃ¡nicos, control motriz y lÃ³gica de programaciÃ³n antes de la temporada competitiva.
 
@@ -50,7 +52,25 @@ El progreso tÃ©cnico de los estudiantes se estructura en cuatro fases continua
 
 ---
 
-## 3. Macro-Ciclo Competitivo WRO (Enero a Julio)
+
+---
+
+## 3. Plan Mensual de Especialización y Pre-Temporada: Noviembre
+* **Régimen:** 8 sesiones al mes (Martes y Jueves).
+* **Objetivo:** Dominio de odometría fina, transición a Python (Senior), control Proporcional/Derivativo de línea, multiplexación de puertos y simulacro en la Copa Pre-WRO de Club.
+
+| Sesión | Nivel Elementary (8 - 12 años) | Nivel Junior (11 - 15 años) | Nivel Senior (14 - 19 años) |
+| :--- | :--- | :--- | :--- |
+| **Semana 1 - M1**<br>*Odometría y Calibración Fina* | Medición de trayectorias con cinta métrica y cálculo de compensación por arrastre de neumáticos en superficie vinílica. | Odometría con encoders internos de motor; estimación de error angular acumulado en secuencias de traslación combinada. | Introducción y estructuración modular en **MicroPython oficial de SPIKE Prime**: clases para tracción diferencial y lectura continua del sensor inercial. |
+| **Semana 1 - J1**<br>*Subprogramas y Parámetros* | Creación de *MyBlocks* con parámetros de entrada (distancia_cm, elocidad) para evitar código repetitivo en cascada. | Uso de variables globales y matrices unidimensionales para registrar el orden de recogida de bloques en pista. | Funciones en Python con retorno de valores booleanos para comprobación asíncrona de fin de trayectoria y detección de colisión. |
+| **Semana 2 - M2**<br>*Seguimiento de Línea Proporcional* | Seguidor de dos sensores con ajuste diferenciado de potencia para trazado suave de curvas cerradas sin desenganche. | Algoritmo de seguidor proporcional (P): cálculo de error = luz - setpoint, ajuste continuo de steering con ganancia Kp. | Controlador Proporcional-Derivativo (PD) en Python: amortiguación de oscilaciones parásitas a alta velocidad y filtrado de ruido. |
+| **Semana 2 - J2**<br>*Navegación de Intersecciones* | Detección confiable de líneas transversales de cruce en 'T' y parada con doble sensor frontal simultáneo. | Algoritmo de conteo de intersecciones para localización relativa sin depender exclusivamente de rotaciones de motor. | Cruce de intersecciones ciegas y maniobra de recuperación autónoma si el robot pierde la línea de guía por inercia excesiva. |
+| **Semana 3 - M3**<br>*Mecanismos Quick-Release* | Diseño de guías y pestillos de encastre deslizante sin pasadores para recambio de palas en menos de 5 segundos. | Multiplexación mecánica: acople de trinquete para que un motor ejecute dos tareas distintas según el sentido de rotación (horario / antihorario). | Sistemas modulares con autoalineación cinemática y compensación de holguras para no superar el límite de 6 puertos del Hub. |
+| **Semana 3 - J3**<br>*Gestión de Energía y Masa* | Balance de peso sobre el eje motriz para evitar descompensación de tracción al transportar piezas pesadas. | Rutinas de testeo y mapeo de degradación de velocidad angular según caída de voltaje de la batería en tandas de 10 minutos. | Optimización de curvas de aceleración y deceleración polinomial en Python para prevenir derrapes con el robot a plena carga. |
+| **Semana 4 - M4**<br>*Copa Pre-WRO: Rondas Clasificatorias* | Reto cronometrado de 3 misiones combinadas en tapete escolar, registro de tiempos y evaluación de espíritu de equipo. | Mini-torneo con cambio sorpresa de zonas de depósito a mitad de la sesión para entrenar la flexibilidad del algoritmo. | Simulación estricta con pesaje en cubo de 25x25x25 cm, cronometraje reglamentario de 120s y 3 intentos oficiales en boxes. |
+| **Semana 4 - J4**<br>*Auditoría y Bitácora Técnica* | Revisión de estado de piezas, desmontaje selectivo, orden de gavetas y presentación oral de aprendizajes. | Evaluación y defensa de la bitácora técnica de ingeniería: bocetos, registro de fallos mecánicos y justificación de engranajes. | Defensa técnica ante jurado de mentores: análisis del código en Python, plan de contingencia ante fallos y selección de alineaciones oficiales. |
+
+## 4. Macro-Ciclo Competitivo WRO (Enero a Julio)
 
 ```
 Ene: Estrategia  â”€â”€â–º Feb: DiseÃ±o  â”€â”€â–º Mar: Base y Chasis  â”€â”€â–º Abr: EstrÃ©s  â”€â”€â–º May: Rutina  â”€â”€â–º Jun/Jul: Torneo
